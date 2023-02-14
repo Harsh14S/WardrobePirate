@@ -40,24 +40,23 @@ const styles = StyleSheet.create({
         // backgroundColor: 'grey',
     },
     TopSearchBar: {
-        // backgroundColor: 'lightgreen',
         marginVertical: RFValue(5),
         marginHorizontal: RFValue(10),
-        // padding: 5,
         height: RFValue(40),
         justifyContent: 'center'
     },
     inContainer: {
         flex: 1,
         backgroundColor: 'skyblue',
-        margin: RFValue(10),
-        padding: RFValue(5),
+        marginHorizontal: RFValue(10),
+        // padding: RFValue(5),
     },
     NewSeasonsEss: {
-        // backgroundColor: 'lightyellow',
-        margin: RFValue(2),
+        flex: 1,
+        // backgroundColor: 'black',
+        // margin: RFValue(2),
         // padding: 5,
-        height: RFValue(120),
+        // height: RFValue(120),
     },
     Categories: {
         // backgroundColor: 'lightpink',
