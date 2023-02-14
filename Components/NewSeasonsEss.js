@@ -28,7 +28,7 @@ export default NewSeasonsEss
 
 const styles = StyleSheet.create({
   container: {
-    height: RFValue(140),
+    flex:1,
     borderRadius: RFValue(30),
     overflow: 'hidden',
     backgroundColor: 'black',

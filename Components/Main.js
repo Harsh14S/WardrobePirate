@@ -47,7 +47,7 @@ const styles = StyleSheet.create({
     },
     inContainer: {
         flex: 1,
-        backgroundColor: 'skyblue',
+        // backgroundColor: 'skyblue',
         marginHorizontal: RFValue(10),
         // padding: RFValue(5),
     },
@@ -56,19 +56,19 @@ const styles = StyleSheet.create({
         // backgroundColor: 'black',
         // margin: RFValue(2),
         // padding: 5,
-        // height: RFValue(120),
+        height: RFValue(140),
     },
     Categories: {
         // backgroundColor: 'lightpink',
-        margin: RFValue(2),
+        marginVertical: RFValue(10),
         // padding: 5,
         height: RFValue(40),
         justifyContent: 'center'
     },
     Product: {
         // backgroundColor: 'lightblue',
-        margin: 2,
-        height: RFValue(1000),
+        // height: RFValue(1000),
+        margin: RFValue(2),
         // padding: 5,
     },
     BottomBar: {

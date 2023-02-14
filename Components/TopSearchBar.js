@@ -11,7 +11,7 @@ const TopSearchBar = () => {
 
       <View style={styles.circle}>
         <Image
-          source={require('../Components/ProjectData/UsersImage/Asta.jpg')} resizeMode="contain"
+          source={require('../Components/ProjectData/UsersImage/Luffy.jpg')} resizeMode="contain"
           style={styles.img}
         />
       </View>
