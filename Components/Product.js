@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from 'react-native'
+import { Image, StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 import { RFPercentage, RFValue } from 'react-native-responsive-fontsize'
 
@@ -6,7 +6,25 @@ const Items = () => {
   return (
     <View style={styles.container}>
       <View style={styles.proContainer}>
-        <View style={styles.productView}></View>
+        <View style={styles.productView}>
+          <Image
+            source={require('../Components/ProjectData/Logo/Tshirt.jpg')}
+            style={styles.img}
+          />
+        </View>
+        <Text style={styles.txt}>Crew Neck Half Sleeve T-Shirt</Text>
+        <View style={styles.btmContainer}>
+          <Text style={styles.priceTag}> $20 </Text>
+          <View style={styles.clrTiles}></View>
+        </View>
+      </View>
+      <View style={styles.proContainer}>
+        <View style={styles.productView}>
+          <Image
+            source={require('../Components/ProjectData/Logo/Tshirt.jpg')}
+            style={styles.img}
+          />
+        </View>
         <Text style={styles.txt}>Crew Neck Half Sleeve T-Shirt</Text>
         <View style={styles.btmContainer}>
           <Text style={styles.priceTag}> $20 </Text>
@@ -24,19 +42,21 @@ const styles = StyleSheet.create({
     backgroundColor: 'lightblue',
     height: RFValue(1000),
     borderRadius: RFValue(40),
+    flexDirection: 'row',
+    justifyContent: 'space-between'
   },
   proContainer: {
-    width: RFValue(160),
+    width: RFValue(155),
   },
   productView: {
     margin: RFValue(2),
     backgroundColor: 'orange',
     borderRadius: RFValue(40),
-    height: RFValue(180),
+    overflow: 'hidden',
   },
   img: {
     height: RFValue(180),
-    width: RFValue(160),
+    width: RFValue(190),
   },
   txt: {
     fontSize: RFValue(15),
@@ -44,10 +64,10 @@ const styles = StyleSheet.create({
   btmContainer: {
     // backgroundColor: 'gold',
     marginTop: RFValue(8),
-    width: RFValue(160),
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'space-between'
+    justifyContent: 'space-between',
+    marginRight: RFValue(5),
   },
   priceTag: {
     fontSize: RFValue(14),
@@ -56,6 +76,5 @@ const styles = StyleSheet.create({
     backgroundColor: 'black',
     width: RFValue(10),
     height: RFValue(10),
-    marginRight: RFValue(5),
   }
 })
