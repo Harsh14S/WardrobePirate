@@ -10,8 +10,11 @@
     "test": "jest"
   },
   "dependencies": {
+    "@react-icons/all-files": "^4.1.0",
     "react": "18.2.0",
-    "react-native": "0.71.2"
+    "react-icons": "^4.7.1",
+    "react-native": "0.71.2",
+    "react-native-responsive-fontsize": "^0.5.1"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",

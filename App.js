@@ -1,18 +1,24 @@
-import { SafeAreaView, StyleSheet, Text, View } from 'react-native'
+import { Dimensions, StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 import Main from './Components/Main'
+import { RFValue } from 'react-native-responsive-fontsize'
 
 
 const App = () => {
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: 'skyblue' }}>
+    <View style={styles.container}>
       <Main />
-    </SafeAreaView>
+    </View>
   )
 }
 
 export default App
 
 const styles = StyleSheet.create({
-
+  container: {
+    flex: 1,
+    marginTop: RFValue(50),
+    height: RFValue(Dimensions.get('screen').height - 50),
+    backgroundColor: 'white',
+  }
 })
