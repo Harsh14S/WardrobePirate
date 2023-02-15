@@ -24,6 +24,7 @@ const Main = () => {
                 <View style={styles.Product}>
                     <Product />
                 </View>
+                <View style={styles.empty}></View>
             </ScrollView>
             <View style={styles.BottomBar}>
                 <BottomBar />
@@ -37,7 +38,6 @@ export default Main;
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        // backgroundColor: 'grey',
         alignItems: 'center',
         justifyContent: 'flex-end',
         marginHorizontal: RFValue(10),
@@ -49,7 +49,9 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
     },
     inContainer: {
+        // backgroundColor: 'grey',
         flex: 1,
+        borderRadius: RFValue(40)
     },
     NewSeasonsEss: {
         flex: 1,
@@ -62,15 +64,16 @@ const styles = StyleSheet.create({
         marginTop: RFValue(10),
     },
     Product: {
-        margin: RFValue(2),
         marginTop: RFValue(10),
     },
     BottomBar: {
-        // backgroundColor: 'black',
         width: '98%',
         borderRadius: RFValue(50),
         marginBottom: RFValue(20),
         position: 'absolute',
         margin: 20,
     },
+    empty: {
+        padding: 50,
+    }
 });

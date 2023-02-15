@@ -7,55 +7,45 @@ const Menus = [
     id: 1,
     name: 'Home',
     src: require('../Components/ProjectData/Logo/Home.png'),
-    stat: true,
+    stat: 1,
   },
   {
     id: 2,
     name: 'Search',
     src: require('../Components/ProjectData/Logo/Search.png'),
-    stat: false,
+    stat: 0,
   },
   {
     id: 3,
     name: 'Cart',
     src: require('../Components/ProjectData/Logo/Shopping-Cart.png'),
-    stat: false,
+    stat: 0,
   },
   {
     id: 4,
     name: 'Profile',
     src: require('../Components/ProjectData/Logo/Profile.png'),
-    stat: false,
+    stat: 0,
   },
 ]
 
 
 const BottomBar = () => {
   const [selectedId, setSelectedId] = useState(false);
-  const [current, setCurrent] = useState(false);
-  const active = true, inactive = false;
-
-  const Active = (stat, id) => {
-    if(stat){
-      bgColor = current ? 'darkorange' : null;
-    }
-    return
-  }
+  const backgroundColor = selectedId ? 'darkorange' : null;
+  // const active = true, inactive = false;
 
   return (
     <View style={styles.container}>
       {
         Menus.map((item) => (
           <TouchableOpacity
-            style={[styles.btn]}
-            onPress={() => {
-              Active(item.stat, item.id)
-            }}>
+            style={[styles.btn, { backgroundColor: backgroundColor }]}
+            onPress={() => (setSelectedId(!selectedId))}>
             <Image source={item.src}
               style={styles.menuIcon}
             />
           </TouchableOpacity>
-
         ))
       }
     </View>
@@ -80,10 +70,10 @@ const styles = StyleSheet.create({
     height: RFValue(20),
     tintColor: 'white',
   },
-  btn:{
+  btn: {
     // backgroundColor: 'darkorange',
     paddingHorizontal: RFValue(20),
-    paddingVertical: RFValue(15),
+    paddingVertical: RFValue(17),
     borderRadius: RFValue(50),
     margin: RFValue(7),
   }

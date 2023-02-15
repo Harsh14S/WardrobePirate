@@ -5,37 +5,37 @@ import { RFValue } from 'react-native-responsive-fontsize'
 const ImgArr = [
   {
     id: 1,
-    img: require('../Components/ProjectData/Products/Tshirt.jpg'),
+    img: require('../Components/ProjectData/ProductsImage/Tshirt.jpg'),
     price: 25,
     colors: ['skyblue', 'tan', 'grey'],
   },
   {
     id: 2,
-    img: require('../Components/ProjectData/Products/Tshirt2.jpeg'),
+    img: require('../Components/ProjectData/ProductsImage/Tshirt2.jpeg'),
     price: 30,
     colors: ['skyblue', 'tan', 'grey'],
   },
   {
     id: 3,
-    img: require('../Components/ProjectData/Products/Tshirt3.jpg'),
+    img: require('../Components/ProjectData/ProductsImage/Tshirt3.jpg'),
     price: 5,
     colors: ['skyblue', 'tan', 'grey'],
   },
   {
     id: 4,
-    img: require('../Components/ProjectData/Products/Pants1.jpg'),
+    img: require('../Components/ProjectData/ProductsImage/Pants1.jpg'),
     price: 18,
     colors: ['skyblue', 'tan', 'grey'],
   },
   {
     id: 5,
-    img: require('../Components/ProjectData/Products/Formal.jpg'),
+    img: require('../Components/ProjectData/ProductsImage/Formal.jpg'),
     price: 49,
     colors: ['skyblue', 'tan', 'grey'],
   },
   {
     id: 6,
-    img: require('../Components/ProjectData/Products/Casual.jpg'),
+    img: require('../Components/ProjectData/ProductsImage/Casual.jpg'),
     price: 42,
     colors: ['skyblue', 'tan', 'grey'],
   },
@@ -77,7 +77,6 @@ const Items = () => {
                   ))
                 }
               </View>
-
             </View>
           </View>
         ))
@@ -90,8 +89,6 @@ export default Items
 
 const styles = StyleSheet.create({
   container: {
-    // backgroundColor: 'lightblue',
-    // height: RFValue(1000),
     borderRadius: RFValue(40),
     flexDirection: 'row',
     justifyContent: 'space-between',
@@ -113,7 +110,7 @@ const styles = StyleSheet.create({
   },
   img: {
     height: RFValue(180),
-    borderRadius: RFValue(40),
+    borderRadius: RFValue(36),
     width: RFValue(190),
     marginLeft: RFValue(35),
   },
@@ -124,9 +121,8 @@ const styles = StyleSheet.create({
   favBtn: {
     backgroundColor: 'darkorange',
     height: RFValue(30),
-    width: RFValue(30),
     borderRadius: RFValue(20),
-    paddingHorizontal: RFValue(25),
+    paddingHorizontal: RFValue(12),
     position: 'absolute',
     alignItems: 'center',
     justifyContent: 'center',
