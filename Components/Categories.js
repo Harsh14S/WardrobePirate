@@ -1,46 +1,65 @@
-import { ScrollView, StyleSheet, Text, TouchableOpacity } from 'react-native'
+import { FlatList, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import React, { useState } from 'react'
 import { RFValue } from 'react-native-responsive-fontsize';
 
 
-const Categories = () => {
-  const [currentActive, setCurrentActive] = useState(true);
-  let backgroundColor = currentActive ? 'black' : 'white';
-  let color = currentActive ? 'white' : 'black';
+const CategoryData = [
+  {
+    id: 1,
+    title: 'Top',
+    stat: '1',
+  },
+  {
+    id: 2,
+    title: 'Men',
+    stat: '0',
+  },
+  {
+    id: 3,
+    title: 'Women',
+    stat: '0',
+  },
+  {
+    id: 4,
+    title: 'Kids',
+    stat: '0',
+  },
+];
 
-  const onPress = () => {
-    if(currentActive){
-      setCurrentActive(!currentActive);
-    } else {
-      setCurrentActive(!currentActive);
-    }
-  }
+const Item = ({ title, bgClr, clr, onPress, stat }) => (
+  <TouchableOpacity
+    style={[styles.btn, { backgroundColor: bgClr }]}
+    onPress={onPress}>
+    <Text style={[styles.title, { color: clr }]}>{stat} {title}</Text>
+  </TouchableOpacity>
+);
+
+const Categories = () => {
+  const [selectedId, setSelectedId] = useState('1');
+
+  const renderItem = ({ item }) => {
+    const backgroundColor = item.id === selectedId ? 'black' : 'white';
+    const color = item.id === selectedId ? 'white' : 'black';
+    return (
+      <Item
+        item={item}
+        title={item.title}
+        onPress={() => setSelectedId(item.id)}
+        bgClr={backgroundColor}
+        clr={color}
+      />
+    );
+  };
 
   return (
     <ScrollView style={styles.container} horizontal={true}>
-      <TouchableOpacity
-      style={[styles.btn, {backgroundColor: backgroundColor}]}
-      onPress={onPress}>
-        <Text style={[styles.title, {color: color}]}>Top</Text>
-      </TouchableOpacity>
-
-      <TouchableOpacity
-      style={[styles.btn, {backgroundColor: backgroundColor}]}
-      onPress={onPress}>
-        <Text style={[styles.title, {color: color}]}>Men</Text>
-      </TouchableOpacity>
-
-      <TouchableOpacity
-      style={[styles.btn, {backgroundColor: backgroundColor}]}
-      onPress={onPress}>
-        <Text style={[styles.title, {color: color}]}>Women</Text>
-      </TouchableOpacity>
-      
-      <TouchableOpacity
-      style={[styles.btn, {backgroundColor: backgroundColor}]}
-      onPress={onPress}>
-        <Text style={[styles.title, {color: color}]}>Kids</Text>
-      </TouchableOpacity>
+      <FlatList
+        data={CategoryData}
+        renderItem={renderItem}
+        keyExtractor={item => item.id}
+        extraData={selectedId}
+        horizontal={true}
+      />
     </ScrollView>
   )
 }
@@ -53,7 +72,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   btn: {
-    // backgroundColor: 'black',
+    // backgroundColor: 'white',
     justifyContent: 'center',
     alignItems: 'center',
     padding: RFValue(4),
@@ -63,7 +82,7 @@ const styles = StyleSheet.create({
     borderWidth: 0.2,
   },
   title: {
-    // color: (currentActive ? 'white': 'black'),
+    // color: 'black',
     fontSize: RFValue(13),
   },
   list: {

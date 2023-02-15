@@ -24,10 +24,10 @@ const Main = () => {
                 <View style={styles.Product}>
                     <Product />
                 </View>
-                {/* <View style={styles.BottomBar}>
-                    <BottomBar />
-                </View> */}
             </ScrollView>
+            <View style={styles.BottomBar}>
+                <BottomBar />
+            </View>
         </View>
     );
 };
@@ -38,42 +38,39 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         // backgroundColor: 'grey',
+        alignItems: 'center',
+        justifyContent: 'flex-end',
+        marginHorizontal: RFValue(10),
     },
     TopSearchBar: {
-        marginVertical: RFValue(5),
-        marginHorizontal: RFValue(10),
+        width: '100%',
+        marginVertical: RFValue(10),
         height: RFValue(40),
-        justifyContent: 'center'
+        justifyContent: 'center',
     },
     inContainer: {
         flex: 1,
-        // backgroundColor: 'skyblue',
-        marginHorizontal: RFValue(10),
-        // padding: RFValue(5),
     },
     NewSeasonsEss: {
         flex: 1,
-        // backgroundColor: 'black',
-        // margin: RFValue(2),
-        // padding: 5,
         height: RFValue(140),
+        marginTop: RFValue(10),
     },
     Categories: {
-        // backgroundColor: 'lightpink',
-        marginVertical: RFValue(10),
-        // padding: 5,
         height: RFValue(40),
-        justifyContent: 'center'
+        justifyContent: 'center',
+        marginTop: RFValue(10),
     },
     Product: {
-        // backgroundColor: 'lightblue',
-        // height: RFValue(1000),
         margin: RFValue(2),
-        // padding: 5,
+        marginTop: RFValue(10),
     },
     BottomBar: {
-        // backgroundColor: 'gold',
-        margin: RFValue(2),
-        // padding: 5,
+        // backgroundColor: 'black',
+        width: '98%',
+        borderRadius: RFValue(50),
+        marginBottom: RFValue(20),
+        position: 'absolute',
+        margin: 20,
     },
 });
