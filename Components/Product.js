@@ -58,8 +58,9 @@ const styles = StyleSheet.create({
   container: {
     borderRadius: RFValue(40),
     flexDirection: 'row',
-    justifyContent: 'space-between',
+    justifyContent: 'space-evenly',
     flexWrap: 'wrap',
+    // marginHorizontal: RFValue(5),
   },
   proContainer: {
     width: RFValue(155),

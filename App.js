@@ -1,13 +1,14 @@
-import { Dimensions, StyleSheet, Text, View } from 'react-native'
+import { Dimensions, Platform, StyleSheet, Text, View } from 'react-native'
 import React from 'react'
-import Main from './Components/Main'
 import { RFValue } from 'react-native-responsive-fontsize'
+import Home from './Components/Home'
+import Nav from './Components/Nav'
 
 
 const App = () => {
   return (
     <View style={styles.container}>
-      <Main />
+      <Nav />
     </View>
   )
 }
@@ -17,7 +18,7 @@ export default App
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    marginTop: RFValue(50),
+    marginTop: Platform.OS === 'ios' ? RFValue(50) : RFValue(10),
     height: RFValue(Dimensions.get('screen').height - 50),
     backgroundColor: 'white',
   }

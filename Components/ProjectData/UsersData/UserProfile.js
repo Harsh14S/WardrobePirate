@@ -2,7 +2,7 @@ const Users = [
   {
     id: 1,
     name: 'Luffy',
-    img: require('../UsersData/Asta.jpg'),
+    img: require('../UsersData/Luffy.jpg'),
     password: "",
   },
   {
