@@ -1,29 +1,12 @@
-import { FlatList, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import { FlatList, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import React, { useState } from 'react'
 import { RFValue } from 'react-native-responsive-fontsize';
 
-
 const CategoryData = [
-  {
-    id: 1,
-    title: 'Top',
-    stat: '1',
-  },
-  {
-    id: 2,
-    title: 'Men',
-    stat: '0',
-  },
-  {
-    id: 3,
-    title: 'Women',
-    stat: '0',
-  },
-  {
-    id: 4,
-    title: 'Kids',
-    stat: '0',
-  },
+  { id: 1, title: 'Top' },
+  { id: 2, title: 'Men' },
+  { id: 3, title: 'Women' },
+  { id: 4, title: 'Kids', },
 ];
 
 const Item = ({ title, bgClr, clr, onPress, stat }) => (
@@ -35,32 +18,30 @@ const Item = ({ title, bgClr, clr, onPress, stat }) => (
 );
 
 const Categories = () => {
-  const [selectedId, setSelectedId] = useState('1');
-
+  const [selectedId, setSelectedId] = useState(1);
   const renderItem = ({ item }) => {
-    const backgroundColor = item.id === selectedId ? 'black' : 'white';
-    const color = item.id === selectedId ? 'white' : 'black';
     return (
       <Item
         item={item}
         title={item.title}
         onPress={() => setSelectedId(item.id)}
-        bgClr={backgroundColor}
-        clr={color}
+        bgClr={(item.id === selectedId) ? 'black' : 'white'}
+        clr={(item.id === selectedId) ? 'white' : 'black'}
       />
     );
   };
 
   return (
-    <ScrollView style={styles.container} horizontal={true}>
+    <View style={styles.container} horizontal={true}>
       <FlatList
         data={CategoryData}
         renderItem={renderItem}
         keyExtractor={item => item.id}
         extraData={selectedId}
         horizontal={true}
+        showsHorizontalScrollIndicator={false}
       />
-    </ScrollView>
+    </View>
   )
 }
 

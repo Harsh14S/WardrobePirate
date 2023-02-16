@@ -1,9 +1,7 @@
-import { Image, ImageBackground, StyleSheet, Text, View } from 'react-native'
+import { Image, StyleSheet, Text, View } from 'react-native'
 import React from 'react'
-import users from '../Components/ProjectData/UserProfile.js'
+import Users from './ProjectData/UsersData/UserProfile';
 import { RFValue } from 'react-native-responsive-fontsize';
-
-const data = users;
 
 const TopSearchBar = () => {
   return (
@@ -11,13 +9,13 @@ const TopSearchBar = () => {
 
       <View style={styles.circle}>
         <Image
-          source={require('../Components/ProjectData/UsersImage/Luffy.jpg')} resizeMode="contain"
+          source={Users[0].img} resizeMode="contain"
           style={styles.img}
         />
       </View>
 
       <View style={styles.name}>
-        <Text style={styles.text}>Hello, {data[0].name}!</Text>
+        <Text style={styles.text}>Hello, {Users[0].name}!</Text>
       </View>
 
       <View style={styles.search}>

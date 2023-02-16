@@ -8,13 +8,19 @@ import ProductDetails from './ProductDetails';
 import TopSearchBar from './TopSearchBar';
 import { RFValue } from 'react-native-responsive-fontsize';
 
+
+
+
 const Main = () => {
     return (
         <View style={styles.container}>
             <View style={styles.TopSearchBar}>
                 <TopSearchBar />
             </View>
-            <ScrollView style={styles.inContainer}>
+            <ScrollView
+                style={styles.inContainer}
+                showsVerticalScrollIndicator={false}
+            >
                 <View style={styles.NewSeasonsEss}>
                     <NewSeasonsEss />
                 </View>
@@ -28,6 +34,7 @@ const Main = () => {
             </ScrollView>
             <View style={styles.BottomBar}>
                 <BottomBar />
+
             </View>
         </View>
     );

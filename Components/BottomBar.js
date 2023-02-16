@@ -1,4 +1,4 @@
-import { FlatList, Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import { Alert, FlatList, Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import React, { useState } from 'react'
 import { RFPercentage, RFValue } from 'react-native-responsive-fontsize'
 
@@ -7,41 +7,36 @@ const Menus = [
     id: 1,
     name: 'Home',
     src: require('../Components/ProjectData/Logo/Home.png'),
-    stat: 1,
   },
   {
     id: 2,
     name: 'Search',
     src: require('../Components/ProjectData/Logo/Search.png'),
-    stat: 0,
   },
   {
     id: 3,
     name: 'Cart',
     src: require('../Components/ProjectData/Logo/Shopping-Cart.png'),
-    stat: 0,
   },
   {
     id: 4,
     name: 'Profile',
     src: require('../Components/ProjectData/Logo/Profile.png'),
-    stat: 0,
   },
 ]
 
 
 const BottomBar = () => {
-  const [selectedId, setSelectedId] = useState(false);
-  const backgroundColor = selectedId ? 'darkorange' : null;
-  // const active = true, inactive = false;
-
+  const [selectedId, setSelectedId] = useState(0);
   return (
     <View style={styles.container}>
       {
-        Menus.map((item) => (
+        Menus.map((item, index) => (
+
           <TouchableOpacity
-            style={[styles.btn, { backgroundColor: backgroundColor }]}
-            onPress={() => (setSelectedId(!selectedId))}>
+            key={index}
+            style={[styles.btn, { backgroundColor: (index === selectedId) ? 'darkorange' : null }]}
+            onPress={() => setSelectedId(index)}>
             <Image source={item.src}
               style={styles.menuIcon}
             />

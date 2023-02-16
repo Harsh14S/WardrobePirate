@@ -1,64 +1,31 @@
-import { Alert, Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import { Alert, Image, Pressable, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import React from 'react'
+import ProductDetails from './ProductDetails'
+import Categories from './Categories'
+import ProductData from './ProjectData/ProductsImage/ProductData'
 import { RFValue } from 'react-native-responsive-fontsize'
-
-const ImgArr = [
-  {
-    id: 1,
-    img: require('../Components/ProjectData/ProductsImage/Tshirt.jpg'),
-    price: 25,
-    colors: ['skyblue', 'tan', 'grey'],
-  },
-  {
-    id: 2,
-    img: require('../Components/ProjectData/ProductsImage/Tshirt2.jpeg'),
-    price: 30,
-    colors: ['skyblue', 'tan', 'grey'],
-  },
-  {
-    id: 3,
-    img: require('../Components/ProjectData/ProductsImage/Tshirt3.jpg'),
-    price: 5,
-    colors: ['skyblue', 'tan', 'grey'],
-  },
-  {
-    id: 4,
-    img: require('../Components/ProjectData/ProductsImage/Pants1.jpg'),
-    price: 18,
-    colors: ['skyblue', 'tan', 'grey'],
-  },
-  {
-    id: 5,
-    img: require('../Components/ProjectData/ProductsImage/Formal.jpg'),
-    price: 49,
-    colors: ['skyblue', 'tan', 'grey'],
-  },
-  {
-    id: 6,
-    img: require('../Components/ProjectData/ProductsImage/Casual.jpg'),
-    price: 42,
-    colors: ['skyblue', 'tan', 'grey'],
-  },
-]
-
-
 
 const Items = () => {
   return (
     <View style={styles.container}>
       {
-        ImgArr.map((item) => (
+        ProductData.map((item, index) => (
           <View style={styles.proContainer}>
             <View style={styles.productView}>
               <View style={styles.imgContainer}>
-                <Image
-                  source={item.img}
-                  style={styles.img}
-                />
+                <Pressable
+                  onPress={() => Alert.alert("Pressed" + index)}
+                >
+                  <Image
+                    key={index}
+                    source={item.img}
+                    style={styles.img}
+                  />
+                </Pressable>
               </View>
               <TouchableOpacity
                 style={styles.favBtn}
-                onPress={() => Alert.alert('Added to your wishlist')}
+                onPress={() => Alert.alert(index + 'Added to your wishlist')}
                 activeOpacity={0.7}
               >
                 <Image
@@ -67,7 +34,7 @@ const Items = () => {
                 />
               </TouchableOpacity>
             </View>
-            <Text style={styles.txt}>Crew Neck Half Sleeve T-Shirt</Text>
+            <Text style={styles.txt}>{item.title}</Text>
             <View style={styles.btmContainer}>
               <Text style={styles.priceTag}> ${item.price}</Text>
               <View style={styles.tilesContainer}>
