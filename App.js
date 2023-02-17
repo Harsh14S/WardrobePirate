@@ -3,12 +3,13 @@ import React from 'react'
 import { RFValue } from 'react-native-responsive-fontsize'
 import Home from './Components/Home'
 import Nav from './Components/Nav'
+import MyCart from './Components/MyCart'
 
 
 const App = () => {
   return (
     <View style={styles.container}>
-      <Nav />
+      <MyCart />
     </View>
   )
 }
