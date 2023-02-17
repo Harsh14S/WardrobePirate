@@ -7,10 +7,6 @@ import Product from './Product';
 import ProductDetails from './ProductDetails';
 import TopSearchBar from './TopSearchBar';
 import { RFValue } from 'react-native-responsive-fontsize';
-import { NavigationContainer } from '@react-navigation/native';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-
-const Tab = createBottomTabNavigator();
 
 const Home = () => {
   return (
@@ -31,7 +27,7 @@ const Home = () => {
         <View style={styles.Product}>
           <Product />
         </View>
-        <View style={styles.empty}></View>
+        <View style={styles.empty} />
       </ScrollView>
     </View>
   );
@@ -48,8 +44,9 @@ const styles = StyleSheet.create({
     paddingHorizontal: RFValue(10),
   },
   TopSearchBar: {
+    // backgroundColor: 'grey',
     width: '100%',
-    marginVertical: RFValue(10),
+    marginTop: RFValue(0),
     height: RFValue(40),
     justifyContent: 'center',
   },
@@ -71,11 +68,13 @@ const styles = StyleSheet.create({
     marginTop: RFValue(10),
   },
   BottomBar: {
-    // backgroundColor: 'black',
     width: '98%',
     borderRadius: RFValue(50),
     marginBottom: RFValue(20),
     position: 'absolute',
     margin: 20,
   },
+  empty: {
+    padding: RFValue(43),
+  }
 });
