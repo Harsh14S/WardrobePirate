@@ -4,8 +4,11 @@ import ProductDetails from './ProductDetails'
 import Categories from './Categories'
 import ProductData from './ProjectData/ProductsImage/ProductData'
 import { RFValue } from 'react-native-responsive-fontsize'
+import { useNavigation } from '@react-navigation/native'
 
-const Product = () => {
+// const navigation = useNavigation();
+
+const Product = ({ func }) => {
   return (
     <View style={styles.container}>
       {
@@ -14,7 +17,8 @@ const Product = () => {
             <View style={styles.productView}>
               <View style={styles.imgContainer}>
                 <Pressable
-                  onPress={() => Alert.alert("Pressed" + index)}
+                  onPress={() => func('ProductDetails', index)}
+                // onPress={() => navigation.navigate('ProductDetails')}
                 >
                   <Image
                     key={index}
@@ -25,7 +29,7 @@ const Product = () => {
               </View>
               <TouchableOpacity
                 style={styles.favBtn}
-                onPress={() => Alert.alert(index + 'Added to your wishlist')}
+                onPress={() => Alert.alert(index + ' Added to your wishlist')}
                 activeOpacity={0.7}
               >
                 <Image

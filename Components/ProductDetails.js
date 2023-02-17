@@ -11,7 +11,6 @@ const ProductDetails = () => {
     <View style={styles.Container}>
       <View style={styles.productImage}>
         <View style={styles.imgContainer}>
-
           <Image
             source={ProductData[1].img}
             style={styles.img}

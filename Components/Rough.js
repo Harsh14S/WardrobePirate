@@ -1,12 +1,12 @@
 import { Alert, Button, Image, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 import React from 'react';
 import { RFValue } from 'react-native-responsive-fontsize';
-import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import ProductDetails from './ProductDetails';
 import Product from './Product';
 import ProductData from './ProjectData/ProductsImage/ProductData'
 import MyCart from './MyCart';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 const Stack = createNativeStackNavigator();
 
@@ -14,25 +14,19 @@ function HomeScreen({ navigation }) {
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Text>Home Screen</Text>
-      <Button title='Go to Details' onPress={() => navigation.navigate('Details')} />
+      <Button title='Go to Details' onPress={() => navigation.navigate('Products')} />
     </View>
   )
 }
 function ProductsScreen({ navigation }) {
+
+  const onPress = (name) => navigation.navigate(name);  // created to link the navigation.navigate to ProductDetails
+
   return (
 
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <ScrollView >
-        <View style={styles.Product}>
-          {/* <Pressable onPress={() => Alert.alert("Pressed" + ProductData[0].id)} > */}
-          <Pressable onPress={() => navigation.navigate('ProductDetails')} >
-            <Image
-              source={ProductData[0].img}
-              style={styles.img}
-            />
-
-          </Pressable>
-        </View>
+        <Product func={onPress} />
         <Button title='Add To Cart' onPress={() => navigation.navigate('My Cart')} />
         <View style={styles.empty} />
       </ScrollView>
@@ -44,14 +38,14 @@ const Rough = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator
-        initialRouteName='Details'>
-        {/* <Stack.Screen
+        initialRouteName='Home'>
+        <Stack.Screen
           name="Home"
           component={HomeScreen}
           options={{ headerBackTitleVisible: false }}
-        /> */}
+        />
         <Stack.Screen
-          name="Details"
+          name="Products"
           component={ProductsScreen}
           options={{ headerBackTitleVisible: false }}
         />
