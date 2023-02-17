@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { StyleSheet, Text, View, Image } from 'react-native';
+import { StyleSheet, Text, View, Image, Platform } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Home from './Home';
 import MyCart from './MyCart';
@@ -91,10 +91,10 @@ const styles = StyleSheet.create({
   iconContainer: {
     alignItems: 'center',
     justifyContent: 'center',
-    paddingHorizontal: RFValue(27),
-    paddingVertical: RFValue(25),
+    paddingHorizontal: Platform.OS === 'ios' ? RFValue(13) : RFValue(28),
+    paddingVertical: Platform.OS === 'ios' ? RFValue(13) : RFValue(22),
     borderRadius: RFValue(50),
     margin: RFValue(7),
-    top: RFValue(13),
+    top: Platform.OS === 'ios' ? RFValue(13) : null,
   },
 })

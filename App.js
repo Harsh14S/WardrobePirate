@@ -3,7 +3,7 @@ import React from 'react'
 import { RFValue } from 'react-native-responsive-fontsize'
 import Home from './Components/Home'
 import Nav from './Components/Nav'
-import MyCart from './Components/MyCart'
+import Rough from './Components/Rough'
 import { NavigationContainer } from '@react-navigation/native'
 
 

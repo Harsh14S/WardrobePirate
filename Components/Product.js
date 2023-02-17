@@ -5,7 +5,7 @@ import Categories from './Categories'
 import ProductData from './ProjectData/ProductsImage/ProductData'
 import { RFValue } from 'react-native-responsive-fontsize'
 
-const Items = () => {
+const Product = () => {
   return (
     <View style={styles.container}>
       {
@@ -52,7 +52,7 @@ const Items = () => {
   )
 }
 
-export default Items
+export default Product
 
 const styles = StyleSheet.create({
   container: {
