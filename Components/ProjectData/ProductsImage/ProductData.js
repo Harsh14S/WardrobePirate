@@ -6,6 +6,8 @@ const ProductData = [
     price: 25,
     colors: ['skyblue', 'tan', 'grey'],
     categ: ['top', 'kids'],
+    rating: 5,
+    size: ['XS', 'S', 'M', 'L', 'XL', 'XXL', 'XXL'],
   },
   {
     id: 2,
@@ -14,6 +16,8 @@ const ProductData = [
     price: 30,
     colors: ['skyblue', 'tan', 'grey'],
     categ: ['top', 'men'],
+    rating: 3,
+    size: ['XS', 'S', 'M', 'L', 'XL', 'XXL', 'XXL'],
   },
   {
     id: 3,
@@ -22,6 +26,8 @@ const ProductData = [
     price: 5,
     colors: ['skyblue', 'tan', 'grey'],
     categ: ['top', 'men'],
+    rating: 4,
+    size: ['XS', 'S', 'M', 'L', 'XL', 'XXL', 'XXL'],
   },
   {
     id: 4,
@@ -30,6 +36,8 @@ const ProductData = [
     price: 18,
     colors: ['skyblue', 'tan', 'grey'],
     categ: ['top', 'men'],
+    rating: 4,
+    size: ['XS', 'S', 'M', 'L', 'XL', 'XXL', 'XXL'],
   },
   {
     id: 5,
@@ -38,6 +46,8 @@ const ProductData = [
     price: 49,
     colors: ['skyblue', 'tan', 'grey'],
     categ: ['top', 'men'],
+    rating: 1,
+    size: ['XS', 'S', 'M', 'L', 'XL', 'XXL', 'XXL'],
   },
   {
     id: 6,
@@ -46,6 +56,8 @@ const ProductData = [
     price: 42,
     colors: ['skyblue', 'tan', 'grey'],
     categ: ['top', 'men'],
+    rating: 3,
+    size: ['XS', 'S', 'M', 'L', 'XL', 'XXL', 'XXL'],
   },
 ]
 

@@ -1,14 +1,15 @@
 import { Alert, Image, Pressable, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
-import React from 'react'
+import React, { useState } from 'react'
 import ProductDetails from './ProductDetails'
 import Categories from './Categories'
 import ProductData from './ProjectData/ProductsImage/ProductData'
 import { RFValue } from 'react-native-responsive-fontsize'
-import { useNavigation } from '@react-navigation/native'
+import { useNavigation, useRoute } from '@react-navigation/native'
 
 // const navigation = useNavigation();
 
-const Product = ({ func }) => {
+
+const Product = ({ navigation }) => {
   return (
     <View style={styles.container}>
       {
@@ -17,8 +18,12 @@ const Product = ({ func }) => {
             <View style={styles.productView}>
               <View style={styles.imgContainer}>
                 <Pressable
-                  onPress={() => func('ProductDetails', index)}
-                // onPress={() => navigation.navigate('ProductDetails')}
+                  // onPress={() => func('ProductDetails', index)}
+                  onPress={() => {
+                    navigation.navigate("ProductDetails", {
+                      index: index,
+                    });
+                  }}
                 >
                   <Image
                     key={index}

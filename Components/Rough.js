@@ -10,43 +10,22 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 const Stack = createNativeStackNavigator();
 
-function HomeScreen({ navigation }) {
-  return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text>Home Screen</Text>
-      <Button title='Go to Details' onPress={() => navigation.navigate('Products')} />
-    </View>
-  )
-}
-function ProductsScreen({ navigation }) {
-
-  const onPress = (name) => navigation.navigate(name);  // created to link the navigation.navigate to ProductDetails
-
-  return (
-
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <ScrollView >
-        <Product func={onPress} />
-        <Button title='Add To Cart' onPress={() => navigation.navigate('My Cart')} />
-        <View style={styles.empty} />
-      </ScrollView>
-    </View>
-  )
-}
-
+// function HomeScreen({ navigation }) {
+//   return (
+//     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+//       <Text>Home Screen</Text>
+//       <Button title='Go to Details' onPress={() => navigation.navigate('Product')} />
+//     </View>
+//   )
+// }
 const Rough = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator
-        initialRouteName='Home'>
+        initialRouteName='Product'>
         <Stack.Screen
-          name="Home"
-          component={HomeScreen}
-          options={{ headerBackTitleVisible: false }}
-        />
-        <Stack.Screen
-          name="Products"
-          component={ProductsScreen}
+          name="Product"
+          component={Product}
           options={{ headerBackTitleVisible: false }}
         />
         <Stack.Screen
@@ -54,11 +33,11 @@ const Rough = () => {
           component={ProductDetails}
           options={{ headerBackTitleVisible: false }}
         />
-        <Stack.Screen
+        {/* <Stack.Screen
           name="My Cart"
           component={MyCart}
           options={{ headerBackTitleVisible: false }}
-        />
+        /> */}
       </Stack.Navigator>
     </NavigationContainer>
   );

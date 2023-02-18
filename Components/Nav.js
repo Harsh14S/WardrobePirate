@@ -6,8 +6,10 @@ import MyCart from './MyCart';
 import { RFValue } from 'react-native-responsive-fontsize';
 import Search from './Search';
 import Profile from './Profile';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 const Tab = createBottomTabNavigator();
+const Stack = createNativeStackNavigator;
 
 export default function App() {
   return (
@@ -91,8 +93,8 @@ const styles = StyleSheet.create({
   iconContainer: {
     alignItems: 'center',
     justifyContent: 'center',
-    paddingHorizontal: Platform.OS === 'ios' ? RFValue(13) : RFValue(28),
-    paddingVertical: Platform.OS === 'ios' ? RFValue(13) : RFValue(22),
+    paddingHorizontal: Platform.OS === 'ios' ? RFValue(27) : RFValue(28),
+    paddingVertical: Platform.OS === 'ios' ? RFValue(26) : RFValue(22),
     borderRadius: RFValue(50),
     margin: RFValue(7),
     top: Platform.OS === 'ios' ? RFValue(13) : null,
