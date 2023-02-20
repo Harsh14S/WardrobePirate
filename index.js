@@ -8,4 +8,4 @@ import { name as appName } from './app.json';
 import Rough from './Components/Rough';
 import Rough2 from './Components/RatingBar';
 
-AppRegistry.registerComponent(appName, () => Rough);
+AppRegistry.registerComponent(appName, () => App);

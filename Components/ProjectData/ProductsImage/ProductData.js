@@ -8,6 +8,7 @@ const ProductData = [
     categ: ['top', 'kids'],
     rating: 5,
     size: ['XS', 'S', 'M', 'L', 'XL', 'XXL', 'XXL'],
+    details: 'A paragraph is defined as “a group of sentences or a single sentence that forms a unit” (Lunsford and Connors 116). Length and appearance do not determine whether a section in a paper is a paragraph. For instance, in some styles of writing, particularly journalistic styles, a paragraph can be just one sentence long',
   },
   {
     id: 2,
@@ -18,6 +19,7 @@ const ProductData = [
     categ: ['top', 'men'],
     rating: 3,
     size: ['XS', 'S', 'M', 'L', 'XL', 'XXL', 'XXL'],
+    details: 'A paragraph is defined as “a group of sentences or a single sentence that forms a unit” (Lunsford and Connors 116). Length and appearance do not determine whether a section in a paper is a paragraph. For instance, in some styles of writing, particularly journalistic styles, a paragraph can be just one sentence long',
   },
   {
     id: 3,
@@ -28,6 +30,7 @@ const ProductData = [
     categ: ['top', 'men'],
     rating: 4,
     size: ['XS', 'S', 'M', 'L', 'XL', 'XXL', 'XXL'],
+    details: 'A paragraph is defined as “a group of sentences or a single sentence that forms a unit” (Lunsford and Connors 116). Length and appearance do not determine whether a section in a paper is a paragraph. For instance, in some styles of writing, particularly journalistic styles, a paragraph can be just one sentence long',
   },
   {
     id: 4,
@@ -38,6 +41,7 @@ const ProductData = [
     categ: ['top', 'men'],
     rating: 4,
     size: ['XS', 'S', 'M', 'L', 'XL', 'XXL', 'XXL'],
+    details: 'A paragraph is defined as “a group of sentences or a single sentence that forms a unit” (Lunsford and Connors 116). Length and appearance do not determine whether a section in a paper is a paragraph. For instance, in some styles of writing, particularly journalistic styles, a paragraph can be just one sentence long',
   },
   {
     id: 5,
@@ -48,6 +52,7 @@ const ProductData = [
     categ: ['top', 'men'],
     rating: 1,
     size: ['XS', 'S', 'M', 'L', 'XL', 'XXL', 'XXL'],
+    details: 'A paragraph is defined as “a group of sentences or a single sentence that forms a unit” (Lunsford and Connors 116). Length and appearance do not determine whether a section in a paper is a paragraph. For instance, in some styles of writing, particularly journalistic styles, a paragraph can be just one sentence long',
   },
   {
     id: 6,
@@ -58,6 +63,7 @@ const ProductData = [
     categ: ['top', 'men'],
     rating: 3,
     size: ['XS', 'S', 'M', 'L', 'XL', 'XXL', 'XXL'],
+    details: 'A paragraph is defined as “a group of sentences or a single sentence that forms a unit” (Lunsford and Connors 116). Length and appearance do not determine whether a section in a paper is a paragraph. For instance, in some styles of writing, particularly journalistic styles, a paragraph can be just one sentence long',
   },
 ]
 

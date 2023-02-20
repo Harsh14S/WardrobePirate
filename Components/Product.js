@@ -4,10 +4,10 @@ import ProductDetails from './ProductDetails'
 import Categories from './Categories'
 import ProductData from './ProjectData/ProductsImage/ProductData'
 import { RFValue } from 'react-native-responsive-fontsize'
-import { useNavigation, useRoute } from '@react-navigation/native'
+import { NavigationContainer, useNavigation, useRoute } from '@react-navigation/native'
+import { createNativeStackNavigator } from '@react-navigation/native-stack'
 
-// const navigation = useNavigation();
-
+const Stack = createNativeStackNavigator();
 
 const Product = ({ navigation }) => {
   return (
@@ -61,9 +61,32 @@ const Product = ({ navigation }) => {
   )
 }
 
-export default Product
+const Navi = () => {
+  return (
+    <Stack.Navigator
+      initialRouteName='Product'>
+      <Stack.Screen
+        name="Product"
+        component={Product}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="ProductDetails"
+        component={ProductDetails}
+        options={{ headerBackTitleVisible: false }}
+      />
+      {/* <Stack.Screen
+          name="My Cart"
+          component={MyCart}
+          options={{ headerBackTitleVisible: false }}
+        /> */}
+    </Stack.Navigator>
+  );
+};
 
-const styles = StyleSheet.create({
+export default Navi
+
+const Pro = StyleSheet.create({
   container: {
     borderRadius: RFValue(40),
     flexDirection: 'row',

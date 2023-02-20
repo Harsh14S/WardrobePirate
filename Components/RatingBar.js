@@ -6,36 +6,30 @@ import { RFValue } from 'react-native-responsive-fontsize';
 const RatingBar = () => {
   const [defaultRating, setDefaultRating] = useState(2);
   const [maxRating, setMaxRating] = useState([1, 2, 3, 4, 5]);
-  // const starImgFilled = require('../Components/ProjectData/Logo/star_filled.png');
-  const starImgFilled = 'https://raw.githubusercontent.com/tranhonghan/images/main/star_filled.png';
-  const starImgCorner = 'https://raw.githubusercontent.com/tranhonghan/images/main/corner_filled.png';
+  const starImgFilled = '../Components/ProjectData/Logo/star_filled.png';
+  const starImgCorner = '../Components/ProjectData/Logo/star_corner.png';
   const CustomRatingBar = () => {
     return (
       <View style={styles.customRatingBarStyle}>
         {
           maxRating.map((item, key) => (
-            <TouchableOpacity
-              activeOpacity={0.7}
-              key={item}
-              onPress={() => setDefaultRating(item)}
-            >
+            <TouchableOpacity activeOpacity={0.7} key={item} onPress={() => setDefaultRating(item)} >
               <Image
                 style={styles.starImgStyle}
                 source={
-                  item <= defaultRating ? { uri: starImgFilled } : { uri: starImgCorner }
+                  item <= defaultRating ? require(starImgFilled) : require(starImgCorner)
                 }
               />
             </TouchableOpacity>
           )
           )
         }
-      </View>
+      </View >
     )
   }
 
   return (
     <View style={styles.container}>
-      <Text>Rough2</Text>
       <CustomRatingBar />
     </View>
   )
@@ -44,20 +38,19 @@ const RatingBar = () => {
 export default RatingBar
 
 const styles = StyleSheet.create({
+  container: {
+    // justifyContent: 'center',
+    // alignItems: 'center',
+  },
   customRatingBarStyle: {
-    justifyContent: 'center',
+    // justifyContent: 'center',
     flexDirection: 'row',
-    marginTop: RFValue(20),
   },
   starImgStyle: {
-    width: RFValue(50),
-    height: RFValue(50),
+    tintColor: 'darkorange',
+    width: RFValue(14),
+    height: RFValue(14),
     resizeMode: 'cover',
-    marginHorizontal: RFValue(10),
-    // backgroundColor: 'black',
+    marginRight: RFValue(3.5),
   },
-  container: {
-    justifyContent: 'center',
-    alignItems: 'center',
-  }
 })

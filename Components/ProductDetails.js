@@ -1,49 +1,63 @@
-import { Image, Pressable, StyleSheet, Text, View } from 'react-native'
+import { Dimensions, Image, Platform, StyleSheet, Text, View } from 'react-native'
 import React, { useState } from 'react'
-import Product from './Product'
 import { RFValue } from 'react-native-responsive-fontsize'
-import BottomBar from './BottomBar'
+// import BottomBar from './BottomBar'
 import ProductData from './ProjectData/ProductsImage/ProductData'
-import { TouchableOpacity } from 'react-native-gesture-handler'
+import { ScrollView, TouchableOpacity } from 'react-native-gesture-handler'
 import { useNavigation, useRoute } from '@react-navigation/native'
-import Rough2 from './RatingBar'
+import RatingBar from './RatingBar'
+import { createNativeStackNavigator } from '@react-navigation/native-stack'
 
-const ProductDetails = ({ navigation }) => {
+const ProductDetails = () => {
   const route = useRoute();
   const index = route.params.index;
+  const [selectedId, setSelectedId] = useState(0);
+
   return (
-    <View style={styles.Container}>
-      <View style={styles.productView}>
-        <View style={styles.imgContainer}>
+    <ScrollView style={styles.Container} showsVerticalScrollIndicator={false}>
+      <View style={styles.productViewCent}>
+        <View style={styles.productView}>
           <Image
             source={ProductData[index].img}
             style={styles.img}
-            resizeMode='center'
           />
+          <View style={styles.priceTagContainer}>
+            <Text style={styles.priceTag}>${ProductData[index].price}</Text>
+          </View>
         </View>
-        <View style={styles.priceTagContainer}>
-          <Text style={styles.priceTag}>${ProductData[index].price}</Text>
+        <View style={styles.nameContainer}>
+          <Text style={styles.productName}>{ProductData[index].title}</Text>
         </View>
-      </View>
+        <View style={styles.productRating}>
+          <View style={{ width: Dimensions.get('window').width - 35 }}>
+            <RatingBar />
+            <Text style={styles.ratingText}>50+ reviews</Text>
+          </View>
+        </View>
+        <View style={styles.productSize}>
+          <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
+            {
+              ProductData[index].size.map((item, index) => (
+                <TouchableOpacity
+                  style={[styles.btn, { backgroundColor: selectedId === index ? 'black' : 'white' }]}
+                  onPress={() => {
+                    setSelectedId(index);
+                  }}>
+                  <Text style={[styles.title, { color: selectedId === index ? 'white' : 'black' }]}>{item}</Text>
+                </TouchableOpacity>
+              ))
+            }
+          </ScrollView>
+        </View>
+        <View style={styles.productDescContainer}>
+          <Text style={styles.productDescTitle}>Description</Text>
+          <Text style={styles.productDesc}>{ProductData[index].details}</Text>
+        </View>
 
-      <View style={styles.nameContainer}>
-        <Text style={styles.productName}> {ProductData[index].title}</Text>
       </View>
-
-      <View style={styles.productRating}>
-        <Text> Product Rating</Text>
-        <Rough2 />
-      </View>
-
-      {/* <View style={styles.productSize}>
-        <Text> Product Sizes</Text>
-      </View>
-      <View style={styles.productDescription}>
-        <Text> Product Description</Text>
-      </View> */}
 
       {/* <BottomBar /> */}
-    </View>
+    </ScrollView>
   )
 }
 
@@ -51,25 +65,24 @@ export default ProductDetails
 
 const styles = StyleSheet.create({
   Container: {
-    backgroundColor: 'yellow',
+    backgroundColor: 'white',
     flex: 1,
     // justifyContent: 'center',
-    alignItems: 'center',
+    // alignItems: 'center',
     paddingTop: RFValue(15),
   },
-  productView: {
-    // backgroundColor: 'grey',
-    marginVertical: RFValue(5),
-    justifyContent: 'center',
+  productViewCent: {
+    alignItems: 'center',
   },
-  imgContainer: {
-    overflow: 'hidden',
-    borderRadius: RFValue(55),
+  productView: {
+    borderRadius: RFValue(40),
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   img: {
-    height: RFValue(320),
-    // borderRadius: RFValue(36),
-    width: RFValue(322),
+    height: RFValue(350),
+    width: Dimensions.get('window').width - 30,
+    borderRadius: RFValue(36),
   },
   priceTag: {
     color: 'white',
@@ -90,38 +103,50 @@ const styles = StyleSheet.create({
     right: RFValue(0),
   },
   nameContainer: {
-    backgroundColor: 'grey',
-    marginTop: RFValue(12),
+    marginTop: RFValue(8),
     marginBottom: RFValue(5),
-    // width: '90%',
-    justifyContent: 'center',
-    alignItems: 'center',
+    width: Dimensions.get('window').width - 35,
   },
   productName: {
     fontSize: RFValue(24),
   },
   productRating: {
-    backgroundColor: 'grey',
-    // width: '90%',
-    justifyContent: 'center',
-    alignItems: 'center',
+    flexDirection: 'row',
     marginTop: RFValue(5),
     marginBottom: RFValue(5),
   },
+  ratingText: {
+    marginHorizontal: RFValue(8),
+  },
   productSize: {
-    backgroundColor: 'grey',
-    paddingVertical: RFValue(20),
-    width: '90%',
+    flexDirection: 'row',
+    marginVertical: RFValue(10),
+  },
+  btn: {
     justifyContent: 'center',
     alignItems: 'center',
-    margin: RFValue(10),
+    padding: RFValue(4),
+    marginHorizontal: RFValue(5),
+    paddingHorizontal: RFValue(17),
+    paddingVertical: RFValue(12),
+    borderRadius: RFValue(12),
   },
-  productDescription: {
-    backgroundColor: 'grey',
-    paddingVertical: RFValue(20),
+  title: {
+    fontSize: RFValue(15),
+  },
+  productDescContainer: {
     width: '90%',
     justifyContent: 'center',
-    alignItems: 'center',
-    margin: RFValue(10),
   },
+  productDescTitle: {
+    fontWeight: '600',
+    fontSize: RFValue(13),
+    marginTop: RFValue(7),
+  },
+  productDesc: {
+    marginTop: RFValue(12),
+    fontSize: RFValue(13),
+    textAlign: 'justify',
+    marginBottom: Platform.OS === 'ios' ? RFValue(40) : RFValue(15),
+  }
 })

@@ -7,11 +7,34 @@ import { RFValue } from 'react-native-responsive-fontsize';
 import Search from './Search';
 import Profile from './Profile';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import ProductDetails from './ProductDetails';
 
 const Tab = createBottomTabNavigator();
-const Stack = createNativeStackNavigator;
+const Stack = createNativeStackNavigator();
 
-export default function App() {
+function App() {
+  return (
+    <Stack.Navigator screenOptions={{ headerShown: false, headerBackTitleVisible: false }}>
+      <Stack.Screen
+        name="Home"
+        component={Nav}
+        options={{ headerBackTitleVisible: false }}
+      />
+      <Stack.Screen
+        name="ProductDetails"
+        component={ProductDetails}
+        options={{ headerShown: true, headerBackTitleVisible: false }}
+      />
+      {/* <Stack.Screen
+          name="My Cart"
+          component={MyCart}
+          options={{ headerBackTitleVisible: false }}
+        /> */}
+    </Stack.Navigator>
+  );
+};
+
+const Nav = () => {
   return (
     <Tab.Navigator
       tabBarOptions={{
@@ -78,7 +101,10 @@ export default function App() {
       }} />
     </Tab.Navigator>
   );
-}
+};
+
+
+export default App
 
 const styles = StyleSheet.create({
   container: {

@@ -1,14 +1,17 @@
-import { ScrollView, StyleSheet, Text, View } from 'react-native';
+import { ScrollView, StyleSheet, Text, View, Pressable, Image, TouchableOpacity } from 'react-native';
 import React from 'react';
 import BottomBar from './BottomBar';
 import Categories from './Categories';
 import NewSeasonsEss from './NewSeasonsEss';
-import Product from './Product';
-import ProductDetails from './ProductDetails';
 import TopSearchBar from './TopSearchBar';
 import { RFValue } from 'react-native-responsive-fontsize';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import ProductData from './ProjectData/ProductsImage/ProductData';
+import ProductDetails from './ProductDetails';
 
-const Home = () => {
+const Stack = createNativeStackNavigator();
+
+const Home = ({navigation}) => {
   return (
     <View style={styles.container}>
       <View style={styles.TopSearchBar}>
@@ -25,7 +28,53 @@ const Home = () => {
           <Categories />
         </View>
         <View style={styles.Product}>
-          <Product />
+          <View style={ProductStyle.container}>
+            {
+              ProductData.map((item, index) => (
+                <View style={ProductStyle.proContainer}>
+                  <View style={ProductStyle.productView}>
+                    <View style={ProductStyle.imgContainer}>
+                      <Pressable
+                        // onPress={() => func('ProductDetails', index)}
+                        onPress={() => {
+                          navigation.navigate('ProductDetails', {
+                            index: index,
+                          });
+                        }}
+                      >
+                        <Image
+                          key={index}
+                          source={item.img}
+                          style={ProductStyle.img}
+                        />
+                      </Pressable>
+                    </View>
+                    <TouchableOpacity
+                      style={ProductStyle.favBtn}
+                      onPress={() => Alert.alert(index + ' Added to your wishlist')}
+                      activeOpacity={0.7}
+                    >
+                      <Image
+                        source={require('../Components/ProjectData/Logo/Favorite.png')}
+                        style={ProductStyle.favImg}
+                      />
+                    </TouchableOpacity>
+                  </View>
+                  <Text style={ProductStyle.txt}>{item.title}</Text>
+                  <View style={ProductStyle.btmContainer}>
+                    <Text style={ProductStyle.priceTag}> ${item.price}</Text>
+                    <View style={ProductStyle.tilesContainer}>
+                      {
+                        item.colors.map((clr) => (
+                          <View style={[ProductStyle.clrTiles, { backgroundColor: clr }]}></View>
+                        ))
+                      }
+                    </View>
+                  </View>
+                </View>
+              ))
+            }
+          </View>
         </View>
         <View style={styles.empty} />
       </ScrollView>
@@ -76,5 +125,71 @@ const styles = StyleSheet.create({
   },
   empty: {
     padding: RFValue(43),
+  }
+});
+
+const ProductStyle = StyleSheet.create({
+  container: {
+    borderRadius: RFValue(40),
+    flexDirection: 'row',
+    justifyContent: 'space-evenly',
+    flexWrap: 'wrap',
+    // marginHorizontal: RFValue(5),
+  },
+  proContainer: {
+    width: RFValue(155),
+    marginBottom: RFValue(6),
+  },
+  productView: {
+    margin: RFValue(2),
+    justifyContent: 'flex-end',
+    alignItems: 'flex-end',
+  },
+  imgContainer: {
+    overflow: 'hidden',
+    width: RFValue(190),
+    borderRadius: RFValue(40),
+  },
+  img: {
+    height: RFValue(180),
+    borderRadius: RFValue(36),
+    width: RFValue(190),
+    marginLeft: RFValue(35),
+  },
+  favImg: {
+    width: RFValue(20),
+    height: RFValue(20),
+  },
+  favBtn: {
+    backgroundColor: 'darkorange',
+    height: RFValue(30),
+    borderRadius: RFValue(20),
+    paddingHorizontal: RFValue(12),
+    position: 'absolute',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  txt: {
+    marginTop: RFValue(3),
+    fontSize: RFValue(13),
+  },
+  btmContainer: {
+    marginTop: RFValue(6),
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    marginRight: RFValue(5),
+  },
+  priceTag: {
+    fontSize: RFValue(14),
+  },
+  tilesContainer: {
+    flexDirection: 'row',
+    marginHorizontal: RFValue(5),
+  },
+  clrTiles: {
+    width: RFValue(10),
+    height: RFValue(10),
+    borderRadius: RFValue(2.5),
   }
 });
