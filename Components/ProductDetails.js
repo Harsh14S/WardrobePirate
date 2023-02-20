@@ -15,7 +15,7 @@ const ProductDetails = () => {
 
   return (
     <ScrollView style={styles.Container} showsVerticalScrollIndicator={false}>
-      <View style={styles.productViewCent}>
+      <View style={styles.productViewCenter}>
         <View style={styles.productView}>
           <Image
             source={ProductData[index].img}
@@ -29,7 +29,7 @@ const ProductDetails = () => {
           <Text style={styles.productName}>{ProductData[index].title}</Text>
         </View>
         <View style={styles.productRating}>
-          <View style={{ width: Dimensions.get('window').width - 35 }}>
+          <View style={{ width: Dimensions.get('window').width - 35, flexDirection: 'row' }}>
             <RatingBar />
             <Text style={styles.ratingText}>50+ reviews</Text>
           </View>
@@ -71,7 +71,7 @@ const styles = StyleSheet.create({
     // alignItems: 'center',
     paddingTop: RFValue(15),
   },
-  productViewCent: {
+  productViewCenter: {
     alignItems: 'center',
   },
   productView: {
@@ -92,7 +92,6 @@ const styles = StyleSheet.create({
   },
   priceTagContainer: {
     backgroundColor: 'black',
-    // height: RFValue(30),
     borderRadius: RFValue(100),
     paddingHorizontal: RFValue(12),
     paddingVertical: RFValue(4),
@@ -108,12 +107,13 @@ const styles = StyleSheet.create({
     width: Dimensions.get('window').width - 35,
   },
   productName: {
-    fontSize: RFValue(24),
+    fontSize: RFValue(25),
+    fontWeight: '500',
+    color: 'black',
   },
   productRating: {
-    flexDirection: 'row',
-    marginTop: RFValue(5),
-    marginBottom: RFValue(5),
+    // backgroundColor: 'yellow',
+    marginVertical: RFValue(5),
   },
   ratingText: {
     marginHorizontal: RFValue(8),
@@ -133,8 +133,10 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: RFValue(15),
+    color: 'black',
   },
   productDescContainer: {
+    color: 'black',
     width: '90%',
     justifyContent: 'center',
   },

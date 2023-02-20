@@ -25,3 +25,7 @@ import android.os.Bundle;
 protected void onCreate(Bundle savedInstanceState) {
 super.onCreate(null);
 }
+
+# for blur effect
+
+npm i @react-native-community/blur

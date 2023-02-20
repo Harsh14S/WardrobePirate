@@ -34,7 +34,7 @@ const Product = ({ navigation }) => {
               </View>
               <TouchableOpacity
                 style={styles.favBtn}
-                onPress={() => Alert.alert(index + ' Added to your wishlist')}
+                onPress={() => Alert.alert(' Added to your wishlist')}
                 activeOpacity={0.7}
               >
                 <Image
@@ -60,29 +60,6 @@ const Product = ({ navigation }) => {
     </View>
   )
 }
-
-const Navi = () => {
-  return (
-    <Stack.Navigator
-      initialRouteName='Product'>
-      <Stack.Screen
-        name="Product"
-        component={Product}
-        options={{ headerShown: false }}
-      />
-      <Stack.Screen
-        name="ProductDetails"
-        component={ProductDetails}
-        options={{ headerBackTitleVisible: false }}
-      />
-      {/* <Stack.Screen
-          name="My Cart"
-          component={MyCart}
-          options={{ headerBackTitleVisible: false }}
-        /> */}
-    </Stack.Navigator>
-  );
-};
 
 export default Navi
 

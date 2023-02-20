@@ -1,4 +1,4 @@
-import { ScrollView, StyleSheet, Text, View, Pressable, Image, TouchableOpacity } from 'react-native';
+import { ScrollView, StyleSheet, Text, View, Pressable, Image, TouchableOpacity, Alert, Dimensions } from 'react-native';
 import React from 'react';
 import BottomBar from './BottomBar';
 import Categories from './Categories';
@@ -11,7 +11,7 @@ import ProductDetails from './ProductDetails';
 
 const Stack = createNativeStackNavigator();
 
-const Home = ({navigation}) => {
+const Home = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <View style={styles.TopSearchBar}>
@@ -33,22 +33,19 @@ const Home = ({navigation}) => {
               ProductData.map((item, index) => (
                 <View style={ProductStyle.proContainer}>
                   <View style={ProductStyle.productView}>
-                    <View style={ProductStyle.imgContainer}>
-                      <Pressable
-                        // onPress={() => func('ProductDetails', index)}
-                        onPress={() => {
-                          navigation.navigate('ProductDetails', {
-                            index: index,
-                          });
-                        }}
-                      >
-                        <Image
-                          key={index}
-                          source={item.img}
-                          style={ProductStyle.img}
-                        />
-                      </Pressable>
-                    </View>
+                    <Pressable
+                      onPress={() => {
+                        navigation.navigate('ProductDetails', {
+                          index: index,
+                        });
+                      }}
+                    >
+                      <Image
+                        key={index}
+                        source={item.img}
+                        style={ProductStyle.img}
+                      />
+                    </Pressable>
                     <TouchableOpacity
                       style={ProductStyle.favBtn}
                       onPress={() => Alert.alert(index + ' Added to your wishlist')}
@@ -89,8 +86,8 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     flex: 1,
     alignItems: 'center',
-    justifyContent: 'flex-end',
-    paddingHorizontal: RFValue(10),
+    justifyContent: 'center',
+    // paddingHorizontal: RFValue(10),
   },
   TopSearchBar: {
     // backgroundColor: 'grey',
@@ -98,10 +95,13 @@ const styles = StyleSheet.create({
     marginTop: RFValue(0),
     height: RFValue(40),
     justifyContent: 'center',
+    width: Dimensions.get('window').width - 30,
   },
   inContainer: {
-    flex: 1,
-    borderRadius: RFValue(40)
+    // flex: 1,
+    width: Dimensions.get('window').width - 25,
+    borderRadius: RFValue(40),
+    marginTop: RFValue(10)
   },
   NewSeasonsEss: {
     flex: 1,
@@ -117,7 +117,7 @@ const styles = StyleSheet.create({
     marginTop: RFValue(10),
   },
   BottomBar: {
-    width: '98%',
+    width: Dimensions.get('window').width - 30,
     borderRadius: RFValue(50),
     marginBottom: RFValue(20),
     position: 'absolute',
@@ -130,11 +130,11 @@ const styles = StyleSheet.create({
 
 const ProductStyle = StyleSheet.create({
   container: {
-    borderRadius: RFValue(40),
+    // borderRadius: RFValue(40),
     flexDirection: 'row',
-    justifyContent: 'space-evenly',
+    justifyContent: 'space-between',
     flexWrap: 'wrap',
-    // marginHorizontal: RFValue(5),
+    paddingHorizontal: RFValue(1),
   },
   proContainer: {
     width: RFValue(155),
@@ -142,19 +142,14 @@ const ProductStyle = StyleSheet.create({
   },
   productView: {
     margin: RFValue(2),
-    justifyContent: 'flex-end',
-    alignItems: 'flex-end',
-  },
-  imgContainer: {
-    overflow: 'hidden',
-    width: RFValue(190),
-    borderRadius: RFValue(40),
+    // borderRadius: RFValue(40),
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   img: {
     height: RFValue(180),
     borderRadius: RFValue(36),
-    width: RFValue(190),
-    marginLeft: RFValue(35),
+    width: Dimensions.get('window').width / 2 - 25,
   },
   favImg: {
     width: RFValue(20),
@@ -165,9 +160,12 @@ const ProductStyle = StyleSheet.create({
     height: RFValue(30),
     borderRadius: RFValue(20),
     paddingHorizontal: RFValue(12),
-    position: 'absolute',
+    paddingVertical: RFValue(4),
     alignItems: 'center',
     justifyContent: 'center',
+    position: 'absolute',
+    bottom: RFValue(0),
+    right: RFValue(0),
   },
   txt: {
     marginTop: RFValue(3),

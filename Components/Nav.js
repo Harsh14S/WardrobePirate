@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { StyleSheet, Text, View, Image, Platform } from 'react-native';
+import { StyleSheet, Text, View, Image, Platform, Button, Alert } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Home from './Home';
 import MyCart from './MyCart';
@@ -8,22 +8,43 @@ import Search from './Search';
 import Profile from './Profile';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import ProductDetails from './ProductDetails';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
 
 function App() {
   return (
-    <Stack.Navigator screenOptions={{ headerShown: false, headerBackTitleVisible: false }}>
+    <Stack.Navigator screenOptions={{
+      headerShown: false,
+      headerBackTitleVisible: false,
+      headerShadowVisible: false,
+    }}>
       <Stack.Screen
         name="Home"
         component={Nav}
-        options={{ headerBackTitleVisible: false }}
+        options={{
+          headerBackTitleVisible: false,
+        }}
       />
       <Stack.Screen
         name="ProductDetails"
         component={ProductDetails}
-        options={{ headerShown: true, headerBackTitleVisible: false }}
+        options={{
+          headerShown: true,
+          headerBackTitleVisible: false,
+          headerRight: () => (
+            <TouchableOpacity
+              style={styles.favBtn}
+              onPress={() => Alert.alert("Added To Your WishList")}
+            >
+              <Image
+                source={require('../Components/ProjectData/Logo/Favorite.png')}
+                style={styles.favImg}
+              />
+            </TouchableOpacity>
+          )
+        }}
       />
       {/* <Stack.Screen
           name="My Cart"
@@ -43,16 +64,16 @@ const Nav = () => {
       screenOptions={{
         headerShown: false,
         tabBarStyle: {
+          backgroundColor: 'black',
           alignContent: 'center',
           justifyContent: 'center',
           position: 'absolute',
-          marginHorizontal: RFValue(10),
+          margin: RFValue(10),
           paddingHorizontal: RFValue(5),
           marginBottom: RFValue(10),
-          backgroundColor: 'black',
           borderRadius: RFValue(45),
           height: RFValue(75),
-        }
+        },
       }}
     >
       <Tab.Screen name="Home" component={Home} options={{
@@ -103,7 +124,6 @@ const Nav = () => {
   );
 };
 
-
 export default App
 
 const styles = StyleSheet.create({
@@ -124,5 +144,14 @@ const styles = StyleSheet.create({
     borderRadius: RFValue(50),
     margin: RFValue(7),
     top: Platform.OS === 'ios' ? RFValue(13) : null,
+  },
+  favBtn: {
+    borderRadius: RFValue(20),
+    marginRight: RFValue(10),
+  },
+  favImg: {
+    tintColor: 'black',
+    width: RFValue(25),
+    height: RFValue(25),
   },
 })
