@@ -1,6 +1,5 @@
-import { Image, StyleSheet, Text, View } from 'react-native'
+import { Image, Pressable, StyleSheet, Text, View } from 'react-native'
 import React, { useState } from 'react'
-import { TouchableOpacity } from 'react-native-gesture-handler';
 import { RFValue } from 'react-native-responsive-fontsize';
 
 const RatingBar = () => {
@@ -13,14 +12,14 @@ const RatingBar = () => {
       <View style={styles.customRatingBarStyle}>
         {
           maxRating.map((item, key) => (
-            <TouchableOpacity activeOpacity={0.7} key={item} onPress={() => setDefaultRating(item)} >
+            <Pressable activeOpacity={0.7} key={item} onPress={() => setDefaultRating(item)} >
               <Image
                 style={styles.starImgStyle}
                 source={
                   item <= defaultRating ? require(starImgFilled) : require(starImgCorner)
                 }
               />
-            </TouchableOpacity>
+            </Pressable>
           )
           )
         }

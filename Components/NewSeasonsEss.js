@@ -1,4 +1,4 @@
-import { Alert, ImageBackground, StyleSheet, Text, TouchableHighlight, View } from 'react-native'
+import { Alert, ImageBackground, StyleSheet, Text, Pressable, View } from 'react-native'
 import React from 'react'
 import { RFPercentage, RFValue } from 'react-native-responsive-fontsize'
 
@@ -11,13 +11,13 @@ const NewSeasonsEss = () => {
       >
         <View style={styles.inContainer}>
           <Text style={styles.txt}>New Seasson Essentials.</Text>
-          <TouchableHighlight
+          <Pressable
             onPress={() => Alert.alert("Pressed")}
             underlayColor='orange'
             style={styles.btn}
           >
             <Text style={styles.btntxt}>View More</Text>
-          </TouchableHighlight>
+          </Pressable>
         </View>
       </ImageBackground>
     </View>

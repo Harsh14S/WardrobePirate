@@ -1,4 +1,4 @@
-import { Alert, FlatList, Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import { Alert, FlatList, Image, StyleSheet, Text, Pressable, View } from 'react-native'
 import React, { useState } from 'react'
 import { RFPercentage, RFValue } from 'react-native-responsive-fontsize'
 
@@ -33,14 +33,14 @@ const BottomBar = () => {
       {
         Menus.map((item, index) => (
 
-          <TouchableOpacity
+          <Pressable
             key={index}
             style={[styles.btn, { backgroundColor: (index === selectedId) ? 'darkorange' : null }]}
             onPress={() => setSelectedId(index)}>
             <Image source={item.src}
               style={styles.menuIcon}
             />
-          </TouchableOpacity>
+          </Pressable>
         ))
       }
     </View>

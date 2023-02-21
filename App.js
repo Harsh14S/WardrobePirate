@@ -1,9 +1,7 @@
-import { Dimensions, Platform, StyleSheet, Text, View } from 'react-native'
+import { Platform, StyleSheet,  View } from 'react-native'
 import React from 'react'
 import { RFValue } from 'react-native-responsive-fontsize'
-import Home from './Components/Home'
 import Nav from './Components/Nav'
-import Rough from './Components/Rough'
 import { NavigationContainer } from '@react-navigation/native'
 
 

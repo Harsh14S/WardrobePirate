@@ -1,10 +1,10 @@
-import { Dimensions, Image, Platform, StyleSheet, Text, View } from 'react-native'
+import { Dimensions, Image, Platform, Pressable, StyleSheet, Text, View } from 'react-native'
 import React, { useState } from 'react'
 import { RFValue } from 'react-native-responsive-fontsize'
 // import BottomBar from './BottomBar'
 import ProductData from './ProjectData/ProductsImage/ProductData'
-import { ScrollView, TouchableOpacity } from 'react-native-gesture-handler'
-import { useNavigation, useRoute } from '@react-navigation/native'
+import { ScrollView } from 'react-native-gesture-handler'
+import { useRoute } from '@react-navigation/native'
 import RatingBar from './RatingBar'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 
@@ -12,6 +12,8 @@ const Add2Cart = createBottomTabNavigator();
 let index = 0;
 
 const ProductDetailsNav = ({ navigation }) => {
+  const [item, setItem] = useState(1);
+  const [amount, setAmount] = useState(1);
   const route = useRoute();
   index = route.params.index;
   return (
@@ -23,7 +25,6 @@ const ProductDetailsNav = ({ navigation }) => {
         headerShown: false,
         tabBarStyle: {
           backgroundColor: 'black',
-          // backgroundColor: 'transparent',
           alignContent: 'center',
           justifyContent: 'center',
           position: 'absolute',
@@ -33,15 +34,15 @@ const ProductDetailsNav = ({ navigation }) => {
           paddingHorizontal: RFValue(5),
           borderRadius: RFValue(45),
           height: RFValue(75),
-          shadowColor: 'black',
-          // shadowOffset: {
-          //   height: RFValue(0),
-          //   width: RFValue(0),
-          // },
-          // shadowOpacity: RFValue(1),
-          // shadowRadius: RFValue(20),
-          // opacity: RFValue(1),
-          // elevation: RFValue(1),
+          shadowColor: 'white',
+          shadowOffset: {
+            height: RFValue(0),
+            width: RFValue(0),
+          },
+          shadowOpacity: RFValue(1),
+          shadowRadius: RFValue(20),
+          opacity: RFValue(1),
+          elevation: RFValue(1),
         },
       }}
     >
@@ -49,25 +50,38 @@ const ProductDetailsNav = ({ navigation }) => {
         tabBarIcon: () => (
           <View style={styles.tabBarContainer}>
             <View style={styles.intractionContainer}>
-              <TouchableOpacity style={styles.plusminuscontainer}>
+              <Pressable
+                style={styles.plusminuscontainer}
+                onPress={() => setAmount(amount - 1)}
+              >
                 <Image
                   source={require('../Components/ProjectData/Logo/Minus.png')}
                   style={styles.plusminus}
                 />
-              </TouchableOpacity>
+              </Pressable>
               <View style={styles.plusminuscontainer}>
-                <Text style={styles.navTxt}>1</Text>
+                <Text style={styles.navTxt}>{amount}</Text>
               </View>
-              <TouchableOpacity style={styles.plusminuscontainer}>
+              <Pressable
+                style={styles.plusminuscontainer}
+                onPress={() => setAmount(amount + 1)}
+              >
                 <Image
                   source={require('../Components/ProjectData/Logo/Plus.png')}
                   style={styles.plusminus}
                 />
-              </TouchableOpacity>
+              </Pressable>
             </View>
-            <TouchableOpacity style={styles.iconContainer}>
+            <Pressable
+              style={styles.iconContainer}
+              onPress={() => {
+                navigation.navigate('Cart', {
+                  index: index,
+                });
+              }}
+            >
               <Text style={styles.navTxt}>Add To Cart</Text>
-            </TouchableOpacity>
+            </Pressable>
           </View>
         )
       }} />
@@ -105,7 +119,7 @@ const ProductDetails = () => {
           <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
             {
               ProductData[index].size.map((item, index) => (
-                <TouchableOpacity
+                <Pressable
                   style={[styles.btn, { backgroundColor: selectedId === index ? 'black' : 'white' }]}
                   onPress={() => {
                     setSelectedId(index);
@@ -113,7 +127,7 @@ const ProductDetails = () => {
                   key={index}
                 >
                   <Text style={[styles.title, { color: selectedId === index ? 'white' : 'black' }]}>{item}</Text>
-                </TouchableOpacity>
+                </Pressable>
               ))
             }
           </ScrollView>
@@ -222,9 +236,11 @@ const styles = StyleSheet.create({
   },
   tabBarContainer: {
     flexDirection: 'row',
-    // backgroundColor: 'white',
+    // backgroundColor: 'skyblue',
     top: Platform.OS === 'ios' ? RFValue(13) : null,
     width: '100%',
+    width: Dimensions.get('window').width - 40,
+    justifyContent: 'space-between',
   },
   iconContainer: {
     alignItems: 'center',
@@ -233,7 +249,6 @@ const styles = StyleSheet.create({
     borderRadius: RFValue(50),
     height: RFValue(62),
     paddingHorizontal: RFValue(45),
-    marginLeft: Platform.OS === 'ios' ? null : RFValue(21),
   },
   navTxt: {
     color: 'white',
@@ -246,7 +261,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    marginHorizontal: RFValue(19),
+    marginLeft: RFValue(10),
   },
   plusminus: {
     tintColor: 'white',
@@ -254,6 +269,7 @@ const styles = StyleSheet.create({
     width: RFValue(26),
   },
   plusminuscontainer: {
-    marginHorizontal: RFValue(6),
-  }
+    marginHorizontal: RFValue(4),
+    width: RFValue(28),
+  },
 })

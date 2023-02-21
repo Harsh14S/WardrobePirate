@@ -1,8 +1,9 @@
 import * as React from 'react';
-import { StyleSheet, Text, View, Image, Platform, Button, Alert } from 'react-native';
+import { StyleSheet, View, Image, Platform, Alert } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Home from './Home';
 import MyCart from './MyCart';
+import Cart from './Cart';
 import { RFValue } from 'react-native-responsive-fontsize';
 import Search from './Search';
 import Profile from './Profile';
@@ -11,20 +12,16 @@ import ProductDetails from './ProductDetails';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
 const Tab = createBottomTabNavigator();
-const Add2Cart = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
 
 function App() {
   return (
-    <Stack.Navigator screenOptions={{
-      headerShown: false,
-      headerBackTitleVisible: false,
-      headerShadowVisible: false,
-    }}>
+    <Stack.Navigator>
       <Stack.Screen
         name="Nav"
         component={Nav}
         options={{
+          headerShown: false,
           headerBackTitleVisible: false,
         }}
       />
@@ -32,7 +29,6 @@ function App() {
         name="ProductDetails"
         component={ProductDetails}
         options={{
-          headerShown: true,
           headerBackTitleVisible: false,
           headerRight: () => (
             <TouchableOpacity
@@ -47,11 +43,23 @@ function App() {
           )
         }}
       />
-      {/* <Stack.Screen
-          name="My Cart"
-          component={MyCart}
-          options={{ headerBackTitleVisible: false }}
-        /> */}
+      <Stack.Screen
+        name="Cart"
+        component={Cart}
+        options={{
+          headerRight: () => (
+            <TouchableOpacity
+              style={styles.favBtn}
+              onPress={() => Alert.alert("Settings")}
+            >
+              <Image
+                source={require('../Components/ProjectData/Logo/Dots.png')}
+                style={styles.favImg}
+              />
+            </TouchableOpacity>
+          )
+        }}
+      />
     </Stack.Navigator>
   );
 };
@@ -124,42 +132,6 @@ const Nav = () => {
     </Tab.Navigator>
   );
 };
-
-// const ProductDetailsNav = () => {
-//   return (
-//     <Add2Cart.Navigator
-//       tabBarOptions={{
-//         showLabel: false,
-//       }}
-//       screenOptions={{
-//         headerShown: false,
-//         tabBarStyle: {
-//           backgroundColor: 'black',
-//           alignContent: 'center',
-//           justifyContent: 'center',
-//           position: 'absolute',
-//           margin: RFValue(10),
-//           paddingHorizontal: RFValue(5),
-//           marginBottom: RFValue(10),
-//           borderRadius: RFValue(45),
-//           height: RFValue(75),
-//         },
-//       }}
-//     >
-//       <Add2Cart.Screen name="ProductDetails" component={ProductDetails} options={{
-//         tabBarIcon: () => (
-//           <View style={[styles.iconContainer, { backgroundColor: 'darkorange'}]}>
-//             <Image
-//               source={require('../Components/ProjectData/Logo/Home.png')}
-//               resizeMode='contain'
-//               style={styles.iconImg}
-//             />
-//           </View>
-//         )
-//       }} />
-//     </Add2Cart.Navigator>
-//   )
-// }
 
 export default App
 

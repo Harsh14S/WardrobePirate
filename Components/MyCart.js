@@ -5,17 +5,6 @@ import { RFPercentage, RFValue } from 'react-native-responsive-fontsize';
 const MyCart = () => {
     return (
         <View style={styles.container}>
-            {/* <View style={styles.topBar}>
-                <View>
-                    <Text>Arrow</Text>
-                </View>
-                <View>
-                    <Text>My Cart</Text>
-                </View>
-                <View>
-                    <Text>other</Text>
-                </View>
-            </View> */}
             <View style={styles.cartContainer}>
                 <Text>Cart</Text>
             </View>

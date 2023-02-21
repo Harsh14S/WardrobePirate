@@ -1,13 +1,10 @@
-import { ScrollView, StyleSheet, Text, View, Pressable, Image, TouchableOpacity, Alert, Dimensions } from 'react-native';
+import { ScrollView, StyleSheet, Text, View, Pressable, Image, Alert, Dimensions } from 'react-native';
 import React from 'react';
-import BottomBar from './BottomBar';
 import Categories from './Categories';
 import NewSeasonsEss from './NewSeasonsEss';
 import TopSearchBar from './TopSearchBar';
 import { RFValue } from 'react-native-responsive-fontsize';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import ProductData from './ProjectData/ProductsImage/ProductData';
-import ProductDetails from './ProductDetails';
 
 // const Stack = createNativeStackNavigator();
 
@@ -46,7 +43,7 @@ const Home = ({ navigation }) => {
                         style={ProductStyle.img}
                       />
                     </Pressable>
-                    <TouchableOpacity
+                    <Pressable
                       style={ProductStyle.favBtn}
                       onPress={() => Alert.alert(index + ' Added to your wishlist')}
                       activeOpacity={0.7}
@@ -55,7 +52,7 @@ const Home = ({ navigation }) => {
                         source={require('../Components/ProjectData/Logo/Favorite.png')}
                         style={ProductStyle.favImg}
                       />
-                    </TouchableOpacity>
+                    </Pressable>
                   </View>
                   <Text style={ProductStyle.txt}>{item.title}</Text>
                   <View style={ProductStyle.btmContainer}>

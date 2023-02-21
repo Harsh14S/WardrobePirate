@@ -1,4 +1,4 @@
-import { FlatList, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import { FlatList, StyleSheet, Text, Pressable, View } from 'react-native'
 import React, { useState } from 'react'
 import { RFValue } from 'react-native-responsive-fontsize';
 
@@ -10,11 +10,11 @@ const CategoryData = [
 ];
 
 const Item = ({ title, bgClr, clr, onPress, stat }) => (
-  <TouchableOpacity
+  <Pressable
     style={[styles.btn, { backgroundColor: bgClr }]}
     onPress={onPress}>
     <Text style={[styles.title, { color: clr }]}>{stat} {title}</Text>
-  </TouchableOpacity>
+  </Pressable>
 );
 
 const productSize = () => {

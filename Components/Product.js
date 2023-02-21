@@ -1,13 +1,7 @@
-import { Alert, Image, Pressable, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
-import React, { useState } from 'react'
-import ProductDetails from './ProductDetails'
-import Categories from './Categories'
+import { Alert, Image, Pressable, StyleSheet, Text, Pressable, View } from 'react-native'
+import React from 'react'
 import ProductData from './ProjectData/ProductsImage/ProductData'
 import { RFValue } from 'react-native-responsive-fontsize'
-import { NavigationContainer, useNavigation, useRoute } from '@react-navigation/native'
-import { createNativeStackNavigator } from '@react-navigation/native-stack'
-
-const Stack = createNativeStackNavigator();
 
 const Product = ({ navigation }) => {
   return (
@@ -32,7 +26,7 @@ const Product = ({ navigation }) => {
                   />
                 </Pressable>
               </View>
-              <TouchableOpacity
+              <Pressable
                 style={styles.favBtn}
                 onPress={() => Alert.alert(' Added to your wishlist')}
                 activeOpacity={0.7}
@@ -41,7 +35,7 @@ const Product = ({ navigation }) => {
                   source={require('../Components/ProjectData/Logo/Favorite.png')}
                   style={styles.favImg}
                 />
-              </TouchableOpacity>
+              </Pressable>
             </View>
             <Text style={styles.txt}>{item.title}</Text>
             <View style={styles.btmContainer}>
