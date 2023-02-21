@@ -4,7 +4,7 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 import { RFValue } from 'react-native-responsive-fontsize';
 
 const RatingBar = () => {
-  const [defaultRating, setDefaultRating] = useState(2);
+  const [defaultRating, setDefaultRating] = useState(5);
   const [maxRating, setMaxRating] = useState([1, 2, 3, 4, 5]);
   const starImgFilled = '../Components/ProjectData/Logo/star_filled.png';
   const starImgCorner = '../Components/ProjectData/Logo/star_corner.png';

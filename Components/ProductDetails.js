@@ -6,11 +6,78 @@ import ProductData from './ProjectData/ProductsImage/ProductData'
 import { ScrollView, TouchableOpacity } from 'react-native-gesture-handler'
 import { useNavigation, useRoute } from '@react-navigation/native'
 import RatingBar from './RatingBar'
-import { createNativeStackNavigator } from '@react-navigation/native-stack'
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
+
+const Add2Cart = createBottomTabNavigator();
+let index = 0;
+
+const ProductDetailsNav = ({ navigation }) => {
+  const route = useRoute();
+  index = route.params.index;
+  return (
+    <Add2Cart.Navigator
+      tabBarOptions={{
+        showLabel: false,
+      }}
+      screenOptions={{
+        headerShown: false,
+        tabBarStyle: {
+          backgroundColor: 'black',
+          // backgroundColor: 'transparent',
+          alignContent: 'center',
+          justifyContent: 'center',
+          position: 'absolute',
+          marginTop: RFValue(20),
+          marginBottom: RFValue(10),
+          marginHorizontal: RFValue(10),
+          paddingHorizontal: RFValue(5),
+          borderRadius: RFValue(45),
+          height: RFValue(75),
+          shadowColor: 'black',
+          // shadowOffset: {
+          //   height: RFValue(0),
+          //   width: RFValue(0),
+          // },
+          // shadowOpacity: RFValue(1),
+          // shadowRadius: RFValue(20),
+          // opacity: RFValue(1),
+          // elevation: RFValue(1),
+        },
+      }}
+    >
+      <Add2Cart.Screen name="ProductDetails" component={ProductDetails} options={{
+        tabBarIcon: () => (
+          <View style={styles.tabBarContainer}>
+            <View style={styles.intractionContainer}>
+              <TouchableOpacity style={styles.plusminuscontainer}>
+                <Image
+                  source={require('../Components/ProjectData/Logo/Minus.png')}
+                  style={styles.plusminus}
+                />
+              </TouchableOpacity>
+              <View style={styles.plusminuscontainer}>
+                <Text style={styles.navTxt}>1</Text>
+              </View>
+              <TouchableOpacity style={styles.plusminuscontainer}>
+                <Image
+                  source={require('../Components/ProjectData/Logo/Plus.png')}
+                  style={styles.plusminus}
+                />
+              </TouchableOpacity>
+            </View>
+            <TouchableOpacity style={styles.iconContainer}>
+              <Text style={styles.navTxt}>Add To Cart</Text>
+            </TouchableOpacity>
+          </View>
+        )
+      }} />
+    </Add2Cart.Navigator>
+  )
+}
 
 const ProductDetails = () => {
-  const route = useRoute();
-  const index = route.params.index;
+  // const route = useRoute();
+  // const index
   const [selectedId, setSelectedId] = useState(0);
 
   return (
@@ -42,7 +109,9 @@ const ProductDetails = () => {
                   style={[styles.btn, { backgroundColor: selectedId === index ? 'black' : 'white' }]}
                   onPress={() => {
                     setSelectedId(index);
-                  }}>
+                  }}
+                  key={index}
+                >
                   <Text style={[styles.title, { color: selectedId === index ? 'white' : 'black' }]}>{item}</Text>
                 </TouchableOpacity>
               ))
@@ -61,7 +130,7 @@ const ProductDetails = () => {
   )
 }
 
-export default ProductDetails
+export default ProductDetailsNav
 
 const styles = StyleSheet.create({
   Container: {
@@ -150,5 +219,41 @@ const styles = StyleSheet.create({
     fontSize: RFValue(13),
     textAlign: 'justify',
     marginBottom: Platform.OS === 'ios' ? RFValue(40) : RFValue(15),
+  },
+  tabBarContainer: {
+    flexDirection: 'row',
+    // backgroundColor: 'white',
+    top: Platform.OS === 'ios' ? RFValue(13) : null,
+    width: '100%',
+  },
+  iconContainer: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: 'darkorange',
+    borderRadius: RFValue(50),
+    height: RFValue(62),
+    paddingHorizontal: RFValue(45),
+    marginLeft: Platform.OS === 'ios' ? null : RFValue(21),
+  },
+  navTxt: {
+    color: 'white',
+    textAlign: 'center',
+    textAlignVertical: 'center',
+    fontWeight: 'bold',
+    fontSize: RFValue(16)
+  },
+  intractionContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginHorizontal: RFValue(19),
+  },
+  plusminus: {
+    tintColor: 'white',
+    height: RFValue(26),
+    width: RFValue(26),
+  },
+  plusminuscontainer: {
+    marginHorizontal: RFValue(6),
   }
 })

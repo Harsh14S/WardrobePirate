@@ -11,6 +11,7 @@ import ProductDetails from './ProductDetails';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
 const Tab = createBottomTabNavigator();
+const Add2Cart = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
 
 function App() {
@@ -21,7 +22,7 @@ function App() {
       headerShadowVisible: false,
     }}>
       <Stack.Screen
-        name="Home"
+        name="Nav"
         component={Nav}
         options={{
           headerBackTitleVisible: false,
@@ -123,6 +124,42 @@ const Nav = () => {
     </Tab.Navigator>
   );
 };
+
+// const ProductDetailsNav = () => {
+//   return (
+//     <Add2Cart.Navigator
+//       tabBarOptions={{
+//         showLabel: false,
+//       }}
+//       screenOptions={{
+//         headerShown: false,
+//         tabBarStyle: {
+//           backgroundColor: 'black',
+//           alignContent: 'center',
+//           justifyContent: 'center',
+//           position: 'absolute',
+//           margin: RFValue(10),
+//           paddingHorizontal: RFValue(5),
+//           marginBottom: RFValue(10),
+//           borderRadius: RFValue(45),
+//           height: RFValue(75),
+//         },
+//       }}
+//     >
+//       <Add2Cart.Screen name="ProductDetails" component={ProductDetails} options={{
+//         tabBarIcon: () => (
+//           <View style={[styles.iconContainer, { backgroundColor: 'darkorange'}]}>
+//             <Image
+//               source={require('../Components/ProjectData/Logo/Home.png')}
+//               resizeMode='contain'
+//               style={styles.iconImg}
+//             />
+//           </View>
+//         )
+//       }} />
+//     </Add2Cart.Navigator>
+//   )
+// }
 
 export default App
 

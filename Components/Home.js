@@ -9,7 +9,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import ProductData from './ProjectData/ProductsImage/ProductData';
 import ProductDetails from './ProductDetails';
 
-const Stack = createNativeStackNavigator();
+// const Stack = createNativeStackNavigator();
 
 const Home = ({ navigation }) => {
   return (
