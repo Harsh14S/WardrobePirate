@@ -13,7 +13,7 @@ let index = 0;
 
 const ProductDetailsNav = ({ navigation }) => {
   const [item, setItem] = useState(1);
-  const [amount, setAmount] = useState(1);
+  const [amount, setAmount] = useState(0);
   const route = useRoute();
   index = route.params.index;
   return (
@@ -238,7 +238,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     // backgroundColor: 'skyblue',
     top: Platform.OS === 'ios' ? RFValue(13) : null,
-    width: '100%',
     width: Dimensions.get('window').width - 40,
     justifyContent: 'space-between',
   },
@@ -255,7 +254,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     textAlignVertical: 'center',
     fontWeight: 'bold',
-    fontSize: RFValue(16)
+    fontSize: RFValue(16),
   },
   intractionContainer: {
     flexDirection: 'row',
