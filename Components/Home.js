@@ -6,8 +6,6 @@ import TopSearchBar from './TopSearchBar';
 import { RFValue } from 'react-native-responsive-fontsize';
 import ProductData from './ProjectData/ProductsImage/ProductData';
 
-// const Stack = createNativeStackNavigator();
-
 const Home = ({ navigation }) => {
   return (
     <View style={styles.container}>
@@ -31,6 +29,7 @@ const Home = ({ navigation }) => {
                 <View style={ProductStyle.proContainer}>
                   <View style={ProductStyle.productView}>
                     <Pressable
+                      key={index}
                       onPress={() => {
                         navigation.navigate('ProductDetails', {
                           index: index,
@@ -38,7 +37,6 @@ const Home = ({ navigation }) => {
                       }}
                     >
                       <Image
-                        key={index}
                         source={item.img}
                         style={ProductStyle.img}
                       />
@@ -55,12 +53,12 @@ const Home = ({ navigation }) => {
                     </Pressable>
                   </View>
                   <Text style={ProductStyle.txt}>{item.title}</Text>
-                  <View style={ProductStyle.btmContainer}>
+                  <View style={ProductStyle.btnContainer}>
                     <Text style={ProductStyle.priceTag}> ${item.price}</Text>
                     <View style={ProductStyle.tilesContainer}>
                       {
-                        item.colors.map((clr) => (
-                          <View style={[ProductStyle.clrTiles, { backgroundColor: clr }]}></View>
+                        item.colors.map((clr, index) => (
+                          <View style={[ProductStyle.clrTiles, { backgroundColor: clr }]} key={index} />
                         ))
                       }
                     </View>
@@ -84,6 +82,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
+    paddingTop: RFValue(10),
     // paddingHorizontal: RFValue(10),
   },
   TopSearchBar: {
@@ -168,7 +167,7 @@ const ProductStyle = StyleSheet.create({
     marginTop: RFValue(3),
     fontSize: RFValue(13),
   },
-  btmContainer: {
+  btnContainer: {
     marginTop: RFValue(6),
     flexDirection: 'row',
     alignItems: 'center',

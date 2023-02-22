@@ -1,20 +1,17 @@
 import { Dimensions, Image, Platform, Pressable, StyleSheet, Text, View } from 'react-native'
 import React, { useState } from 'react'
 import { RFValue } from 'react-native-responsive-fontsize'
-// import BottomBar from './BottomBar'
 import ProductData from './ProjectData/ProductsImage/ProductData'
 import { ScrollView } from 'react-native-gesture-handler'
-import { useRoute } from '@react-navigation/native'
 import RatingBar from './RatingBar'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 
 const Add2Cart = createBottomTabNavigator();
 let index = 0;
 
-const ProductDetailsNav = ({ navigation }) => {
-  const [item, setItem] = useState(1);
+const ProductDetailsNav = ({ navigation, route }) => {
+  // const [item, setItem] = useState(1);
   const [amount, setAmount] = useState(0);
-  const route = useRoute();
   index = route.params.index;
   return (
     <Add2Cart.Navigator
@@ -46,7 +43,7 @@ const ProductDetailsNav = ({ navigation }) => {
         },
       }}
     >
-      <Add2Cart.Screen name="ProductDetails" component={ProductDetails} options={{
+      <Add2Cart.Screen name="ProductDetail" component={ProductDetails} options={{
         tabBarIcon: () => (
           <View style={styles.tabBarContainer}>
             <View style={styles.intractionContainer}>
@@ -86,12 +83,10 @@ const ProductDetailsNav = ({ navigation }) => {
         )
       }} />
     </Add2Cart.Navigator>
-  )
-}
+  );
+};
 
-const ProductDetails = () => {
-  // const route = useRoute();
-  // const index
+const ProductDetails = ({ }) => {
   const [selectedId, setSelectedId] = useState(0);
 
   return (
@@ -136,8 +131,8 @@ const ProductDetails = () => {
           <Text style={styles.productDescTitle}>Description</Text>
           <Text style={styles.productDesc}>{ProductData[index].details}</Text>
         </View>
-
       </View>
+      <View style={styles.empty} />
 
       {/* <BottomBar /> */}
     </ScrollView>
@@ -176,7 +171,8 @@ const styles = StyleSheet.create({
   priceTagContainer: {
     backgroundColor: 'black',
     borderRadius: RFValue(100),
-    paddingHorizontal: RFValue(12),
+    // paddingHorizontal: RFValue(12),
+    width: Dimensions.get('window').width - 290,
     paddingVertical: RFValue(4),
     alignItems: 'center',
     justifyContent: 'center',
@@ -270,5 +266,8 @@ const styles = StyleSheet.create({
   plusminuscontainer: {
     marginHorizontal: RFValue(4),
     width: RFValue(28),
+  },
+  empty: {
+    padding: RFValue(43),
   },
 })

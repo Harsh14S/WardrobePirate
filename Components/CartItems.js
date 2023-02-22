@@ -54,7 +54,7 @@ const styles = StyleSheet.create({
     // backgroundColor: 'yellow',
     flexDirection: 'row',
     justifyContent: 'center',
-    marginTop: RFValue(10)
+    marginVertical: RFValue(5),
   },
   imgContainer: {
     // backgroundColor: 'red',
@@ -64,8 +64,8 @@ const styles = StyleSheet.create({
     padding: RFValue(5),
   },
   img: {
-    height: RFValue(100),
-    width: RFValue(100),
+    height: RFValue(85),
+    width: RFValue(85),
     borderRadius: RFValue(20),
   },
   itemDetails: {

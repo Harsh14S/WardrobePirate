@@ -2,10 +2,9 @@ import { Alert, Dimensions, Image, Pressable, StyleSheet, Text, View } from 'rea
 import React from 'react'
 import { RFValue } from 'react-native-responsive-fontsize';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { useRoute } from '@react-navigation/native';
-import ProductData from './ProjectData/ProductsImage/ProductData';
 import { ScrollView } from 'react-native-gesture-handler';
 import CartItems from './CartItems';
+import Bill from './CartBill';
 
 const Add2Cart = createBottomTabNavigator();
 let index = 1;
@@ -13,14 +12,18 @@ let index = 1;
 const Cart = () => {
   return (
     <View style={styles.container}>
-      <ScrollView style={styles.cartContainer}>
-        <CartItems />
-        <CartItems />
-        <CartItems />
+      <ScrollView>
+        <View style={styles.cartContainer}>
+          <CartItems />
+          <CartItems />
+          <CartItems />
+        </View>
+        <View style={styles.billContainer}>
+          <Bill />
+          {/* <Text>Bill</Text> */}
+        </View>
+        <View style={styles.empty} />
       </ScrollView>
-      <View style={styles.billContainer}>
-        <Text>Bill</Text>
-      </View>
     </View>
   )
 };
@@ -35,7 +38,7 @@ export default Checkout = ({ route }) => {
       screenOptions={{
         headerShown: false,
         tabBarStyle: {
-          backgroundColor: 'darkorange',
+          backgroundColor: 'black',
           alignContent: 'center',
           justifyContent: 'center',
           position: 'absolute',
@@ -48,7 +51,7 @@ export default Checkout = ({ route }) => {
         },
       }}
     >
-      <Add2Cart.Screen name="Cart" component={Cart} options={{
+      <Add2Cart.Screen name="My Cart" component={Cart} options={{
         tabBarIcon: () => (
           <Pressable
             style={styles.checkout}
@@ -70,30 +73,30 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   cartContainer: {
+    flex: 1,
     marginTop: RFValue(10),
-    backgroundColor: 'grey',
+    // backgroundColor: 'grey',
     paddingVertical: RFValue(2),
-    backgroundColor: 'white',
     width: Dimensions.get('window').width - 20,
+    // height: Dimensions.get('window').height / 2 - 55,
   },
 
   billContainer: {
-    // flex: 1,
-    marginTop: RFValue(6),
-    justifyContent: 'center',
-    paddingVertical: RFValue(50),
-    backgroundColor: 'white',
-    alignItems: 'center',
+    flex: 1,
+    marginTop: RFValue(50),
+    // paddingVertical: RFValue(50),
+    // backgroundColor: 'white',
     width: Dimensions.get('window').width - 20,
+    // height: Dimensions.get('window').height / 2 - 150,
   },
   checkout: {
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: 'black',
+    backgroundColor: 'darkorange',
     borderRadius: RFValue(50),
     width: Dimensions.get('window').width - 20,
     top: Platform.OS === 'ios' ? RFValue(13) : null,
-    height: RFValue(60),
+    height: RFValue(62),
   },
   navTxt: {
     color: 'white',
@@ -103,5 +106,8 @@ const styles = StyleSheet.create({
     fontSize: RFValue(16),
     // paddingVertical: RFValue(5),
   },
-
+  empty: {
+    // backgroundColor: "white",
+    padding: RFValue(40),
+  },
 })
