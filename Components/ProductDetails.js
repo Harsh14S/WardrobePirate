@@ -15,12 +15,11 @@ const ProductDetailsNav = ({ navigation, route }) => {
   index = route.params.index;
   return (
     <Add2Cart.Navigator
-      tabBarOptions={{
-        showLabel: false,
-      }}
       screenOptions={{
+        "tabBarShowLabel": false,
         headerShown: false,
         tabBarStyle: {
+          "display": "flex",
           backgroundColor: 'black',
           alignContent: 'center',
           justifyContent: 'center',

@@ -20,7 +20,6 @@ function App() {
     <Stack.Navigator
       screenOptions={{
         headerShadowVisible: false,
-
       }}
     >
       <Stack.Screen
