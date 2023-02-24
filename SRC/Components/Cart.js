@@ -15,8 +15,8 @@ const Cart = () => {
       <ScrollView>
         <View style={styles.cartContainer}>
           <CartItems />
-          <CartItems />
-          <CartItems />
+          {/* <CartItems />
+          <CartItems /> */}
         </View>
         <View style={styles.billContainer}>
           <Bill />

@@ -5,11 +5,18 @@ import ProductData from '../ProjectData/ProductsImage/ProductData'
 import { ScrollView } from 'react-native-gesture-handler'
 import RatingBar from './RatingBar'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
+import { useDispatch } from 'react-redux'
+import { addItemToCart } from '../Redux/Actions/ActionIndex'
 
 const Add2Cart = createBottomTabNavigator();
 let index = 0;
 
 const ProductDetailsNav = ({ navigation, route }) => {
+  const dispatch = useDispatch();
+  // const addItem = (item) => {
+  //   dispatch(addItemToCart(item));
+  //   // console.warn(addItem);
+  // }
   // const [item, setItem] = useState(1);
   const [amount, setAmount] = useState(0);
   index = route.params.index;

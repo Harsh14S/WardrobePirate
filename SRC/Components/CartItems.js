@@ -2,47 +2,71 @@ import { Image, Pressable, StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 import { RFValue } from 'react-native-responsive-fontsize'
 import ProductData from '../ProjectData/ProductsImage/ProductData'
+import { useDispatch, useSelector } from 'react-redux'
+import { removeItemFromCart } from '../Redux/Actions/ActionIndex'
+import { FlatList } from 'react-native-gesture-handler'
 
 const CartItems = () => {
+  const items = useSelector(state => state);
+  const dispatch = useDispatch();
+  const removeItem = (index) => {
+    dispatch(removeItemFromCart(index));
+  }
   return (
     <View style={styles.container}>
-      <View style={styles.imgContainer}><Image source={ProductData[0].img} style={styles.img} /></View>
-      <View style={styles.itemDetails}>
-        <View style={styles.itemTitle}>
-          <Text style={styles.itemTitleTxt}>{ProductData[0].title}</Text>
-        </View>
-        <View style={styles.itemCateg}>
-          <Text style={styles.itemCategTxt}>{ProductData[0].categ}</Text>
-        </View>
-        <View style={styles.priceQuantity}>
-          <Text style={styles.itemPrice}>${ProductData[0].price}</Text>
-          <View style={styles.intractionContainer}>
-            <Pressable
-              style={styles.plusminuscontainer}
-            // onPress={() => setAmount(amount - 1)}
-            >
-              <Image
-                source={require('../ProjectData/Logo/Minus.png')}
-                style={styles.plusminus}
-              />
-            </Pressable>
-            <View style={styles.plusminuscontainer}>
-              <Text style={styles.itemQuantity}>2</Text>
-              {/* <Text style={styles.navTxt}>{amount}</Text> */}
+      <FlatList data={items} renderItem={({ item, index }) => {
+        return (
+          <View key={index}>
+            <View style={styles.imgContainer}><Image source={ProductData[item].img} style={styles.img} /></View>
+            <View style={styles.itemDetails}>
+              <View style={styles.itemTitle}>
+                <Text style={styles.itemTitleTxt}>{ProductData[item].title}</Text>
+              </View>
+              <View style={styles.itemCateg}>
+                <Text style={styles.itemCategTxt}>{ProductData[item].categ}</Text>
+              </View>
+              <View style={styles.priceQuantity}>
+                <Text style={styles.itemPrice}>${ProductData[item].price}</Text>
+                <View style={styles.intractionContainer}>
+                  <Pressable
+                    style={styles.plusminuscontainer}
+                  // onPress={() => setAmount(amount - 1)}
+                  >
+                    <Image
+                      source={require('../ProjectData/Logo/Minus.png')}
+                      style={styles.plusminus}
+                    />
+                  </Pressable>
+                  <View style={styles.plusminuscontainer}>
+                    <Text style={styles.itemQuantity}>2</Text>
+                    {/* <Text style={styles.navTxt}>{amount}</Text> */}
+                  </View>
+                  <Pressable
+                    style={styles.plusminuscontainer}
+                  // onPress={() => setAmount(amount + 1)}
+                  >
+                    <Image
+                      source={require('../ProjectData/Logo/Plus.png')}
+                      style={styles.plusminus}
+                    />
+                  </Pressable>
+                  <Pressable
+                    style={styles.plusminuscontainer}
+                    onPress={() => removeItem(index)}
+                  >
+                    <Image
+                      source={require('../ProjectData/Logo/Bin.png')}
+                      style={styles.plusminus}
+                    />
+                  </Pressable>
+                </View>
+              </View>
             </View>
-            <Pressable
-              style={styles.plusminuscontainer}
-            // onPress={() => setAmount(amount + 1)}
-            >
-              <Image
-                source={require('../ProjectData/Logo/Plus.png')}
-                style={styles.plusminus}
-              />
-            </Pressable>
           </View>
-        </View>
-      </View>
-    </View>
+        )
+      }} />
+
+    </View >
   )
 }
 
@@ -112,6 +136,7 @@ const styles = StyleSheet.create({
     width: RFValue(26),
   },
   plusminuscontainer: {
+    // backgroundColor: 'yellow',
     marginHorizontal: RFValue(4),
     width: RFValue(28),
   },

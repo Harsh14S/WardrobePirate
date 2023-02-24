@@ -29,3 +29,9 @@ super.onCreate(null);
 # for blur effect
 
 npm i @react-native-community/blur
+
+# Installing redux
+
+npm install redux
+npm install @reduxjs/toolkit
+npm install react-redux

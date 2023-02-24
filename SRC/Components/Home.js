@@ -5,8 +5,15 @@ import NewSeasonsEss from './NewSeasonsEss';
 import TopSearchBar from './TopSearchBar';
 import { RFValue } from 'react-native-responsive-fontsize';
 import ProductData from '../ProjectData/ProductsImage/ProductData';
+import { useDispatch } from 'react-redux';
 
 const Home = ({ navigation }) => {
+
+  const addItem = (item) => {
+    const dispatch = useDispatch();
+    dispatch(addItemToCart(item));
+    // console.warn(addItem);
+  }
   return (
     <View style={styles.container}>
       <View style={styles.TopSearchBar}>
@@ -43,7 +50,10 @@ const Home = ({ navigation }) => {
                     </Pressable>
                     <Pressable
                       style={ProductStyle.favBtn}
-                      onPress={() => Alert.alert(index + ' Added to your wishlist')}
+                      onPress={() => {
+                        // Alert.alert(index + ' Added to your wishlist');
+                        addItem(index);
+                      }}
                       activeOpacity={0.7}
                     >
                       <Image

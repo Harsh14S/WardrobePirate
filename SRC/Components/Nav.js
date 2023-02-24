@@ -8,14 +8,15 @@ import { RFValue } from 'react-native-responsive-fontsize';
 import Search from './Search';
 import Profile from './Profile';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import ProductDetails from './ProductDetails';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import ProductDetailsNav from './ProductDetails';
+import { useSelector } from 'react-redux';
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
 
 function App() {
+  const items = useSelector(state => state)
   return (
     <Stack.Navigator
       screenOptions={{
@@ -113,6 +114,7 @@ const Nav = () => {
         )
       }} />
       <Tab.Screen name="Cart" component={MyCart} options={{
+        // tabBarBadge: items.length,
         tabBarIcon: ({ focused }) => (
           <View style={[styles.iconContainer, { backgroundColor: focused ? 'darkorange' : null }]}>
             <Image
