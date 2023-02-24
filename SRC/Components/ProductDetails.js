@@ -1,7 +1,7 @@
 import { Dimensions, Image, Platform, Pressable, StyleSheet, Text, View } from 'react-native'
 import React, { useState } from 'react'
 import { RFValue } from 'react-native-responsive-fontsize'
-import ProductData from './ProjectData/ProductsImage/ProductData'
+import ProductData from '../ProjectData/ProductsImage/ProductData'
 import { ScrollView } from 'react-native-gesture-handler'
 import RatingBar from './RatingBar'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
@@ -51,7 +51,7 @@ const ProductDetailsNav = ({ navigation, route }) => {
                 onPress={() => setAmount(amount - 1)}
               >
                 <Image
-                  source={require('./ProjectData/Logo/Minus.png')}
+                  source={require('../ProjectData/Logo/Minus.png')}
                   style={styles.plusminus}
                 />
               </Pressable>
@@ -63,7 +63,7 @@ const ProductDetailsNav = ({ navigation, route }) => {
                 onPress={() => setAmount(amount + 1)}
               >
                 <Image
-                  source={require('./ProjectData/Logo/Plus.png')}
+                  source={require('../ProjectData/Logo/Plus.png')}
                   style={styles.plusminus}
                 />
               </Pressable>

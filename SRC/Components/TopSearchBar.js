@@ -1,6 +1,6 @@
 import { Image, StyleSheet, Text, View } from 'react-native'
 import React from 'react'
-import Users from './ProjectData/UsersData/UserProfile';
+import Users from '../ProjectData/UsersData/UserProfile';
 import { RFValue } from 'react-native-responsive-fontsize';
 
 const TopSearchBar = () => {
@@ -20,7 +20,7 @@ const TopSearchBar = () => {
 
       <View style={styles.search}>
         <Image
-          source={require('./ProjectData/Logo/Search.png')} resizeMode="contain"
+          source={require('../ProjectData/Logo/Search.png')} resizeMode="contain"
           style={styles.logo}
         />
       </View>

@@ -62,9 +62,12 @@ const styles = StyleSheet.create({
     borderRadius: RFValue(25),
     // borderWidth: 0.2,
     shadowColor: 'black',
-    // elevation: 20,
-    shadowOffset: (0, 10),
-    shadowRadius: 2,
+    elevation: RFValue(1),
+    shadowOffset: {
+      height: RFValue(1),
+      // width: RFValue(0),
+    },
+    shadowRadius: RFValue(2),
     shadowOpacity: 0.1,
   },
   title: {

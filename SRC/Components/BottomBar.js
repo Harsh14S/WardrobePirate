@@ -6,22 +6,22 @@ const Menus = [
   {
     id: 1,
     name: 'Home',
-    src: require('./ProjectData/Logo/Home.png'),
+    src: require('../ProjectData/Logo/Home.png'),
   },
   {
     id: 2,
     name: 'Search',
-    src: require('./ProjectData/Logo/Search.png'),
+    src: require('../ProjectData/Logo/Search.png'),
   },
   {
     id: 3,
     name: 'Cart',
-    src: require('./ProjectData/Logo/Shopping-Cart.png'),
+    src: require('../ProjectData/Logo/Shopping-Cart.png'),
   },
   {
     id: 4,
     name: 'Profile',
-    src: require('./ProjectData/Logo/Profile.png'),
+    src: require('../ProjectData/Logo/Profile.png'),
   },
 ]
 

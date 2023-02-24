@@ -42,7 +42,7 @@ function App() {
               onPress={() => Alert.alert("Added To Your WishList")}
             >
               <Image
-                source={require('./ProjectData/Logo/Favorite.png')}
+                source={require('../ProjectData/Logo/Favorite.png')}
                 style={styles.favImg}
               />
             </TouchableOpacity>
@@ -59,7 +59,7 @@ function App() {
               onPress={() => Alert.alert("Settings")}
             >
               <Image
-                source={require('./ProjectData/Logo/Dots.png')}
+                source={require('../ProjectData/Logo/Dots.png')}
                 style={styles.favImg}
               />
             </TouchableOpacity>
@@ -94,7 +94,7 @@ const Nav = () => {
         tabBarIcon: ({ focused }) => (
           <View style={[styles.iconContainer, { backgroundColor: focused ? 'darkorange' : null }]}>
             <Image
-              source={require('./ProjectData/Logo/Home.png')}
+              source={require('../ProjectData/Logo/Home.png')}
               resizeMode='contain'
               style={styles.iconImg}
             />
@@ -105,7 +105,7 @@ const Nav = () => {
         tabBarIcon: ({ focused }) => (
           <View style={[styles.iconContainer, { backgroundColor: focused ? 'darkorange' : null }]}>
             <Image
-              source={require('./ProjectData/Logo/Search.png')}
+              source={require('../ProjectData/Logo/Search.png')}
               resizeMode='contain'
               style={styles.iconImg}
             />
@@ -116,7 +116,7 @@ const Nav = () => {
         tabBarIcon: ({ focused }) => (
           <View style={[styles.iconContainer, { backgroundColor: focused ? 'darkorange' : null }]}>
             <Image
-              source={require('./ProjectData/Logo/Cart.png')}
+              source={require('../ProjectData/Logo/Cart.png')}
               resizeMode='contain'
               style={styles.iconImg}
             />
@@ -127,7 +127,7 @@ const Nav = () => {
         tabBarIcon: ({ focused }) => (
           <View style={[styles.iconContainer, { backgroundColor: focused ? 'darkorange' : null }]}>
             <Image
-              source={require('./ProjectData/Logo/Profile.png')}
+              source={require('../ProjectData/Logo/Profile.png')}
               resizeMode='contain'
               style={styles.iconImg}
             />

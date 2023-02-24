@@ -1,7 +1,7 @@
 import { Image, Pressable, StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 import { RFValue } from 'react-native-responsive-fontsize'
-import ProductData from './ProjectData/ProductsImage/ProductData'
+import ProductData from '../ProjectData/ProductsImage/ProductData'
 
 const CartItems = () => {
   return (
@@ -22,7 +22,7 @@ const CartItems = () => {
             // onPress={() => setAmount(amount - 1)}
             >
               <Image
-                source={require('./ProjectData/Logo/Minus.png')}
+                source={require('../ProjectData/Logo/Minus.png')}
                 style={styles.plusminus}
               />
             </Pressable>
@@ -35,7 +35,7 @@ const CartItems = () => {
             // onPress={() => setAmount(amount + 1)}
             >
               <Image
-                source={require('./ProjectData/Logo/Plus.png')}
+                source={require('../ProjectData/Logo/Plus.png')}
                 style={styles.plusminus}
               />
             </Pressable>

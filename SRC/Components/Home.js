@@ -4,7 +4,7 @@ import Categories from './Categories';
 import NewSeasonsEss from './NewSeasonsEss';
 import TopSearchBar from './TopSearchBar';
 import { RFValue } from 'react-native-responsive-fontsize';
-import ProductData from './ProjectData/ProductsImage/ProductData';
+import ProductData from '../ProjectData/ProductsImage/ProductData';
 
 const Home = ({ navigation }) => {
   return (
@@ -26,10 +26,9 @@ const Home = ({ navigation }) => {
           <View style={ProductStyle.container}>
             {
               ProductData.map((item, index) => (
-                <View style={ProductStyle.proContainer}>
+                <View style={ProductStyle.proContainer} key={item.id}>
                   <View style={ProductStyle.productView}>
                     <Pressable
-                      key={index}
                       onPress={() => {
                         navigation.navigate('ProductDetails', {
                           index: index,
@@ -37,6 +36,7 @@ const Home = ({ navigation }) => {
                       }}
                     >
                       <Image
+                        // key={index}
                         source={item.img}
                         style={ProductStyle.img}
                       />
@@ -47,7 +47,7 @@ const Home = ({ navigation }) => {
                       activeOpacity={0.7}
                     >
                       <Image
-                        source={require('./ProjectData/Logo/Favorite.png')}
+                        source={require('../ProjectData/Logo/Favorite.png')}
                         style={ProductStyle.favImg}
                       />
                     </Pressable>
