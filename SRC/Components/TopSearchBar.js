@@ -20,7 +20,7 @@ const TopSearchBar = () => {
 
       <View style={styles.search}>
         <Image
-          source={require('../Components/ProjectData/Logo/Search.png')} resizeMode="contain"
+          source={require('./ProjectData/Logo/Search.png')} resizeMode="contain"
           style={styles.logo}
         />
       </View>

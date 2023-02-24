@@ -51,7 +51,7 @@ const ProductDetailsNav = ({ navigation, route }) => {
                 onPress={() => setAmount(amount - 1)}
               >
                 <Image
-                  source={require('../Components/ProjectData/Logo/Minus.png')}
+                  source={require('./ProjectData/Logo/Minus.png')}
                   style={styles.plusminus}
                 />
               </Pressable>
@@ -63,7 +63,7 @@ const ProductDetailsNav = ({ navigation, route }) => {
                 onPress={() => setAmount(amount + 1)}
               >
                 <Image
-                  source={require('../Components/ProjectData/Logo/Plus.png')}
+                  source={require('./ProjectData/Logo/Plus.png')}
                   style={styles.plusminus}
                 />
               </Pressable>

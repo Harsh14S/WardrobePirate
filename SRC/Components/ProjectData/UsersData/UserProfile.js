@@ -2,7 +2,7 @@ let Users = [
   {
     id: 1,
     name: 'Luffy',
-    img: require('../UsersData/Luffy.jpg'),
+    img: require('./Luffy.jpg'),
     password: "",
     cart: [
       {
@@ -14,7 +14,7 @@ let Users = [
   {
     id: 2,
     name: 'Asta',
-    img: require('../UsersData/Asta.jpg'),
+    img: require('./Asta.jpg'),
     password: "",
     cart: [
       {

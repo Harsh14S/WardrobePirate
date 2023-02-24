@@ -2,7 +2,7 @@ const ProductData = [
   {
     id: 1,
     title: 'DC Tshirt with Round Neck',
-    img: require('../ProductsImage/Tshirt.jpg'),
+    img: require('./Tshirt.jpg'),
     price: 25,
     colors: ['skyblue', 'tan', 'grey'],
     categ: ['Men'],
@@ -13,7 +13,7 @@ const ProductData = [
   {
     id: 2,
     title: 'Jacket Full Sleeve Double Collar',
-    img: require('../ProductsImage/Tshirt2.jpeg'),
+    img: require('./Tshirt2.jpeg'),
     price: 30,
     colors: ['skyblue', 'tan', 'grey'],
     categ: ['Men'],
@@ -24,7 +24,7 @@ const ProductData = [
   {
     id: 3,
     title: 'Plain Half Sleeve Tshirt',
-    img: require('../ProductsImage/Tshirt3.jpg'),
+    img: require('./Tshirt3.jpg'),
     price: 5,
     colors: ['skyblue', 'tan', 'grey'],
     categ: ['Men'],
@@ -35,7 +35,7 @@ const ProductData = [
   {
     id: 4,
     title: 'Stretchable Cotton Pants Side pockets',
-    img: require('../ProductsImage/Pants1.jpg'),
+    img: require('./Pants1.jpg'),
     price: 18,
     colors: ['skyblue', 'tan', 'grey'],
     categ: ['Men'],
@@ -46,7 +46,7 @@ const ProductData = [
   {
     id: 5,
     title: `Men's Formal Outfit with Coat`,
-    img: require('../ProductsImage/Formal.jpg'),
+    img: require('./Formal.jpg'),
     price: 49,
     colors: ['skyblue', 'tan', 'grey'],
     categ: ['Men'],
@@ -57,7 +57,7 @@ const ProductData = [
   {
     id: 6,
     title: `Men's Casual Outfit with Hoodie`,
-    img: require('../ProductsImage/Casual.jpg'),
+    img: require('./Casual.jpg'),
     price: 42,
     colors: ['skyblue', 'tan', 'grey'],
     categ: ['Men'],

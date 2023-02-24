@@ -47,7 +47,7 @@ const Home = ({ navigation }) => {
                       activeOpacity={0.7}
                     >
                       <Image
-                        source={require('../Components/ProjectData/Logo/Favorite.png')}
+                        source={require('./ProjectData/Logo/Favorite.png')}
                         style={ProductStyle.favImg}
                       />
                     </Pressable>

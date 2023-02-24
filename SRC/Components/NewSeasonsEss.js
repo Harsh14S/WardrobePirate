@@ -6,7 +6,7 @@ const NewSeasonsEss = () => {
   return (
     <View style={styles.container}>
       <ImageBackground
-        source={require('../Components/ProjectData/Logo/wardrobe.jpeg')}
+        source={require('./ProjectData/Logo/wardrobe.jpeg')}
         style={styles.imgBack}
       >
         <View style={styles.inContainer}>
