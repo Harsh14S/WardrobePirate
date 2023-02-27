@@ -7,20 +7,15 @@ import CartItems from './CartItems';
 import Bill from './CartBill';
 
 const Add2Cart = createBottomTabNavigator();
-let index = 1;
-
 const Cart = () => {
   return (
     <View style={styles.container}>
       <ScrollView>
         <View style={styles.cartContainer}>
           <CartItems />
-          {/* <CartItems />
-          <CartItems /> */}
         </View>
         <View style={styles.billContainer}>
           <Bill />
-          {/* <Text>Bill</Text> */}
         </View>
         <View style={styles.empty} />
       </ScrollView>

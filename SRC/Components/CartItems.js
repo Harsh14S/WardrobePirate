@@ -1,9 +1,9 @@
 import { Image, Pressable, StyleSheet, Text, View } from 'react-native'
-import React from 'react'
+import React, { useEffect } from 'react'
 import { RFValue } from 'react-native-responsive-fontsize'
 import ProductData from '../ProjectData/ProductsImage/ProductData'
 import { useDispatch, useSelector } from 'react-redux'
-import { removeItemFromCart } from '../Redux/Actions/ActionIndex'
+import { removeItemFromCart } from '../Redux/Actions/Actions'
 import { FlatList } from 'react-native-gesture-handler'
 
 const CartItems = () => {
@@ -12,6 +12,7 @@ const CartItems = () => {
   const removeItem = (index) => {
     dispatch(removeItemFromCart(index));
   }
+
   return (
     <View style={styles.container}>
       <FlatList data={items} renderItem={({ item, index }) => {
@@ -52,7 +53,10 @@ const CartItems = () => {
                   </Pressable>
                   <Pressable
                     style={styles.plusminuscontainer}
-                    onPress={() => removeItem(index)}
+                    onPress={() => {
+                      removeItem(index);
+                      // console.log(index)
+                    }}
                   >
                     <Image
                       source={require('../ProjectData/Logo/Bin.png')}

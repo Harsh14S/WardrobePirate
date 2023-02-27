@@ -16,7 +16,7 @@ const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
 
 function App() {
-  const items = useSelector(state => state)
+  // const items = useSelector(state => state);
   return (
     <Stack.Navigator
       screenOptions={{

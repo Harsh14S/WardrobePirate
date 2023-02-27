@@ -1,4 +1,4 @@
-import { ScrollView, StyleSheet, Text, View, Pressable, Image, Alert, Dimensions } from 'react-native';
+import { ScrollView, StyleSheet, Text, View, Pressable, Image, Dimensions } from 'react-native';
 import React from 'react';
 import Categories from './Categories';
 import NewSeasonsEss from './NewSeasonsEss';
@@ -6,13 +6,12 @@ import TopSearchBar from './TopSearchBar';
 import { RFValue } from 'react-native-responsive-fontsize';
 import ProductData from '../ProjectData/ProductsImage/ProductData';
 import { useDispatch } from 'react-redux';
+import { addItemToCart } from '../Redux/Actions/Actions'
 
 const Home = ({ navigation }) => {
-
+  const dispatch = useDispatch();
   const addItem = (item) => {
-    const dispatch = useDispatch();
-    dispatch(addItemToCart(item));
-    // console.warn(addItem);
+    dispatch(addItemToCart(item))
   }
   return (
     <View style={styles.container}>
@@ -40,7 +39,7 @@ const Home = ({ navigation }) => {
                         navigation.navigate('ProductDetails', {
                           index: index,
                         });
-                      }}
+                      }} d
                     >
                       <Image
                         // key={index}
@@ -52,6 +51,7 @@ const Home = ({ navigation }) => {
                       style={ProductStyle.favBtn}
                       onPress={() => {
                         // Alert.alert(index + ' Added to your wishlist');
+                        console.log(index);
                         addItem(index);
                       }}
                       activeOpacity={0.7}

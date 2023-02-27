@@ -4,12 +4,12 @@ import { RFValue } from 'react-native-responsive-fontsize'
 import Nav from './SRC/Components/Nav'
 import { NavigationContainer } from '@react-navigation/native'
 import { Provider } from 'react-redux'
-import Store from './SRC/Redux/Store/Store'
+import { MyStore } from './SRC/Redux/Store/Store'
 
 
 const App = () => {
   return (
-    <Provider store={Store}>
+    <Provider store={MyStore}>
       <View style={styles.container}>
         <NavigationContainer>
           <Nav />
