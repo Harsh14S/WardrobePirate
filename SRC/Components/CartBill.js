@@ -29,11 +29,11 @@ export default Bill
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    // flex: 1,
     width: '100%',
   },
   billHeadings: {
-    flex: 1,
+    // flex: 1,
     justifyContent: 'space-between',
     flexDirection: 'row',
     margin: RFValue(4),

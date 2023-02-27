@@ -2,22 +2,17 @@ import { Image, Pressable, StyleSheet, Text, View } from 'react-native'
 import React, { useEffect } from 'react'
 import { RFValue } from 'react-native-responsive-fontsize'
 import ProductData from '../ProjectData/ProductsImage/ProductData'
-import { useDispatch, useSelector } from 'react-redux'
-import { removeItemFromCart } from '../Redux/Actions/Actions'
 import { FlatList } from 'react-native-gesture-handler'
 
 const CartItems = () => {
-  const items = useSelector(state => state);
-  const dispatch = useDispatch();
-  const removeItem = (index) => {
-    dispatch(removeItemFromCart(index));
-  }
+  const items = 0;
+  // }
 
   return (
     <View style={styles.container}>
-      <FlatList data={items} renderItem={({ item, index }) => {
+      <FlatList data={items} showsVerticalScrollIndicator={false} renderItem={({ item, index }) => {
         return (
-          <View key={index}>
+          <View key={index} style={{ flexDirection: 'row' }}>
             <View style={styles.imgContainer}><Image source={ProductData[item].img} style={styles.img} /></View>
             <View style={styles.itemDetails}>
               <View style={styles.itemTitle}>
@@ -60,7 +55,7 @@ const CartItems = () => {
                   >
                     <Image
                       source={require('../ProjectData/Logo/Bin.png')}
-                      style={styles.plusminus}
+                      style={styles.bin}
                     />
                   </Pressable>
                 </View>
@@ -78,7 +73,7 @@ export default CartItems
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    // flex: 1,
     // backgroundColor: 'yellow',
     flexDirection: 'row',
     justifyContent: 'center',
@@ -138,6 +133,10 @@ const styles = StyleSheet.create({
   plusminus: {
     height: RFValue(26),
     width: RFValue(26),
+  },
+  bin: {
+    height: RFValue(22),
+    width: RFValue(22),
   },
   plusminuscontainer: {
     // backgroundColor: 'yellow',

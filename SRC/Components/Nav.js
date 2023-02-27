@@ -2,21 +2,19 @@ import * as React from 'react';
 import { StyleSheet, View, Image, Platform, Alert } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Home from './Home';
-import MyCart from './MyCart';
-import Cart from './Cart';
+import { Checkout, Cart } from './Cart';
 import { RFValue } from 'react-native-responsive-fontsize';
 import Search from './Search';
-import Profile from './Profile';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import ProductDetailsNav from './ProductDetails';
 import { useSelector } from 'react-redux';
+import WishList from './WishList';
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
 
 function App() {
-  // const items = useSelector(state => state);
   return (
     <Stack.Navigator
       screenOptions={{
@@ -51,8 +49,8 @@ function App() {
         }}
       />
       <Stack.Screen
-        name="Cart"
-        component={Cart}
+        name="CartCheck"
+        component={Checkout}
         options={{
           headerRight: () => (
             <TouchableOpacity
@@ -72,6 +70,7 @@ function App() {
 };
 
 const Nav = () => {
+  const items = useSelector(state => state);
   return (
     <Tab.Navigator
       screenOptions={{
@@ -113,7 +112,9 @@ const Nav = () => {
           </View>
         )
       }} />
-      <Tab.Screen name="Cart" component={MyCart} options={{
+      <Tab.Screen name="My Cart" component={Cart} options={{
+        // "tabBarShowLabel": true,
+        headerShown: true,
         // tabBarBadge: items.length,
         tabBarIcon: ({ focused }) => (
           <View style={[styles.iconContainer, { backgroundColor: focused ? 'darkorange' : null }]}>
@@ -125,11 +126,12 @@ const Nav = () => {
           </View>
         )
       }} />
-      <Tab.Screen name="Profile" component={Profile} options={{
+      <Tab.Screen name="WishList" component={WishList} options={{
+        headerShown: true,
         tabBarIcon: ({ focused }) => (
           <View style={[styles.iconContainer, { backgroundColor: focused ? 'darkorange' : null }]}>
             <Image
-              source={require('../ProjectData/Logo/Profile.png')}
+              source={require('../ProjectData/Logo/Favorite.png')}
               resizeMode='contain'
               style={styles.iconImg}
             />
@@ -144,8 +146,8 @@ export default App
 
 const styles = StyleSheet.create({
   iconImg: {
-    width: RFValue(20),
-    height: RFValue(20),
+    width: RFValue(23),
+    height: RFValue(23),
     tintColor: 'white',
   },
   iconContainer: {

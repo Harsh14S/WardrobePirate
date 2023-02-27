@@ -6,12 +6,13 @@ import TopSearchBar from './TopSearchBar';
 import { RFValue } from 'react-native-responsive-fontsize';
 import ProductData from '../ProjectData/ProductsImage/ProductData';
 import { useDispatch } from 'react-redux';
-import { addItemToCart } from '../Redux/Actions/Actions'
+import { addItemToWishlist } from '../Redux/Actions/Actions';
 
 const Home = ({ navigation }) => {
+  let op;
   const dispatch = useDispatch();
   const addItem = (item) => {
-    dispatch(addItemToCart(item))
+    dispatch(addItemToWishlist(item));
   }
   return (
     <View style={styles.container}>
@@ -39,7 +40,7 @@ const Home = ({ navigation }) => {
                         navigation.navigate('ProductDetails', {
                           index: index,
                         });
-                      }} d
+                      }}
                     >
                       <Image
                         // key={index}
@@ -48,13 +49,13 @@ const Home = ({ navigation }) => {
                       />
                     </Pressable>
                     <Pressable
-                      style={ProductStyle.favBtn}
+                      style={[ProductStyle.favBtn, {opacity: op}]}
                       onPress={() => {
                         // Alert.alert(index + ' Added to your wishlist');
                         console.log(index);
+                        
                         addItem(index);
                       }}
-                      activeOpacity={0.7}
                     >
                       <Image
                         source={require('../ProjectData/Logo/Favorite.png')}
@@ -158,6 +159,7 @@ const ProductStyle = StyleSheet.create({
     width: Dimensions.get('window').width / 2 - 25,
   },
   favImg: {
+    tintColor: 'white',
     width: RFValue(20),
     height: RFValue(20),
   },

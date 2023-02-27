@@ -13,7 +13,7 @@ const Search = () => {
     return (
         <View style={styles.container}>
             <Text>Search</Text>
-            <TriangleCorner />
+            {/* <TriangleCorner /> */}
         </View>
     )
 };
