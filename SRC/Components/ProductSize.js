@@ -54,6 +54,7 @@ const styles = StyleSheet.create({
     // backgroundColor: 'grey',
   },
   btn: {
+    backgroundColor: 'grey',
     justifyContent: 'center',
     alignItems: 'center',
     padding: RFValue(4),

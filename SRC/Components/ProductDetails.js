@@ -207,6 +207,12 @@ const styles = StyleSheet.create({
     paddingHorizontal: RFValue(17),
     paddingVertical: RFValue(12),
     borderRadius: RFValue(12),
+    elevation: RFValue(1),
+    shadowOffset: {
+      height: RFValue(2),
+      width: RFValue(0),
+    },
+
   },
   title: {
     fontSize: RFValue(15),
