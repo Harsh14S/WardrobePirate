@@ -35,3 +35,7 @@ npm i @react-native-community/blur
 npm install redux
 npm install @reduxjs/toolkit
 npm install react-redux
+
+# install after cloning repo in local
+
+npm i @react-native-community/cli-platform-android

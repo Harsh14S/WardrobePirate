@@ -1,26 +1,26 @@
 import * as React from 'react';
-import { StyleSheet, View, Image, Platform, Alert } from 'react-native';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import {StyleSheet, View, Image, Platform, Alert} from 'react-native';
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import Home from './Home';
-import { Checkout, Cart } from './Cart';
-import { RFValue } from 'react-native-responsive-fontsize';
+import {Checkout, Cart} from './Cart';
+import {RFValue} from 'react-native-responsive-fontsize';
 import Search from './Search';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { TouchableOpacity } from 'react-native-gesture-handler';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import {TouchableOpacity} from 'react-native-gesture-handler';
 import ProductDetailsNav from './ProductDetails';
-import { useSelector } from 'react-redux';
+import {useSelector} from 'react-redux';
 import WishList from './WishList';
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
 
-function App() {
+const App = () => {
+  const items = useSelector(state => state.Wishlist);
   return (
     <Stack.Navigator
       screenOptions={{
         headerShadowVisible: false,
-      }}
-    >
+      }}>
       <Stack.Screen
         name="Nav"
         component={Nav}
@@ -38,14 +38,13 @@ function App() {
           headerRight: () => (
             <TouchableOpacity
               style={styles.favBtn}
-              onPress={() => Alert.alert("Added To Your WishList")}
-            >
+              onPress={() => Alert.alert('Added To Your WishList')}>
               <Image
                 source={require('../ProjectData/Logo/Favorite.png')}
                 style={styles.favImg}
               />
             </TouchableOpacity>
-          )
+          ),
         }}
       />
       <Stack.Screen
@@ -55,14 +54,13 @@ function App() {
           headerRight: () => (
             <TouchableOpacity
               style={styles.favBtn}
-              onPress={() => Alert.alert("Settings")}
-            >
+              onPress={() => Alert.alert('Settings')}>
               <Image
                 source={require('../ProjectData/Logo/Dots.png')}
                 style={styles.favImg}
               />
             </TouchableOpacity>
-          )
+          ),
         }}
       />
     </Stack.Navigator>
@@ -74,10 +72,10 @@ const Nav = () => {
   return (
     <Tab.Navigator
       screenOptions={{
-        "tabBarShowLabel": false,
+        tabBarShowLabel: false,
         headerShown: false,
         tabBarStyle: {
-          "display": "flex",
+          display: 'flex',
           backgroundColor: 'black',
           alignContent: 'center',
           justifyContent: 'center',
@@ -88,61 +86,93 @@ const Nav = () => {
           borderRadius: RFValue(45),
           height: RFValue(75),
         },
-      }}
-    >
-      <Tab.Screen name="Home" component={Home} options={{
-        tabBarIcon: ({ focused }) => (
-          <View style={[styles.iconContainer, { backgroundColor: focused ? 'darkorange' : null }]}>
-            <Image
-              source={require('../ProjectData/Logo/Home.png')}
-              resizeMode='contain'
-              style={styles.iconImg}
-            />
-          </View>
-        )
-      }} />
-      <Tab.Screen name="Search" component={Search} options={{
-        tabBarIcon: ({ focused }) => (
-          <View style={[styles.iconContainer, { backgroundColor: focused ? 'darkorange' : null }]}>
-            <Image
-              source={require('../ProjectData/Logo/Search.png')}
-              resizeMode='contain'
-              style={styles.iconImg}
-            />
-          </View>
-        )
-      }} />
-      <Tab.Screen name="My Cart" component={Cart} options={{
-        // "tabBarShowLabel": true,
-        headerShown: true,
-        // tabBarBadge: items.length,
-        tabBarIcon: ({ focused }) => (
-          <View style={[styles.iconContainer, { backgroundColor: focused ? 'darkorange' : null }]}>
-            <Image
-              source={require('../ProjectData/Logo/Cart.png')}
-              resizeMode='contain'
-              style={styles.iconImg}
-            />
-          </View>
-        )
-      }} />
-      <Tab.Screen name="WishList" component={WishList} options={{
-        headerShown: true,
-        tabBarIcon: ({ focused }) => (
-          <View style={[styles.iconContainer, { backgroundColor: focused ? 'darkorange' : null }]}>
-            <Image
-              source={require('../ProjectData/Logo/Favorite.png')}
-              resizeMode='contain'
-              style={styles.iconImg}
-            />
-          </View>
-        )
-      }} />
+      }}>
+      <Tab.Screen
+        name="Home"
+        component={Home}
+        options={{
+          tabBarIcon: ({focused}) => (
+            <View
+              style={[
+                styles.iconContainer,
+                {backgroundColor: focused ? 'darkorange' : null},
+              ]}>
+              <Image
+                source={require('../ProjectData/Logo/Home.png')}
+                resizeMode="contain"
+                style={styles.iconImg}
+              />
+            </View>
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="Search"
+        component={Search}
+        options={{
+          tabBarIcon: ({focused}) => (
+            <View
+              style={[
+                styles.iconContainer,
+                {backgroundColor: focused ? 'darkorange' : null},
+              ]}>
+              <Image
+                source={require('../ProjectData/Logo/Search.png')}
+                resizeMode="contain"
+                style={styles.iconImg}
+              />
+            </View>
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="My Cart"
+        component={Cart}
+        options={{
+          // "tabBarShowLabel": true,
+          headerShown: true,
+          // tabBarBadge: items.length,
+          tabBarIcon: ({focused}) => (
+            <View
+              style={[
+                styles.iconContainer,
+                {backgroundColor: focused ? 'darkorange' : null},
+              ]}>
+              <Image
+                source={require('../ProjectData/Logo/Cart.png')}
+                resizeMode="contain"
+                style={styles.iconImg}
+              />
+            </View>
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="WishList"
+        component={WishList}
+        options={{
+          headerShown: true,
+          tabBarBadge: items.length,
+          tabBarIcon: ({focused}) => (
+            <View
+              style={[
+                styles.iconContainer,
+                {backgroundColor: focused ? 'darkorange' : null},
+              ]}>
+              <Image
+                source={require('../ProjectData/Logo/Favorite.png')}
+                resizeMode="contain"
+                style={styles.iconImg}
+              />
+            </View>
+          ),
+        }}
+      />
     </Tab.Navigator>
   );
 };
 
-export default App
+export default App;
 
 const styles = StyleSheet.create({
   iconImg: {
@@ -168,4 +198,4 @@ const styles = StyleSheet.create({
     width: RFValue(25),
     height: RFValue(25),
   },
-})
+});

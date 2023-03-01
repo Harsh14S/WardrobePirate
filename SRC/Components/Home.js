@@ -1,19 +1,28 @@
-import { ScrollView, StyleSheet, Text, View, Pressable, Image, Dimensions } from 'react-native';
+import {
+  ScrollView,
+  StyleSheet,
+  Text,
+  View,
+  Pressable,
+  Image,
+  Dimensions,
+} from 'react-native';
 import React from 'react';
 import Categories from './Categories';
 import NewSeasonsEss from './NewSeasonsEss';
 import TopSearchBar from './TopSearchBar';
-import { RFValue } from 'react-native-responsive-fontsize';
+import {RFValue} from 'react-native-responsive-fontsize';
 import ProductData from '../ProjectData/ProductsImage/ProductData';
-import { useDispatch } from 'react-redux';
-import { addItemToWishlist } from '../Redux/Actions/Actions';
+import {useDispatch, useSelector} from 'react-redux';
+import {addToWishlist} from '../Redux/Actions/WishListActions';
 
-const Home = ({ navigation }) => {
-  let op;
+const Home = ({navigation}) => {
+  const items = useSelector(state => state.wish);
+  // console.log("Home Items: ", items.length);
   const dispatch = useDispatch();
-  const addItem = (item) => {
-    dispatch(addItemToWishlist(item));
-  }
+  const addItem = item => {
+    dispatch(addToWishlist(item));
+  };
   return (
     <View style={styles.container}>
       <View style={styles.TopSearchBar}>
@@ -21,8 +30,7 @@ const Home = ({ navigation }) => {
       </View>
       <ScrollView
         style={styles.inContainer}
-        showsVerticalScrollIndicator={false}
-      >
+        showsVerticalScrollIndicator={false}>
         <View style={styles.NewSeasonsEss}>
           <NewSeasonsEss />
         </View>
@@ -31,52 +39,48 @@ const Home = ({ navigation }) => {
         </View>
         <View style={styles.Product}>
           <View style={ProductStyle.container}>
-            {
-              ProductData.map((item, index) => (
-                <View style={ProductStyle.proContainer} key={item.id}>
-                  <View style={ProductStyle.productView}>
-                    <Pressable
-                      onPress={() => {
-                        navigation.navigate('ProductDetails', {
-                          index: index,
-                        });
-                      }}
-                    >
-                      <Image
-                        // key={index}
-                        source={item.img}
-                        style={ProductStyle.img}
+            {ProductData.map((item, index) => (
+              <View style={ProductStyle.proContainer} key={item.id}>
+                <View style={ProductStyle.productView}>
+                  <Pressable
+                    onPress={() => {
+                      navigation.navigate('ProductDetails', {
+                        index: index,
+                      });
+                    }}>
+                    <Image
+                      // key={index}
+                      source={item.img}
+                      style={ProductStyle.img}
+                    />
+                  </Pressable>
+                  <Pressable
+                    style={[ProductStyle.favBtn, {}]}
+                    onPress={() => {
+                      // Alert.alert(index + ' Added to your wishlist');
+                      // console.log('Home Item: ', item);
+                      addItem(item);
+                    }}>
+                    <Image
+                      source={require('../ProjectData/Logo/Favorite.png')}
+                      style={ProductStyle.favImg}
+                    />
+                  </Pressable>
+                </View>
+                <Text style={ProductStyle.txt}>{item.title}</Text>
+                <View style={ProductStyle.btnContainer}>
+                  <Text style={ProductStyle.priceTag}> ${item.price}</Text>
+                  <View style={ProductStyle.tilesContainer}>
+                    {item.colors.map((clr, index) => (
+                      <View
+                        style={[ProductStyle.clrTiles, {backgroundColor: clr}]}
+                        key={index}
                       />
-                    </Pressable>
-                    <Pressable
-                      style={[ProductStyle.favBtn, {opacity: op}]}
-                      onPress={() => {
-                        // Alert.alert(index + ' Added to your wishlist');
-                        console.log(index);
-                        
-                        addItem(index);
-                      }}
-                    >
-                      <Image
-                        source={require('../ProjectData/Logo/Favorite.png')}
-                        style={ProductStyle.favImg}
-                      />
-                    </Pressable>
-                  </View>
-                  <Text style={ProductStyle.txt}>{item.title}</Text>
-                  <View style={ProductStyle.btnContainer}>
-                    <Text style={ProductStyle.priceTag}> ${item.price}</Text>
-                    <View style={ProductStyle.tilesContainer}>
-                      {
-                        item.colors.map((clr, index) => (
-                          <View style={[ProductStyle.clrTiles, { backgroundColor: clr }]} key={index} />
-                        ))
-                      }
-                    </View>
+                    ))}
                   </View>
                 </View>
-              ))
-            }
+              </View>
+            ))}
           </View>
         </View>
         <View style={styles.empty} />
@@ -108,7 +112,7 @@ const styles = StyleSheet.create({
     // flex: 1,
     width: Dimensions.get('window').width - 25,
     borderRadius: RFValue(40),
-    marginTop: RFValue(10)
+    marginTop: RFValue(10),
   },
   NewSeasonsEss: {
     flex: 1,
@@ -132,7 +136,7 @@ const styles = StyleSheet.create({
   },
   empty: {
     padding: RFValue(43),
-  }
+  },
 });
 
 const ProductStyle = StyleSheet.create({
@@ -197,5 +201,5 @@ const ProductStyle = StyleSheet.create({
     width: RFValue(10),
     height: RFValue(10),
     borderRadius: RFValue(2.5),
-  }
+  },
 });

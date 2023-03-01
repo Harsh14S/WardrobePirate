@@ -1,29 +1,27 @@
-import { ADDED_TO_WISHLIST, REMOVE_FROM_WISHLIST } from "../Actions/Constant";
+import {ADD_TO_WISHLIST, REMOVE_FROM_WISHLIST} from '../Actions/Constant';
 
-const initialState = {
-  // id: 0,
-  index: 0,
-  isAdded: false,
-}
+const initialState = [];
 
-export const WishListReducer = (state = initialState, action) => {
+export const wishlistItemHistory = (state = initialState, action) => {
   switch (action.type) {
-    case ADDED_TO_WISHLIST:
-      return {
-        ...state,
-        index: action.payLoad,
-        isAdded: true,
-      };
+    case ADD_TO_WISHLIST:
+      if (action.payload.item.inWishlist) {
+        console.log('Already Added to wishlist...');
+        return [...state];
+      } else {
+        action.payload.item.inWishlist = true;
+        console.log('Item with ID added: ', action.payload.item.id);
+        return [...state, action.payload.item];
+      }
     case REMOVE_FROM_WISHLIST:
-      return {
-        ...state,
-        index: action.payLoad,
-        isAdded: false,
-      };
+      console.log('Item with Removed with added: ', action.payload.item.id);
+      return state.filter((record, index, item) => {
+        action.payload.item.inWishlist = false;
+        // console.log("record.id: ", record.id);
+        // console.log("action.payload.item.id: ", action.payload.item.id);
+        return record.id !== action.payload.item.id;
+      });
     default:
       return state;
   }
-}
-
-
-// WishListReducer({ type: 'added' });  // returns index and isAdded
+};
