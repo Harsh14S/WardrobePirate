@@ -1,10 +1,10 @@
-import {Platform, StyleSheet, View, SafeAreaView} from 'react-native';
+import { Platform, StyleSheet, View, SafeAreaView } from 'react-native';
 import React from 'react';
-import {RFValue} from 'react-native-responsive-fontsize';
+import { RFValue } from 'react-native-responsive-fontsize';
 import Nav from './SRC/Components/Nav';
-import {NavigationContainer} from '@react-navigation/native';
-import {Provider} from 'react-redux';
-import {MyStore} from './SRC/Redux/Store/Store';
+import { NavigationContainer } from '@react-navigation/native';
+import { Provider } from 'react-redux';
+import { MyStore } from './SRC/Redux/Store/Store';
 import Rough from './SRC/Components/Rough';
 
 const App = () => {
@@ -16,9 +16,6 @@ const App = () => {
         </NavigationContainer>
       </View>
     </Provider>
-    // <SafeAreaView style={{ flex: 1 }}>
-    //   <Rough />
-    // </SafeAreaView>
   );
 };
 
@@ -28,6 +25,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: 'white',
-    marginTop: Platform.OS === 'ios' ? RFValue(40) : RFValue(10),
+    paddingTop: Platform.OS === 'ios' ? RFValue(55) : RFValue(20),
   },
 });

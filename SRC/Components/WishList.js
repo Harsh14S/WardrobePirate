@@ -7,28 +7,27 @@ import {
   View,
 } from 'react-native';
 import React from 'react';
-import {RFValue} from 'react-native-responsive-fontsize';
-import {useDispatch, useSelector} from 'react-redux';
-import {removeFromWishlist} from '../Redux/Actions/WishListActions';
+import { RFValue } from 'react-native-responsive-fontsize';
+import { useDispatch, useSelector } from 'react-redux';
+import { removeFromWishlist } from '../Redux/Actions/WishListActions';
+// import Toast from 'react-native-toast-message';
 
 const WishList = () => {
   const items = useSelector(state => state.wish);
-  console.log('Items in Cart: ', items.length);
+  console.log('Items in Cart: ', items);
   const dispatch = useDispatch();
   const removeItem = item => {
     dispatch(removeFromWishlist(item));
   };
 
-  if (items.length === 0) {
-    return (
-      <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-        <Text style={{fontSize: RFValue(20), fontWeight: '600'}}>
+  return (
+    items.length === 0 ? (
+      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: 'white' }}>
+        <Text style={{ fontSize: RFValue(20), fontWeight: '400', color: 'lightgrey' }}>
           Wishlist Empty
         </Text>
       </View>
-    );
-  } else
-    return (
+    ) : (
       <ScrollView showsVerticalScrollIndicator={false}>
         {items.map((item, index) => (
           <View style={styles.container} key={index}>
@@ -61,7 +60,7 @@ const WishList = () => {
                       // console.log("Item: ", item);
                       // console.log("Index: ", index);
                     }}>
-                    <Text style={{color: 'white'}}>Remove</Text>
+                    <Text style={{ color: 'white' }}>Remove</Text>
                   </Pressable>
                 </View>
               </View>
@@ -69,7 +68,8 @@ const WishList = () => {
           </View>
         ))}
       </ScrollView>
-    );
+    )
+  );
 };
 
 export default WishList;

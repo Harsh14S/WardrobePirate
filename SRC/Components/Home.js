@@ -11,12 +11,13 @@ import React from 'react';
 import Categories from './Categories';
 import NewSeasonsEss from './NewSeasonsEss';
 import TopSearchBar from './TopSearchBar';
-import {RFValue} from 'react-native-responsive-fontsize';
+import { RFValue } from 'react-native-responsive-fontsize';
 import ProductData from '../ProjectData/ProductsImage/ProductData';
-import {useDispatch, useSelector} from 'react-redux';
-import {addToWishlist} from '../Redux/Actions/WishListActions';
+import { useDispatch, useSelector } from 'react-redux';
+import { addToWishlist } from '../Redux/Actions/WishListActions';
+// import Toast from 'react-native-toast-message';
 
-const Home = ({navigation}) => {
+const Home = ({ navigation }) => {
   const items = useSelector(state => state.wish);
   // console.log("Home Items: ", items.length);
   const dispatch = useDispatch();
@@ -49,7 +50,6 @@ const Home = ({navigation}) => {
                       });
                     }}>
                     <Image
-                      // key={index}
                       source={item.img}
                       style={ProductStyle.img}
                     />
@@ -62,7 +62,8 @@ const Home = ({navigation}) => {
                       addItem(item);
                     }}>
                     <Image
-                      source={require('../ProjectData/Logo/Favorite.png')}
+                      source={
+                        item.inWishlist ? require('../ProjectData/Logo/FavoriteFill.png') : require('../ProjectData/Logo/FavoriteEmpty.png')}
                       style={ProductStyle.favImg}
                     />
                   </Pressable>
@@ -73,7 +74,7 @@ const Home = ({navigation}) => {
                   <View style={ProductStyle.tilesContainer}>
                     {item.colors.map((clr, index) => (
                       <View
-                        style={[ProductStyle.clrTiles, {backgroundColor: clr}]}
+                        style={[ProductStyle.clrTiles, { backgroundColor: clr }]}
                         key={index}
                       />
                     ))}
@@ -164,15 +165,15 @@ const ProductStyle = StyleSheet.create({
   },
   favImg: {
     tintColor: 'white',
-    width: RFValue(20),
-    height: RFValue(20),
+    width: RFValue(19),
+    height: RFValue(19),
   },
   favBtn: {
     backgroundColor: 'darkorange',
     height: RFValue(30),
     borderRadius: RFValue(20),
-    paddingHorizontal: RFValue(12),
-    paddingVertical: RFValue(4),
+    paddingHorizontal: RFValue(15),
+    paddingVertical: RFValue(17),
     alignItems: 'center',
     justifyContent: 'center',
     position: 'absolute',

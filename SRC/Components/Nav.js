@@ -1,25 +1,27 @@
 import * as React from 'react';
-import {StyleSheet, View, Image, Platform, Alert} from 'react-native';
-import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import { StyleSheet, View, Image, Platform, Alert, Text } from 'react-native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Home from './Home';
-import {Checkout, Cart} from './Cart';
-import {RFValue} from 'react-native-responsive-fontsize';
+import { Checkout, Cart } from './Cart';
+import { RFValue } from 'react-native-responsive-fontsize';
 import Search from './Search';
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import {TouchableOpacity} from 'react-native-gesture-handler';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 import ProductDetailsNav from './ProductDetails';
-import {useSelector} from 'react-redux';
+import { useSelector } from 'react-redux';
 import WishList from './WishList';
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
 
 const App = () => {
-  const items = useSelector(state => state.Wishlist);
   return (
     <Stack.Navigator
       screenOptions={{
         headerShadowVisible: false,
+        headerTitleStyle: {
+          fontSize: RFValue(18),
+        },
       }}>
       <Stack.Screen
         name="Nav"
@@ -34,6 +36,7 @@ const App = () => {
         name="ProductDetails"
         component={ProductDetailsNav}
         options={{
+          title: 'Product Details',
           headerBackTitleVisible: false,
           headerRight: () => (
             <TouchableOpacity
@@ -68,12 +71,17 @@ const App = () => {
 };
 
 const Nav = () => {
-  const items = useSelector(state => state);
+  const items = useSelector(state => state.wish);
+  // console.log("State Items in Nav: ", items.length);
   return (
     <Tab.Navigator
       screenOptions={{
         tabBarShowLabel: false,
-        headerShown: false,
+        headerShadowVisible: false,
+        headerTitleStyle: {
+          fontSize: RFValue(18),
+        },
+        // headerShown: false,
         tabBarStyle: {
           display: 'flex',
           backgroundColor: 'black',
@@ -91,11 +99,12 @@ const Nav = () => {
         name="Home"
         component={Home}
         options={{
-          tabBarIcon: ({focused}) => (
+          headerShown: false,
+          tabBarIcon: ({ focused }) => (
             <View
               style={[
                 styles.iconContainer,
-                {backgroundColor: focused ? 'darkorange' : null},
+                { backgroundColor: focused ? 'darkorange' : null },
               ]}>
               <Image
                 source={require('../ProjectData/Logo/Home.png')}
@@ -110,11 +119,11 @@ const Nav = () => {
         name="Search"
         component={Search}
         options={{
-          tabBarIcon: ({focused}) => (
+          tabBarIcon: ({ focused }) => (
             <View
               style={[
                 styles.iconContainer,
-                {backgroundColor: focused ? 'darkorange' : null},
+                { backgroundColor: focused ? 'darkorange' : null },
               ]}>
               <Image
                 source={require('../ProjectData/Logo/Search.png')}
@@ -130,13 +139,12 @@ const Nav = () => {
         component={Cart}
         options={{
           // "tabBarShowLabel": true,
-          headerShown: true,
           // tabBarBadge: items.length,
-          tabBarIcon: ({focused}) => (
+          tabBarIcon: ({ focused }) => (
             <View
               style={[
                 styles.iconContainer,
-                {backgroundColor: focused ? 'darkorange' : null},
+                { backgroundColor: focused ? 'darkorange' : null },
               ]}>
               <Image
                 source={require('../ProjectData/Logo/Cart.png')}
@@ -151,19 +159,24 @@ const Nav = () => {
         name="WishList"
         component={WishList}
         options={{
-          headerShown: true,
-          tabBarBadge: items.length,
-          tabBarIcon: ({focused}) => (
+          // tabBarBadge: items.length,
+          tabBarIcon: ({ focused }) => (
             <View
               style={[
                 styles.iconContainer,
-                {backgroundColor: focused ? 'darkorange' : null},
+                { backgroundColor: focused ? 'darkorange' : null },
               ]}>
               <Image
                 source={require('../ProjectData/Logo/Favorite.png')}
                 resizeMode="contain"
                 style={styles.iconImg}
               />
+
+              {
+                items.length === 0 ? null :
+                  <View style={styles.badgeContainer}>
+                    <Text style={[styles.badgeTxt, { color: focused ? 'darkorange' : 'black' }]}>{items.length}</Text>
+                  </View>}
             </View>
           ),
         }}
@@ -197,5 +210,21 @@ const styles = StyleSheet.create({
     tintColor: 'black',
     width: RFValue(25),
     height: RFValue(25),
+  },
+  badgeContainer: {
+    backgroundColor: 'white',
+    width: RFValue(17),
+    height: RFValue(17),
+    borderRadius: RFValue(10),
+    justifyContent: 'center',
+    alignItems: 'center',
+    position: 'absolute',
+    top: RFValue(8),
+    right: RFValue(13)
+  },
+  badgeTxt: {
+    color: 'darkorange',
+    fontWeight: '600',
+    fontSize: RFValue(10)
   },
 });

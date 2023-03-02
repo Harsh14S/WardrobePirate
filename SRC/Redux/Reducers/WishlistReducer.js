@@ -1,4 +1,4 @@
-import {ADD_TO_WISHLIST, REMOVE_FROM_WISHLIST} from '../Actions/Constant';
+import { ADD_TO_WISHLIST, REMOVE_FROM_WISHLIST } from '../Actions/Constant';
 
 const initialState = [];
 
@@ -15,7 +15,7 @@ export const wishlistItemHistory = (state = initialState, action) => {
       }
     case REMOVE_FROM_WISHLIST:
       console.log('Item with Removed with added: ', action.payload.item.id);
-      return state.filter((record, index, item) => {
+      return state.filter((record) => {
         action.payload.item.inWishlist = false;
         // console.log("record.id: ", record.id);
         // console.log("action.payload.item.id: ", action.payload.item.id);

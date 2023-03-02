@@ -119,7 +119,7 @@ const ProductDetails = ({ }) => {
                   }}
                   key={index}
                 >
-                  <Text style={[styles.title, { color: selectedId === index ? 'white' : 'black' }]}>{item}</Text>
+                  <Text style={[styles.sizeTitle, { color: selectedId === index ? 'white' : 'black' }]}>{item}</Text>
                 </Pressable>
               ))
             }
@@ -199,6 +199,10 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     marginVertical: RFValue(10),
   },
+  sizeTitle: {
+    fontSize: RFValue(14),
+    fontWeight: '600'
+  },
   btn: {
     justifyContent: 'center',
     alignItems: 'center',
@@ -206,13 +210,16 @@ const styles = StyleSheet.create({
     marginHorizontal: RFValue(5),
     paddingHorizontal: RFValue(17),
     paddingVertical: RFValue(12),
+    marginVertical: RFValue(2),
     borderRadius: RFValue(12),
-    elevation: RFValue(1),
-    shadowOffset: {
-      height: RFValue(2),
-      width: RFValue(0),
-    },
-
+    // elevation: RFValue(1),
+    // shadowColor: 'black',
+    // shadowOffset: {
+    //   height: RFValue(1),
+    //   // width: RFValue(0),
+    // },
+    // shadowRadius: RFValue(2),
+    // shadowOpacity: 0.2,
   },
   title: {
     fontSize: RFValue(15),
@@ -232,7 +239,7 @@ const styles = StyleSheet.create({
     marginTop: RFValue(12),
     fontSize: RFValue(13),
     textAlign: 'justify',
-    marginBottom: Platform.OS === 'ios' ? RFValue(40) : RFValue(15),
+    marginBottom: RFValue(25),
   },
   tabBarContainer: {
     flexDirection: 'row',
