@@ -6,6 +6,7 @@ import { ScrollView } from 'react-native-gesture-handler'
 import RatingBar from './RatingBar'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { useSelector } from 'react-redux'
+import HeaderProductDetails from './HeaderProductDetails'
 
 const Add2Cart = createBottomTabNavigator();
 let index = 0;
@@ -13,33 +14,14 @@ let index = 0;
 const ProductDetailsNav = ({ navigation, route }) => {
   const [amount, setAmount] = useState(0);
   index = route.params.index;
+  // console.log("inWishlist: ", route.params.inWishlist);
+  // console.log(ProductData[index].inWishlist);
   return (
     <Add2Cart.Navigator
       screenOptions={{
         "tabBarShowLabel": false,
         headerShown: false,
-        tabBarStyle: {
-          "display": "flex",
-          backgroundColor: 'black',
-          alignContent: 'center',
-          justifyContent: 'center',
-          position: 'absolute',
-          marginTop: RFValue(20),
-          marginBottom: RFValue(10),
-          marginHorizontal: RFValue(10),
-          paddingHorizontal: RFValue(5),
-          borderRadius: RFValue(45),
-          height: RFValue(75),
-          shadowColor: 'white',
-          shadowOffset: {
-            height: RFValue(0),
-            width: RFValue(0),
-          },
-          shadowOpacity: RFValue(1),
-          shadowRadius: RFValue(20),
-          opacity: RFValue(1),
-          elevation: RFValue(1),
-        },
+        tabBarStyle: styles.tabNav,
       }}
     >
       <Add2Cart.Screen name="ProductDetail" component={ProductDetails} options={{
@@ -85,56 +67,59 @@ const ProductDetailsNav = ({ navigation, route }) => {
   );
 };
 
-const ProductDetails = ({ }) => {
+const ProductDetails = ({ navigation }) => {
   const [selectedId, setSelectedId] = useState(0);
 
   return (
-    <ScrollView style={styles.Container} showsVerticalScrollIndicator={false}>
-      <View style={styles.productViewCenter}>
-        <View style={styles.productView}>
-          <Image
-            source={ProductData[index].img}
-            style={styles.img}
-          />
-          <View style={styles.priceTagContainer}>
-            <Text style={styles.priceTag}>${ProductData[index].price}</Text>
+    <View style={styles.Container}>
+      <HeaderProductDetails navigation={navigation} inWishlist={ProductData[index]} />
+      <ScrollView style={{ flex: 1, marginTop: RFValue(10) }} showsVerticalScrollIndicator={false}>
+        <View style={styles.productViewCenter}>
+          <View style={styles.productView}>
+            <Image
+              source={ProductData[index].img}
+              style={styles.img}
+            />
+            <View style={styles.priceTagContainer}>
+              <Text style={styles.priceTag}>${ProductData[index].price}</Text>
+            </View>
           </View>
-        </View>
-        <View style={styles.nameContainer}>
-          <Text style={styles.productName}>{ProductData[index].title}</Text>
-        </View>
-        <View style={styles.productRating}>
-          <View style={{ width: Dimensions.get('window').width - 35, flexDirection: 'row' }}>
-            <RatingBar />
-            <Text style={styles.ratingText}>50+ reviews</Text>
+          <View style={styles.nameContainer}>
+            <Text style={styles.productName}>{ProductData[index].title}</Text>
           </View>
-        </View>
-        <View style={styles.productSize}>
-          <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
-            {
-              ProductData[index].size.map((item, index) => (
-                <Pressable
-                  style={[styles.btn, { backgroundColor: selectedId === index ? 'black' : 'white' }]}
-                  onPress={() => {
-                    setSelectedId(index);
-                  }}
-                  key={index}
-                >
-                  <Text style={[styles.sizeTitle, { color: selectedId === index ? 'white' : 'black' }]}>{item}</Text>
-                </Pressable>
-              ))
-            }
-          </ScrollView>
-        </View>
-        <View style={styles.productDescContainer}>
-          <Text style={styles.productDescTitle}>Description</Text>
-          <Text style={styles.productDesc}>{ProductData[index].details}</Text>
-        </View>
-      </View>
-      <View style={styles.empty} />
+          <View style={styles.productRating}>
+            <View style={{ width: Dimensions.get('window').width - 35, flexDirection: 'row' }}>
+              <RatingBar />
+              <Text style={styles.ratingText}>50+ reviews</Text>
+            </View>
+          </View>
+          <View style={styles.productSize}>
+            <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
+              {
+                ProductData[index].size.map((item, index) => (
+                  <Pressable
+                    style={[styles.btn, { backgroundColor: selectedId === index ? 'black' : 'white' }]}
+                    onPress={() => {
+                      setSelectedId(index);
+                    }}
+                    key={index}
+                  >
+                    <Text style={[styles.sizeTitle, { color: selectedId === index ? 'white' : 'black' }]}>{item}</Text>
+                  </Pressable>
+                ))
+              }
+            </ScrollView>
+          </View>
+          <View style={styles.productDescContainer}>
+            <Text style={styles.productDescTitle}>Description</Text>
+            <Text style={styles.productDesc}>{ProductData[index].details}</Text>
+          </View>
+          <View style={styles.empty} />
 
-      {/* <BottomBar /> */}
-    </ScrollView>
+        </View>
+        {/* <BottomBar /> */}
+      </ScrollView>
+    </View>
   )
 }
 
@@ -146,7 +131,30 @@ const styles = StyleSheet.create({
     flex: 1,
     // justifyContent: 'center',
     // alignItems: 'center',
-    paddingTop: RFValue(15),
+    paddingTop: RFValue(5),
+    // marginTop: RFValue(5),
+  },
+  tabNav: {
+    "display": "flex",
+    backgroundColor: 'black',
+    alignContent: 'center',
+    justifyContent: 'center',
+    position: 'absolute',
+    marginTop: RFValue(20),
+    marginBottom: RFValue(10),
+    marginHorizontal: RFValue(10),
+    paddingHorizontal: RFValue(5),
+    borderRadius: RFValue(45),
+    height: RFValue(75),
+    shadowColor: 'white',
+    shadowOffset: {
+      height: RFValue(0),
+      width: RFValue(0),
+    },
+    shadowOpacity: RFValue(1),
+    shadowRadius: RFValue(20),
+    opacity: RFValue(1),
+    elevation: RFValue(1),
   },
   productViewCenter: {
     alignItems: 'center',

@@ -19,7 +19,8 @@ const App = () => {
   return (
     <Stack.Navigator
       screenOptions={{
-        headerShadowVisible: false,
+        headerShown: false,
+        // headerShadowVisible: false,
         headerTitleStyle: {
           fontSize: RFValue(18),
         },
@@ -27,11 +28,11 @@ const App = () => {
       <Stack.Screen
         name="Nav"
         component={Nav}
-        options={{
-          headerShown: false,
-          headerBackTitleVisible: false,
-          headerShadowVisible: false,
-        }}
+      // options={{
+      //   headerShown: false,
+      //   headerBackTitleVisible: false,
+      //   headerShadowVisible: false,
+      // }}
       />
       <Stack.Screen
         name="ProductDetails"
@@ -58,6 +59,7 @@ const App = () => {
         name="CartCheck"
         component={Checkout}
         options={{
+          headerShown: true,
           headerRight: () => (
             <TouchableOpacity
               style={styles.favBtn}

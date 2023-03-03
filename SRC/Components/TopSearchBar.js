@@ -6,14 +6,12 @@ import { RFValue } from 'react-native-responsive-fontsize';
 const TopSearchBar = () => {
   return (
     <View style={styles.container}>
-
       <View style={styles.circle}>
         <Image
           source={Users[0].img} resizeMode="contain"
           style={styles.img}
         />
       </View>
-
       <View style={styles.name}>
         <Text style={styles.text}>Hello, {Users[0].name}!</Text>
       </View>

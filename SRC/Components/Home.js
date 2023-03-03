@@ -47,6 +47,7 @@ const Home = ({ navigation }) => {
                     onPress={() => {
                       navigation.navigate('ProductDetails', {
                         index: index,
+                        inWishlist: item.inWishlist,
                       });
                     }}>
                     <Image
@@ -59,9 +60,9 @@ const Home = ({ navigation }) => {
                     onPress={() => {
                       // Alert.alert(index + ' Added to your wishlist');
                       // !item.inWishlist;
-                      // console.log(' item.inWishlist before add: ', item.inWishlist);
+                      console.log(' item.inWishlist before add: ', item.inWishlist);
                       addItemToWishlist(item);
-                      // console.log(' item.inWishlist after add: ', item.inWishlist);
+                      console.log(' item.inWishlist after add: ', item.inWishlist);
                     }}>
                     <Image
                       source={

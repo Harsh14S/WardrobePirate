@@ -54,10 +54,10 @@ const Wishlist = () => {
                     ]}
                     onPress={() => {
                       // console.log("Item: ", item);
-                      // console.log(' item.inWishlist before remove: ', item.inWishlist);
+                      console.log(' item.inWishlist before remove: ', item.inWishlist);
                       removeItemFromWishlist(item);
                       // addItemToWishlist(item);
-                      // console.log(' item.inWishlist after remove: ', item.inWishlist);
+                      console.log(' item.inWishlist after remove: ', item.inWishlist);
                     }}>
                     <Text style={{ color: 'white' }}>Remove</Text>
                   </Pressable>
