@@ -9,12 +9,13 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import ProductDetailsNav from './ProductDetails';
 import { useSelector } from 'react-redux';
-import WishList from './WishList';
+import Wishlist from './Wishlist';
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
 
 const App = () => {
+  const wishState = useSelector(state => state.wish);
   return (
     <Stack.Navigator
       screenOptions={{
@@ -41,7 +42,10 @@ const App = () => {
           headerRight: () => (
             <TouchableOpacity
               style={styles.favBtn}
-              onPress={() => Alert.alert('Added To Your WishList')}>
+              onPress={() => {
+                // Alert.alert('Added To Your WishList');
+                console.log("WishState in ProductDetatils: ", wishState)
+              }}>
               <Image
                 source={require('../ProjectData/Logo/Favorite.png')}
                 style={styles.favImg}
@@ -156,8 +160,8 @@ const Nav = () => {
         }}
       />
       <Tab.Screen
-        name="WishList"
-        component={WishList}
+        name="Wishlist"
+        component={Wishlist}
         options={{
           // tabBarBadge: items.length,
           tabBarIcon: ({ focused }) => (

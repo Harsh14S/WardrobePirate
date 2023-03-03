@@ -1,6 +1,8 @@
-import {combineReducers} from 'redux';
-import {wishlistItemHistory} from './WishlistReducer';
+import { combineReducers } from "redux";
+// import { CartReducer } from "./CartReducer";
+import { wishlistReducer } from "./WishlistReducer";
 
 export const RootReducer = combineReducers({
-  wish: wishlistItemHistory,
-});
+  wish: wishlistReducer,
+  // cart: CartReducer,
+})

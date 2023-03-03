@@ -14,14 +14,14 @@ import TopSearchBar from './TopSearchBar';
 import { RFValue } from 'react-native-responsive-fontsize';
 import ProductData from '../ProjectData/ProductsImage/ProductData';
 import { useDispatch, useSelector } from 'react-redux';
-import { addToWishlist } from '../Redux/Actions/WishListActions';
+import { addToWishlist } from '../Redux/Actions/WishlistActions';
 // import Toast from 'react-native-toast-message';
 
 const Home = ({ navigation }) => {
-  const items = useSelector(state => state.wish);
-  // console.log("Home Items: ", items.length);
   const dispatch = useDispatch();
-  const addItem = item => {
+  const wishState = useSelector(state => state.wish);
+  // console.log("Home Items: ", items.length);
+  const addItemToWishlist = item => {
     dispatch(addToWishlist(item));
   };
   return (
@@ -55,15 +55,20 @@ const Home = ({ navigation }) => {
                     />
                   </Pressable>
                   <Pressable
-                    style={[ProductStyle.favBtn, {}]}
+                    style={ProductStyle.favBtn}
                     onPress={() => {
                       // Alert.alert(index + ' Added to your wishlist');
-                      // console.log('Home Item: ', item);
-                      addItem(item);
+                      // !item.inWishlist;
+                      // console.log(' item.inWishlist before add: ', item.inWishlist);
+                      addItemToWishlist(item);
+                      // console.log(' item.inWishlist after add: ', item.inWishlist);
                     }}>
                     <Image
                       source={
-                        item.inWishlist ? require('../ProjectData/Logo/FavoriteFill.png') : require('../ProjectData/Logo/FavoriteEmpty.png')}
+                        (item.inWishlist)
+                          ? require('../ProjectData/Logo/FavoriteFill.png')
+                          : require('../ProjectData/Logo/FavoriteEmpty.png')
+                      }
                       style={ProductStyle.favImg}
                     />
                   </Pressable>

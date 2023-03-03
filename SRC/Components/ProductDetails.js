@@ -5,6 +5,7 @@ import ProductData from '../ProjectData/ProductsImage/ProductData'
 import { ScrollView } from 'react-native-gesture-handler'
 import RatingBar from './RatingBar'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
+import { useSelector } from 'react-redux'
 
 const Add2Cart = createBottomTabNavigator();
 let index = 0;

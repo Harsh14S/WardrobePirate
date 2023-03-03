@@ -9,27 +9,26 @@ import {
 import React from 'react';
 import { RFValue } from 'react-native-responsive-fontsize';
 import { useDispatch, useSelector } from 'react-redux';
-import { removeFromWishlist } from '../Redux/Actions/WishListActions';
-// import Toast from 'react-native-toast-message';
+import { removeFromWishlist } from '../Redux/Actions/WishlistActions';
 
-const WishList = () => {
-  const items = useSelector(state => state.wish);
-  console.log('Items in Cart: ', items);
+const Wishlist = () => {
+  const wishState = useSelector(state => state.wish);
+  // console.log('Items in Wishlist: ', wishState.length);
   const dispatch = useDispatch();
-  const removeItem = item => {
-    dispatch(removeFromWishlist(item));
+  const removeItemFromWishlist = data => {
+    dispatch(removeFromWishlist(data));
   };
-
   return (
-    items.length === 0 ? (
+
+    wishState.length === 0 ? (
       <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: 'white' }}>
-        <Text style={{ fontSize: RFValue(20), fontWeight: '400', color: 'lightgrey' }}>
+        <Text style={{ fontSize: RFValue(20), fontWeight: '600', color: 'lightgrey' }}>
           Wishlist Empty
         </Text>
       </View>
     ) : (
-      <ScrollView showsVerticalScrollIndicator={false}>
-        {items.map((item, index) => (
+      <ScrollView showsVerticalScrollIndicator={false} style={{ backgroundColor: 'white' }}>
+        {wishState.map((item, index) => (
           <View style={styles.container} key={index}>
             <View style={styles.imgContainer}>
               <Image source={item.img} style={styles.img} />
@@ -54,11 +53,11 @@ const WishList = () => {
                       },
                     ]}
                     onPress={() => {
-                      removeItem(item);
-                      // console.log("BTN Item: ", item);
-                      // console.log("Index: ", ProductData.id);
                       // console.log("Item: ", item);
-                      // console.log("Index: ", index);
+                      // console.log(' item.inWishlist before remove: ', item.inWishlist);
+                      removeItemFromWishlist(item);
+                      // addItemToWishlist(item);
+                      // console.log(' item.inWishlist after remove: ', item.inWishlist);
                     }}>
                     <Text style={{ color: 'white' }}>Remove</Text>
                   </Pressable>
@@ -72,7 +71,7 @@ const WishList = () => {
   );
 };
 
-export default WishList;
+export default Wishlist;
 
 const styles = StyleSheet.create({
   container: {
