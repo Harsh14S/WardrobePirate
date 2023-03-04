@@ -1,20 +1,17 @@
 import { Image, Pressable, StyleSheet, Text, View } from 'react-native'
 import React from 'react'
-// import Users from '../ProjectData/UsersData/UserProfile';
 import { RFValue } from 'react-native-responsive-fontsize';
 import { useDispatch, useSelector } from 'react-redux';
-import { addToWishlist, removeFromWishlist } from '../Redux/Actions/WishlistActions';
+import { emptyCartItems } from '../Redux/Actions/CartActions';
 
-const HeaderProductDetails = ({ navigation, item }) => {
+const HeaderCart = ({ navigation, item }) => {
   const wishState = useSelector(state => state.wish);
   const cartState = useSelector(state => state.cart);
   const dispatch = useDispatch();
-  const addItemToWishlist = data => {
-    dispatch(addToWishlist(data));
+  const emptyCart = () => {
+    dispatch(emptyCartItems());
   };
-  const removeItemFromWishlist = data => {
-    dispatch(removeFromWishlist(data));
-  };
+
   return (
     <View style={styles.container}>
       <Pressable
@@ -27,27 +24,24 @@ const HeaderProductDetails = ({ navigation, item }) => {
         />
       </Pressable>
       <View style={styles.headerTitleContainer}>
-        <Text style={styles.text}>Product Details</Text>
+        <Text style={styles.text}>My Cart</Text>
       </View>
       <Pressable
         style={[styles.circle, { marginRight: RFValue(10) }]}
         onPress={() => {
-          item.inWishlist ? removeItemFromWishlist(item) : addItemToWishlist(item);
-          // removeItemFromWishlist(item);
-          // console.log(item);
+          emptyCart();
         }}
       >
         <Image
-          source={item.inWishlist ? require('../ProjectData/Logo/FavoriteFill.png') : require('../ProjectData/Logo/FavoriteEmpty.png')}
+          source={require('../ProjectData/Logo/Bin.png')}
           style={styles.img}
-        // source={require('../ProjectData/Logo/FavoriteEmpty.png')}
         />
       </Pressable>
     </View >
   )
 }
 
-export default HeaderProductDetails;
+export default HeaderCart;
 
 
 const styles = StyleSheet.create({
@@ -85,7 +79,7 @@ const styles = StyleSheet.create({
   },
   text: {
     fontSize: RFValue(18),
-    // marginLeft: RFValue(5),
+    marginLeft: RFValue(5),
     fontWeight: '600',
   },
   search: {

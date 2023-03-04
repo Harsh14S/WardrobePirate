@@ -1,21 +1,25 @@
 import { Dimensions, Image, Platform, Pressable, StyleSheet, Text, View } from 'react-native'
 import React, { useState } from 'react'
 import { RFValue } from 'react-native-responsive-fontsize'
-import ProductData from '../ProjectData/ProductsImage/ProductData'
 import { ScrollView } from 'react-native-gesture-handler'
 import RatingBar from './RatingBar'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import HeaderProductDetails from './HeaderProductDetails'
+import { addIntoCart } from '../Redux/Actions/CartActions'
 
+let item = {};
 const Add2Cart = createBottomTabNavigator();
-let index = 0;
 
 const ProductDetailsNav = ({ navigation, route }) => {
-  const [amount, setAmount] = useState(0);
-  index = route.params.index;
-  // console.log("inWishlist: ", route.params.inWishlist);
-  // console.log(ProductData[index].inWishlist);
+  item = route.params.item;
+  const cartState = useSelector(state => state.cart);
+  // console.log("Cart State: ", cartState);
+  const dispatch = useDispatch();
+  const addItemIntoCart = (item, quantity) => {
+    dispatch(addIntoCart(item, quantity));
+  }
+  const [quantity, setQuantity] = useState(1);
   return (
     <Add2Cart.Navigator
       screenOptions={{
@@ -30,7 +34,9 @@ const ProductDetailsNav = ({ navigation, route }) => {
             <View style={styles.intractionContainer}>
               <Pressable
                 style={styles.plusminuscontainer}
-                onPress={() => setAmount(amount - 1)}
+                onPress={() => {
+                  quantity >= 2 ? setQuantity(quantity - 1) : null;
+                }}
               >
                 <Image
                   source={require('../ProjectData/Logo/Minus.png')}
@@ -38,11 +44,13 @@ const ProductDetailsNav = ({ navigation, route }) => {
                 />
               </Pressable>
               <View style={styles.plusminuscontainer}>
-                <Text style={styles.navTxt}>{amount}</Text>
+                <Text style={styles.navTxt}>{quantity}</Text>
               </View>
               <Pressable
                 style={styles.plusminuscontainer}
-                onPress={() => setAmount(amount + 1)}
+                onPress={() => {
+                  quantity <= 9 ? setQuantity(quantity + 1) : null;
+                }}
               >
                 <Image
                   source={require('../ProjectData/Logo/Plus.png')}
@@ -53,9 +61,14 @@ const ProductDetailsNav = ({ navigation, route }) => {
             <Pressable
               style={styles.iconContainer}
               onPress={() => {
-                navigation.navigate('CartCheck', {
-                  index: index,
+                navigation.navigate('CheckoutCart', {
+                  item: item,
+                  quantity: quantity,
                 });
+                // console.log("Item quantity: ", item.quantity);
+                addItemIntoCart(item, quantity);
+                // console.log("Item quantity: ", item.quantity);
+                // console.log("Cart State: ", cartState);
               }}
             >
               <Text style={styles.navTxt}>Add To Cart</Text>
@@ -68,24 +81,25 @@ const ProductDetailsNav = ({ navigation, route }) => {
 };
 
 const ProductDetails = ({ navigation }) => {
+  // const cartState = useSelector(state => state.cart);
   const [selectedId, setSelectedId] = useState(0);
-
+  // console.log("item: ", item);
   return (
     <View style={styles.Container}>
-      <HeaderProductDetails navigation={navigation} inWishlist={ProductData[index]} />
+      <HeaderProductDetails navigation={navigation} item={item} />
       <ScrollView style={{ flex: 1, marginTop: RFValue(10) }} showsVerticalScrollIndicator={false}>
         <View style={styles.productViewCenter}>
           <View style={styles.productView}>
             <Image
-              source={ProductData[index].img}
+              source={item.img}
               style={styles.img}
             />
             <View style={styles.priceTagContainer}>
-              <Text style={styles.priceTag}>${ProductData[index].price}</Text>
+              <Text style={styles.priceTag}>${item.price}</Text>
             </View>
           </View>
           <View style={styles.nameContainer}>
-            <Text style={styles.productName}>{ProductData[index].title}</Text>
+            <Text style={styles.productName}>{item.title}</Text>
           </View>
           <View style={styles.productRating}>
             <View style={{ width: Dimensions.get('window').width - 35, flexDirection: 'row' }}>
@@ -96,7 +110,7 @@ const ProductDetails = ({ navigation }) => {
           <View style={styles.productSize}>
             <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
               {
-                ProductData[index].size.map((item, index) => (
+                item.size.map((item, index) => (
                   <Pressable
                     style={[styles.btn, { backgroundColor: selectedId === index ? 'black' : 'white' }]}
                     onPress={() => {
@@ -112,7 +126,7 @@ const ProductDetails = ({ navigation }) => {
           </View>
           <View style={styles.productDescContainer}>
             <Text style={styles.productDescTitle}>Description</Text>
-            <Text style={styles.productDesc}>{ProductData[index].details}</Text>
+            <Text style={styles.productDesc}>{item.details}</Text>
           </View>
           <View style={styles.empty} />
 

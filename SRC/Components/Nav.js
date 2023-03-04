@@ -10,6 +10,7 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 import ProductDetailsNav from './ProductDetails';
 import { useSelector } from 'react-redux';
 import Wishlist from './Wishlist';
+import MyCart from './MyCart';
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
@@ -56,10 +57,10 @@ const App = () => {
         }}
       />
       <Stack.Screen
-        name="CartCheck"
+        name="CheckoutCart"
         component={Checkout}
         options={{
-          headerShown: true,
+          // headerShown: true,
           headerRight: () => (
             <TouchableOpacity
               style={styles.favBtn}
@@ -142,7 +143,7 @@ const Nav = () => {
       />
       <Tab.Screen
         name="My Cart"
-        component={Cart}
+        component={MyCart}
         options={{
           // "tabBarShowLabel": true,
           // tabBarBadge: items.length,

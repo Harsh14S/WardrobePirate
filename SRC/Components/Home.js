@@ -10,7 +10,7 @@ import {
 import React from 'react';
 import Categories from './Categories';
 import NewSeasonsEss from './NewSeasonsEss';
-import TopSearchBar from './TopSearchBar';
+import TopSearchBar from './HeaderHome';
 import { RFValue } from 'react-native-responsive-fontsize';
 import ProductData from '../ProjectData/ProductsImage/ProductData';
 import { useDispatch, useSelector } from 'react-redux';
@@ -46,8 +46,7 @@ const Home = ({ navigation }) => {
                   <Pressable
                     onPress={() => {
                       navigation.navigate('ProductDetails', {
-                        index: index,
-                        inWishlist: item.inWishlist,
+                        item: item,
                       });
                     }}>
                     <Image
@@ -60,9 +59,9 @@ const Home = ({ navigation }) => {
                     onPress={() => {
                       // Alert.alert(index + ' Added to your wishlist');
                       // !item.inWishlist;
-                      console.log(' item.inWishlist before add: ', item.inWishlist);
+                      // console.log(' item.inWishlist before add: ', item.inWishlist);
                       addItemToWishlist(item);
-                      console.log(' item.inWishlist after add: ', item.inWishlist);
+                      // console.log(' item.inWishlist after add: ', item.inWishlist);
                     }}>
                     <Image
                       source={

@@ -3,21 +3,20 @@ import React from 'react'
 import { RFValue } from 'react-native-responsive-fontsize';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import CartItems from './CartItems';
-import Bill from './CartBill';
 import { useSelector } from 'react-redux';
+import HeaderCart from './HeaderCart';
 
 const Add2Cart = createBottomTabNavigator();
-const Cart = () => {
-  const items = useSelector(state => state);
+const Cart = ({ navigation }) => {
+  const cartState = useSelector(state => state.cart);
+  // console.log("Cart State: ", cartState);
+  // console.log("Item through nav: ", item);
   return (
     <View style={styles.container}>
       {/* <ScrollView> */}
+      <HeaderCart navigation={navigation} />
       <View style={styles.cartContainer}>
         <CartItems />
-      </View>
-      <Text>Total Items in Cart: {Object.keys(items).length}</Text>
-      <View style={styles.billContainer}>
-        <Bill />
       </View>
       <View style={styles.empty} />
       {/* </ScrollView> */}
@@ -25,26 +24,15 @@ const Cart = () => {
   )
 };
 
-const Checkout = ({ route }) => {
+const Checkout = ({ navigation, route }) => {
+  // console.log("Item through nav: ", item);
   index = route.params.index;
   return (
     <Add2Cart.Navigator
       screenOptions={{
         "tabBarShowLabel": false,
         headerShown: false,
-        tabBarStyle: {
-          "display": "flex",
-          backgroundColor: 'black',
-          alignContent: 'center',
-          justifyContent: 'center',
-          position: 'absolute',
-          marginTop: RFValue(20),
-          marginBottom: RFValue(10),
-          marginHorizontal: RFValue(10),
-          paddingHorizontal: RFValue(5),
-          borderRadius: RFValue(45),
-          height: RFValue(61),
-        },
+        tabBarStyle: styles.tabContainer,
       }}
     >
       <Add2Cart.Screen name="MyCart" component={Cart} options={{
@@ -69,19 +57,34 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     // justifyContent: 'center',
     alignItems: 'center',
+    paddingBottom: RFValue(75),
+  },
+  tabContainer: {
+    "display": "flex",
+    backgroundColor: 'black',
+    alignContent: 'center',
+    justifyContent: 'center',
+    position: 'absolute',
+    marginTop: RFValue(20),
+    marginBottom: RFValue(10),
+    marginHorizontal: RFValue(10),
+    paddingHorizontal: RFValue(5),
+    borderRadius: RFValue(45),
+    height: RFValue(61),
   },
   cartContainer: {
-    // flex: 2,
+    flex: 2,
     marginTop: RFValue(10),
-    // backgroundColor: 'grey',
+    // backgroundColor: 'lightgrey',
     paddingVertical: RFValue(2),
     width: Dimensions.get('window').width - 20,
     // height: Dimensions.get('window').height / 2 - 55,
   },
 
   billContainer: {
+    backgroundColor: 'grey',
     // flex: 1,
-    marginTop: RFValue(50),
+    marginTop: RFValue(5),
     // paddingVertical: RFValue(50),
     // backgroundColor: 'white',
     width: Dimensions.get('window').width - 20,
@@ -104,8 +107,5 @@ const styles = StyleSheet.create({
     fontSize: RFValue(16),
     // paddingVertical: RFValue(5),
   },
-  empty: {
-    // backgroundColor: "white",
-    padding: RFValue(40),
-  },
+
 })

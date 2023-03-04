@@ -3,7 +3,7 @@ import React from 'react'
 import Users from '../ProjectData/UsersData/UserProfile';
 import { RFValue } from 'react-native-responsive-fontsize';
 
-const TopSearchBar = () => {
+const HeaderHome = () => {
   return (
     <View style={styles.container}>
       <View style={styles.circle}>
@@ -26,7 +26,7 @@ const TopSearchBar = () => {
   )
 }
 
-export default TopSearchBar
+export default HeaderHome
 
 
 const styles = StyleSheet.create({
@@ -54,7 +54,9 @@ const styles = StyleSheet.create({
   },
   text: {
     fontSize: RFValue(18),
-    marginLeft: RFValue(5),
+    marginLeft: RFValue(10),
+    fontWeight: '600',
+
   },
   search: {
     marginRight: RFValue(5),

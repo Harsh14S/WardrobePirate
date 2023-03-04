@@ -12,7 +12,7 @@ const TriangleCorner = () => {
 const Search = () => {
     return (
         <View style={styles.container}>
-            <Text>Search</Text>
+            {/* <Text>Search</Text> */}
             {/* <TriangleCorner /> */}
         </View>
     )
@@ -23,7 +23,7 @@ export default Search
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: 'yellow',
+        backgroundColor: 'white',
         justifyContent: 'center',
         alignItems: 'center',
     },
