@@ -25,3 +25,7 @@ import android.os.Bundle;
 protected void onCreate(Bundle savedInstanceState) {
 super.onCreate(null);
 }
+
+# Install after cloning project for android
+
+npm i @react-native-community/cli-platform-android
