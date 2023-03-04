@@ -1,13 +1,48 @@
-import { Alert, Dimensions, Image, Pressable, StyleSheet, Text, View } from 'react-native'
-import React from 'react'
-import { RFValue } from 'react-native-responsive-fontsize';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import {
+  Alert,
+  Dimensions,
+  Image,
+  Pressable,
+  StyleSheet,
+  Text,
+  View,
+} from 'react-native';
+import React from 'react';
+import {RFValue} from 'react-native-responsive-fontsize';
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import CartItems from './CartItems';
-import { useSelector } from 'react-redux';
+import {useSelector} from 'react-redux';
 import HeaderCart from './HeaderCart';
-
 const Add2Cart = createBottomTabNavigator();
-const Cart = ({ navigation }) => {
+
+export const CheckoutCart = () => {
+  // console.log('quantity: ', route.params.quantity);
+  // console.log("Item through nav: ", item);
+  return (
+    <Add2Cart.Navigator
+      screenOptions={{
+        tabBarShowLabel: false,
+        headerShown: false,
+        tabBarStyle: styles.tabContainer,
+      }}>
+      <Add2Cart.Screen
+        name="MyCart"
+        component={Cart}
+        options={{
+          tabBarIcon: () => (
+            <Pressable
+              style={styles.checkout}
+              onPress={() => Alert.alert('Hello')}>
+              <Text style={styles.navTxt}>Checkout</Text>
+            </Pressable>
+          ),
+        }}
+      />
+    </Add2Cart.Navigator>
+  );
+};
+
+const Cart = ({navigation}) => {
   const cartState = useSelector(state => state.cart);
   // console.log("Cart State: ", cartState);
   // console.log("Item through nav: ", item);
@@ -21,35 +56,8 @@ const Cart = ({ navigation }) => {
       <View style={styles.empty} />
       {/* </ScrollView> */}
     </View>
-  )
+  );
 };
-
-const Checkout = ({ navigation, route }) => {
-  // console.log("Item through nav: ", item);
-  index = route.params.index;
-  return (
-    <Add2Cart.Navigator
-      screenOptions={{
-        "tabBarShowLabel": false,
-        headerShown: false,
-        tabBarStyle: styles.tabContainer,
-      }}
-    >
-      <Add2Cart.Screen name="MyCart" component={Cart} options={{
-        tabBarIcon: () => (
-          <Pressable
-            style={styles.checkout}
-            onPress={() => Alert.alert("Hello")}
-          >
-            <Text style={styles.navTxt}>Checkout</Text>
-          </Pressable>
-        )
-      }} />
-    </Add2Cart.Navigator>
-  )
-};
-
-export { Checkout, Cart }
 
 const styles = StyleSheet.create({
   container: {
@@ -60,7 +68,7 @@ const styles = StyleSheet.create({
     paddingBottom: RFValue(75),
   },
   tabContainer: {
-    "display": "flex",
+    display: 'flex',
     backgroundColor: 'black',
     alignContent: 'center',
     justifyContent: 'center',
@@ -107,5 +115,4 @@ const styles = StyleSheet.create({
     fontSize: RFValue(16),
     // paddingVertical: RFValue(5),
   },
-
-})
+});

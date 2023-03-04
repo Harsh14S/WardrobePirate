@@ -1,7 +1,7 @@
 import {StyleSheet, View, Image, Platform, Alert, Text} from 'react-native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import Home from './Home';
-import {Checkout, Cart} from './Cart';
+import {CheckoutCart} from './CheckoutCart';
 import {RFValue} from 'react-native-responsive-fontsize';
 import Search from './Search';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
@@ -57,7 +57,7 @@ const App = () => {
       />
       <Stack.Screen
         name="CheckoutCart"
-        component={Checkout}
+        component={CheckoutCart}
         options={{
           // headerShown: true,
           headerRight: () => (
