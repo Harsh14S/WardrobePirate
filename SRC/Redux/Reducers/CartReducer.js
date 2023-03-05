@@ -9,10 +9,11 @@ const initialState = [];
 export const CartReducer = (state = initialState, action) => {
   switch (action.type) {
     case ADD_INTO_CART:
-      if (action.payload.isAdded) {
+      if (action.payload.item.quantity === 0) {
         // action.payload.isAdded = false;
         return [...state];
       } else {
+        action.payload.item.quantity = action.payload.quantity;
         return [...state, action.payload.item];
       }
 
@@ -21,8 +22,6 @@ export const CartReducer = (state = initialState, action) => {
         // action.payload.isAdded = false;
         console.log('Item Removed with ID: ', action.payload.data.id);
         action.payload.data.quantity = 0;
-        action.payload.quantity = 0;
-        // action.payload.isAdded = false;
         return record.id !== action.payload.data.id;
       });
 
@@ -33,6 +32,8 @@ export const CartReducer = (state = initialState, action) => {
 
     case EMPTY_CART:
       state.map(item => {
+        // item.quantity = 0;
+        console.log('item:', item);
         item.quantity = 0;
       });
       state = [];
