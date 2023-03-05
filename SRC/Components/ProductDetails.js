@@ -14,7 +14,7 @@ import RatingBar from './RatingBar';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {useDispatch, useSelector} from 'react-redux';
 import HeaderProductDetails from './HeaderProductDetails';
-import {addIntoCart} from '../Redux/Actions/CartActions';
+import {addIntoCart, setItemQuantity} from '../Redux/Actions/CartActions';
 
 let item = {};
 const Add2Cart = createBottomTabNavigator();
@@ -25,11 +25,13 @@ const ProductDetailsNav = ({navigation, route}) => {
   const cartState = useSelector(state => state.cart);
   const dispatch = useDispatch();
 
-  const addItemIntoCart = item => {
-    dispatch(addIntoCart(item));
+  const addItemIntoCart = (item, quantity, isAdded) => {
+    dispatch(addIntoCart(item, quantity, isAdded));
   };
 
-  const [quant, setQuant] = useState(1);
+  const setQuantity = (item, quantity) => {
+    dispatch(setItemQuantity(item, quantity));
+  };
   return (
     <Add2Cart.Navigator
       screenOptions={{
@@ -47,7 +49,9 @@ const ProductDetailsNav = ({navigation, route}) => {
                 <Pressable
                   style={styles.plusminuscontainer}
                   onPress={() => {
-                    quant >= 2 ? setQuant(quant - 1) : null;
+                    item.quantity >= 2
+                      ? setQuantity(item, item.quantity - 1)
+                      : null;
                   }}>
                   <Image
                     source={require('../ProjectData/Logo/Minus.png')}
@@ -55,12 +59,14 @@ const ProductDetailsNav = ({navigation, route}) => {
                   />
                 </Pressable>
                 <View style={styles.plusminuscontainer}>
-                  <Text style={styles.navTxt}>{quant}</Text>
+                  <Text style={styles.navTxt}>{item.quantity}</Text>
                 </View>
                 <Pressable
                   style={styles.plusminuscontainer}
                   onPress={() => {
-                    quant <= 9 ? setQuant(quant + 1) : null;
+                    item.quantity <= 9
+                      ? setQuantity(item, item.quantity + 1)
+                      : null;
                   }}>
                   <Image
                     source={require('../ProjectData/Logo/Plus.png')}
@@ -83,8 +89,7 @@ const ProductDetailsNav = ({navigation, route}) => {
                   //   item.quantity += quant;
                   //   addItemIntoCart(item);
                   // }
-                  addItemIntoCart(item);
-                  item.quantity = quant;
+                  addItemIntoCart(item, item.quantity);
                   // console.log('After item.quantity: ', item.quantity);
                 }}>
                 <Text style={styles.navTxt}>Add To Cart</Text>

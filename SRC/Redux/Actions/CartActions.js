@@ -7,32 +7,32 @@ import {
   SET_ITEM_QUANTITY,
 } from './Constant';
 
-export const addIntoCart = item => {
-  return {
-    type: ADD_INTO_CART,
-    payload: {item},
-  };
-};
-
-export const removeFromCart = data => {
-  return {
-    type: REMOVE_FROM_CART,
-    payload: {data},
-  };
-};
-// export const addIntoCart = (item, quantity) => {
+// export const addIntoCart = (item, q) => {
 //   return {
 //     type: ADD_INTO_CART,
-//     payload: {item, quantity},
+//     payload: {item},
 //   };
 // };
 
-// export const removeFromCart = (data, quantity) => {
+// export const removeFromCart = data => {
 //   return {
 //     type: REMOVE_FROM_CART,
-//     payload: {data, quantity},
+//     payload: {data},
 //   };
 // };
+export const addIntoCart = (item, quantity, isAdded) => {
+  return {
+    type: ADD_INTO_CART,
+    payload: {item, quantity, isAdded},
+  };
+};
+
+export const removeFromCart = (data, quantity, isAdded) => {
+  return {
+    type: REMOVE_FROM_CART,
+    payload: {data, quantity, isAdded},
+  };
+};
 
 // export const itemAdditionCart = quantity => {
 //   return {
@@ -48,12 +48,12 @@ export const removeFromCart = data => {
 //   };
 // };
 
-// export const setItemQuantity = quantity => {
-//   return {
-//     type: SET_ITEM_QUANTITY,
-//     payload: {quantity},
-//   };
-// };
+export const setItemQuantity = (item, quantity) => {
+  return {
+    type: SET_ITEM_QUANTITY,
+    payload: {item, quantity},
+  };
+};
 
 export const emptyCartItems = () => {
   return {

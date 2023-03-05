@@ -10,78 +10,89 @@ import {
 import React, {useState} from 'react';
 import {RFValue} from 'react-native-responsive-fontsize';
 import {useDispatch, useSelector} from 'react-redux';
-import {removeFromCart} from '../Redux/Actions/CartActions';
+import {removeFromCart, setItemQuantity} from '../Redux/Actions/CartActions';
 
-// let itemQuantity;
+let itemQuantity;
+// let itemIndex;
 
 const CartItems = () => {
-  // const [quantity, setQuantity] = useState(quant);
-  const [quantity, setQuantity] = useState(1);
+
   const cartState = useSelector(state => state.cart);
-  // console.log("cartState: ", cartState);
-  // console.log('quant: ', quant);
   const dispatch = useDispatch();
-  const removeItemFromCart = item => {
-    dispatch(removeFromCart(item));
+  const removeItemFromCart = (item, isAdded) => {
+    dispatch(removeFromCart(item, isAdded));
+  };
+  const setQuantity = (item, quantity) => {
+    dispatch(setItemQuantity(item, quantity));
   };
   return (
     <View style={styles.container}>
       <ScrollView style={styles.itemContainer}>
-        {cartState.map((item, index) => (
-          <View key={index} style={{flexDirection: 'row'}}>
-            <View style={styles.imgContainer}>
-              <Image source={item.img} style={styles.img} />
-            </View>
-            <View style={styles.itemDetails}>
-              <View style={styles.itemTitle}>
-                <Text style={styles.itemTitleTxt}>{item.title}</Text>
+        {cartState.map((item, index) => {
+          console.log('itemQuantity: ', itemQuantity);
+          itemQuantity = item.quantity;
+          console.log('item.quantity: ', item.quantity);
+          return (
+            <View key={index} style={{flexDirection: 'row'}}>
+              <View style={styles.imgContainer}>
+                <Image source={item.img} style={styles.img} />
               </View>
-              <View style={styles.itemCateg}>
-                <Text style={styles.itemCategTxt}>{item.categ}</Text>
-              </View>
-              <View style={styles.priceQuantity}>
-                <Text style={styles.itemPrice}>${item.price}</Text>
-                <View style={styles.intractionContainer}>
-                  <Pressable
-                    style={styles.plusminuscontainer}
-                    onPress={() => {
-                      // removeItemFromCart(item);
-                      console.log('Item Quantity: ', item.quantity);
-                    }}>
-                    <Image
-                      source={require('../ProjectData/Logo/Bin.png')}
-                      style={styles.bin}
-                    />
-                  </Pressable>
-                  <Pressable
-                    style={styles.plusminuscontainer}
-                    onPress={() => {
-                      quantity >= 2 ? setQuantity(quantity - 1) : null;
-                    }}>
-                    <Image
-                      source={require('../ProjectData/Logo/Minus.png')}
-                      style={styles.plusminus}
-                    />
-                  </Pressable>
-                  <View style={styles.plusminuscontainer}>
-                    <Text style={styles.itemQuantity}>{item.quantity}</Text>
-                    {/* <Text style={styles.navTxt}>{amount}</Text> */}
+              <View style={styles.itemDetails}>
+                <View style={styles.itemTitle}>
+                  <Text style={styles.itemTitleTxt}>{item.title}</Text>
+                </View>
+                <View style={styles.itemCateg}>
+                  <Text style={styles.itemCategTxt}>{item.categ}</Text>
+                </View>
+                <View style={styles.priceQuantity}>
+                  <Text style={styles.itemPrice}>${item.price}</Text>
+                  <View style={styles.intractionContainer}>
+                    <Pressable
+                      style={styles.plusminuscontainer}
+                      onPress={() => {
+                        removeItemFromCart(item, item.quantity, false);
+                        // console.log('Item Quantity: ', item.quantity);
+                      }}>
+                      <Image
+                        source={require('../ProjectData/Logo/Bin.png')}
+                        style={styles.bin}
+                      />
+                    </Pressable>
+                    <Pressable
+                      style={styles.plusminuscontainer}
+                      onPress={() => {
+                        item.quantity >= 2
+                          ? setQuantity(item, item.quantity - 1)
+                          : null;
+                      }}>
+                      <Image
+                        source={require('../ProjectData/Logo/Minus.png')}
+                        style={styles.plusminus}
+                      />
+                    </Pressable>
+                    <View style={styles.plusminuscontainer}>
+                      <Text style={styles.itemQuantity}>{item.quantity}</Text>
+                      {/* <Text style={styles.navTxt}>{amount}</Text> */}
+                    </View>
+                    <Pressable
+                      style={styles.plusminuscontainer}
+                      onPress={() => {
+                        item.quantity <= 9
+                          ? setQuantity(item, item.quantity + 1)
+                          : null;
+                      }}>
+                      <Image
+                        source={require('../ProjectData/Logo/Plus.png')}
+                        style={styles.plusminus}
+                      />
+                    </Pressable>
                   </View>
-                  <Pressable
-                    style={styles.plusminuscontainer}
-                    onPress={() => {
-                      quantity <= 9 ? setQuantity(quantity + 1) : null;
-                    }}>
-                    <Image
-                      source={require('../ProjectData/Logo/Plus.png')}
-                      style={styles.plusminus}
-                    />
-                  </Pressable>
                 </View>
               </View>
             </View>
-          </View>
-        ))}
+            // (itemIndex = index)
+          );
+        })}
       </ScrollView>
       <View style={styles.billContainer}>
         <View style={styles.billHeadings}>
