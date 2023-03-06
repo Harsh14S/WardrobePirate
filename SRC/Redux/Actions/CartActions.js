@@ -7,51 +7,25 @@ import {
   SET_ITEM_QUANTITY,
 } from './Constant';
 
-// export const addIntoCart = (item, q) => {
-//   return {
-//     type: ADD_INTO_CART,
-//     payload: {item},
-//   };
-// };
-
-// export const removeFromCart = data => {
-//   return {
-//     type: REMOVE_FROM_CART,
-//     payload: {data},
-//   };
-// };
 export const addIntoCart = (item, quantity, isAdded) => {
   return {
     type: ADD_INTO_CART,
-    payload: {item, quantity, isAdded},
+    payload: { item, quantity, isAdded },
   };
 };
 
-export const removeFromCart = (data, quantity, isAdded) => {
+export const removeFromCart = (data) => {
+  console.log('data :', data);
   return {
     type: REMOVE_FROM_CART,
-    payload: {data, quantity, isAdded},
+    payload: { data },
   };
 };
-
-// export const itemAdditionCart = quantity => {
-//   return {
-//     type: ADD_ITEM_INTO_CART,
-//     payload: {quantity},
-//   };
-// };
-
-// export const itemMinusCart = quantity => {
-//   return {
-//     type: MIN_ITEM_INTO_CART,
-//     payload: {quantity},
-//   };
-// };
 
 export const setItemQuantity = (item, quantity) => {
   return {
     type: SET_ITEM_QUANTITY,
-    payload: {item, quantity},
+    payload: { item, quantity },
   };
 };
 

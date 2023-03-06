@@ -9,21 +9,25 @@ const initialState = [];
 export const CartReducer = (state = initialState, action) => {
   switch (action.type) {
     case ADD_INTO_CART:
-      if (action.payload.item.quantity === 0) {
-        // action.payload.isAdded = false;
-        return [...state];
+      console.log("isAdded: ", action.payload.isAdded);
+      if (action.payload.isAdded) {
+        action.payload.item.quantity = action.payload.quantity;
+        return [...state, action.payload.item]
       } else {
         action.payload.item.quantity = action.payload.quantity;
-        return [...state, action.payload.item];
+        return [...state];
       }
 
     case REMOVE_FROM_CART:
       return state.filter(record => {
-        // action.payload.isAdded = false;
-        console.log('Item Removed with ID: ', action.payload.data.id);
+        console.log("Record.quantity: ", record.id);
+        console.log("action.payload.data.quantity: ", action.payload.data.id);
         action.payload.data.quantity = 0;
+        // ("",action.payload.isAdded)
         return record.id !== action.payload.data.id;
-      });
+      })
+    // console.log("State returned: ", state);
+    // return [...state]
 
     case SET_ITEM_QUANTITY:
       action.payload.item.quantity = action.payload.quantity;

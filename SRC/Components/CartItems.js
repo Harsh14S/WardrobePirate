@@ -7,33 +7,30 @@ import {
   Text,
   View,
 } from 'react-native';
-import React, {useState} from 'react';
-import {RFValue} from 'react-native-responsive-fontsize';
-import {useDispatch, useSelector} from 'react-redux';
-import {removeFromCart, setItemQuantity} from '../Redux/Actions/CartActions';
+import React, { useEffect, useState } from 'react';
+import { RFValue } from 'react-native-responsive-fontsize';
+import { useDispatch, useSelector } from 'react-redux';
+import { removeFromCart, setItemQuantity } from '../Redux/Actions/CartActions';
 
-let itemQuantity;
+
 // let itemIndex;
+let initQuantity = 1;
 
 const CartItems = () => {
-
+  const [quant, setQuant] = useState(initQuantity);
   const cartState = useSelector(state => state.cart);
   const dispatch = useDispatch();
-  const removeItemFromCart = (item, isAdded) => {
-    dispatch(removeFromCart(item, isAdded));
+  const removeItemFromCart = (item) => {
+    dispatch(removeFromCart(item));
   };
-  const setQuantity = (item, quantity) => {
-    dispatch(setItemQuantity(item, quantity));
-  };
+
   return (
     <View style={styles.container}>
       <ScrollView style={styles.itemContainer}>
         {cartState.map((item, index) => {
-          console.log('itemQuantity: ', itemQuantity);
-          itemQuantity = item.quantity;
-          console.log('item.quantity: ', item.quantity);
+          
           return (
-            <View key={index} style={{flexDirection: 'row'}}>
+            <View key={index} style={{ flexDirection: 'row' }}>
               <View style={styles.imgContainer}>
                 <Image source={item.img} style={styles.img} />
               </View>
@@ -50,7 +47,9 @@ const CartItems = () => {
                     <Pressable
                       style={styles.plusminuscontainer}
                       onPress={() => {
-                        removeItemFromCart(item, item.quantity, false);
+                        removeItemFromCart(item);
+                        // setQuant(1);
+                        console.log("Item: ", item);
                         // console.log('Item Quantity: ', item.quantity);
                       }}>
                       <Image
@@ -61,9 +60,7 @@ const CartItems = () => {
                     <Pressable
                       style={styles.plusminuscontainer}
                       onPress={() => {
-                        item.quantity >= 2
-                          ? setQuantity(item, item.quantity - 1)
-                          : null;
+                        quant >= 2 ? setQuant(quant - 1) : null;
                       }}>
                       <Image
                         source={require('../ProjectData/Logo/Minus.png')}
@@ -71,15 +68,13 @@ const CartItems = () => {
                       />
                     </Pressable>
                     <View style={styles.plusminuscontainer}>
-                      <Text style={styles.itemQuantity}>{item.quantity}</Text>
+                      <Text style={styles.itemQuantity}>{quant}</Text>
                       {/* <Text style={styles.navTxt}>{amount}</Text> */}
                     </View>
                     <Pressable
                       style={styles.plusminuscontainer}
                       onPress={() => {
-                        item.quantity <= 9
-                          ? setQuantity(item, item.quantity + 1)
-                          : null;
+                        quant <= 9 ? setQuant(quant + 1) : null;
                       }}>
                       <Image
                         source={require('../ProjectData/Logo/Plus.png')}
@@ -103,12 +98,12 @@ const CartItems = () => {
           <Text style={styles.titleTxt}>Fee Delivery:</Text>
           <Text style={styles.priceTxt}>$30.00</Text>
         </View>
-        <View style={[styles.billHeadings, {paddingBottom: RFValue(70)}]}>
+        <View style={[styles.billHeadings, { paddingBottom: RFValue(70) }]}>
           <Text style={styles.titleTxt}>Discount:</Text>
           <Text style={styles.priceTxt}>$30.00</Text>
         </View>
         <View style={styles.separator} />
-        <View style={[styles.billHeadings, {paddingTop: RFValue(8)}]}>
+        <View style={[styles.billHeadings, { paddingTop: RFValue(8) }]}>
           <Text style={styles.titleTxt}>Total: </Text>
           <Text style={styles.priceTxt}>$30.00</Text>
         </View>

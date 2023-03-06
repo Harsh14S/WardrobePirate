@@ -7,20 +7,22 @@ import {
   Text,
   View,
 } from 'react-native';
-import React, {useState} from 'react';
-import {RFValue} from 'react-native-responsive-fontsize';
-import {ScrollView} from 'react-native-gesture-handler';
+import React, { useState } from 'react';
+import { RFValue } from 'react-native-responsive-fontsize';
+import { ScrollView } from 'react-native-gesture-handler';
 import RatingBar from './RatingBar';
-import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import {useDispatch, useSelector} from 'react-redux';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { useDispatch, useSelector } from 'react-redux';
 import HeaderProductDetails from './HeaderProductDetails';
-import {addIntoCart, setItemQuantity} from '../Redux/Actions/CartActions';
+import { addIntoCart, setItemQuantity } from '../Redux/Actions/CartActions';
 
 let item = {};
 const Add2Cart = createBottomTabNavigator();
+let initQuantity = 1;
 
-const ProductDetailsNav = ({navigation, route}) => {
+const ProductDetailsNav = ({ navigation, route }) => {
   item = route.params.item;
+  const [quant, setQuant] = useState(1);
 
   const cartState = useSelector(state => state.cart);
   const dispatch = useDispatch();
@@ -50,8 +52,9 @@ const ProductDetailsNav = ({navigation, route}) => {
                   style={styles.plusminuscontainer}
                   onPress={() => {
                     item.quantity >= 2
-                      ? setQuantity(item, item.quantity - 1)
-                      : null;
+                    // ? setQuantity(item, item.quantity - 1)
+                    // : null;
+                    quant >= 2 ? (setQuant(quant - 1)) : null;
                   }}>
                   <Image
                     source={require('../ProjectData/Logo/Minus.png')}
@@ -59,14 +62,17 @@ const ProductDetailsNav = ({navigation, route}) => {
                   />
                 </Pressable>
                 <View style={styles.plusminuscontainer}>
-                  <Text style={styles.navTxt}>{item.quantity}</Text>
+                  {/* <Text style={styles.navTxt}>{item.quantity}</Text> */}
+                  {/* <Text style={styles.navTxt}>{item.quantity}</Text> */}
+                  <Text style={styles.navTxt}>{quant}</Text>
                 </View>
                 <Pressable
                   style={styles.plusminuscontainer}
                   onPress={() => {
-                    item.quantity <= 9
-                      ? setQuantity(item, item.quantity + 1)
-                      : null;
+                    // item.quantity <= 9
+                    //   ? setQuantity(item, item.quantity + 1)
+                    //   : null;
+                    quant <= 9 ? setQuant(quant + 1) : null;
                   }}>
                   <Image
                     source={require('../ProjectData/Logo/Plus.png')}
@@ -80,17 +86,12 @@ const ProductDetailsNav = ({navigation, route}) => {
                   navigation.navigate('CheckoutCart', {
                     // quantity: quant,
                   });
-                  // console.log('Quant: ', quant);
-                  // console.log('Before item.quantity: ', item.quantity);
-                  // if (
-                  //   item.quantity + quant <= 10 ||
-                  //   item.quantity - quant >= 1
-                  // ) {
-                  //   item.quantity += quant;
-                  //   addItemIntoCart(item);
-                  // }
-                  addItemIntoCart(item, item.quantity);
-                  // console.log('After item.quantity: ', item.quantity);
+                  if (item.quantity === 0) {
+                    addItemIntoCart(item, item.quantity, true);
+                    setQuant(item.quantity);
+                  } else {
+                    addItemIntoCart(item, item.quantity, false);
+                  }
                 }}>
                 <Text style={styles.navTxt}>Add To Cart</Text>
               </Pressable>
@@ -102,7 +103,7 @@ const ProductDetailsNav = ({navigation, route}) => {
   );
 };
 
-const ProductDetails = ({navigation}) => {
+const ProductDetails = ({ navigation }) => {
   // const cartState = useSelector(state => state.cart);
   const [selectedId, setSelectedId] = useState(0);
   // console.log("item: ", item);
@@ -110,7 +111,7 @@ const ProductDetails = ({navigation}) => {
     <View style={styles.Container}>
       <HeaderProductDetails navigation={navigation} item={item} />
       <ScrollView
-        style={{flex: 1, marginTop: RFValue(10)}}
+        style={{ flex: 1, marginTop: RFValue(10) }}
         showsVerticalScrollIndicator={false}>
         <View style={styles.productViewCenter}>
           <View style={styles.productView}>
@@ -140,7 +141,7 @@ const ProductDetails = ({navigation}) => {
                 <Pressable
                   style={[
                     styles.btn,
-                    {backgroundColor: selectedId === index ? 'black' : 'white'},
+                    { backgroundColor: selectedId === index ? 'black' : 'white' },
                   ]}
                   onPress={() => {
                     setSelectedId(index);
@@ -149,7 +150,7 @@ const ProductDetails = ({navigation}) => {
                   <Text
                     style={[
                       styles.sizeTitle,
-                      {color: selectedId === index ? 'white' : 'black'},
+                      { color: selectedId === index ? 'white' : 'black' },
                     ]}>
                     {item}
                   </Text>
