@@ -26,12 +26,14 @@ protected void onCreate(Bundle savedInstanceState) {
 super.onCreate(null);
 }
 
+
 # Installing redux
 
-npm install redux
-npm install @reduxjs/toolkit
-npm install react-redux
+# npm install redux
+# npm install @reduxjs/toolkit
+# npm install react-redux
 
 # install after cloning repo in local
 
-npm i @react-native-community/cli-platform-android
+# Install after cloning project for android
+# npm i @react-native-community/cli-platform-android
