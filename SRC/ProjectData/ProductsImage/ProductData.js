@@ -1,7 +1,7 @@
 const ProductData = [
   {
     id: 1,
-    quantity: 0,
+    quantity: 1,
     title: 'DC Tshirt with Round Neck',
     img: require('../ProductsImage/Tshirt.jpg'),
     price: 25,
@@ -15,7 +15,7 @@ const ProductData = [
   },
   {
     id: 2,
-    quantity: 0,
+    quantity: 1,
     title: 'Jacket Full Sleeve Double Collar',
     img: require('../ProductsImage/Tshirt2.jpeg'),
     price: 30,
@@ -29,7 +29,7 @@ const ProductData = [
   },
   {
     id: 3,
-    quantity: 0,
+    quantity: 1,
     title: 'Plain Half Sleeve Tshirt',
     img: require('../ProductsImage/Tshirt3.jpg'),
     price: 5,
@@ -43,7 +43,7 @@ const ProductData = [
   },
   {
     id: 4,
-    quantity: 0,
+    quantity: 1,
     title: 'Stretchable Cotton Pants Side pockets',
     img: require('../ProductsImage/Pants1.jpg'),
     price: 18,
@@ -57,7 +57,7 @@ const ProductData = [
   },
   {
     id: 5,
-    quantity: 0,
+    quantity: 1,
     title: `Men's Formal Outfit with Coat`,
     img: require('../ProductsImage/Formal.jpg'),
     price: 49,
@@ -71,7 +71,7 @@ const ProductData = [
   },
   {
     id: 6,
-    quantity: 0,
+    quantity: 1,
     title: `Men's Casual Outfit with Hoodie`,
     img: require('../ProductsImage/Casual.jpg'),
     price: 42,

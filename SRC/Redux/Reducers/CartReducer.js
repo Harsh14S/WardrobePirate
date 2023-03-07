@@ -6,15 +6,20 @@ import {
 } from '../Actions/Constant';
 
 const initialState = [];
+
 export const CartReducer = (state = initialState, action) => {
+
   switch (action.type) {
+
     case ADD_INTO_CART:
       console.log("isAdded: ", action.payload.isAdded);
       if (action.payload.isAdded) {
-        action.payload.item.quantity = action.payload.quantity;
-        return [...state, action.payload.item]
+        if (state.includes(action.payload.item)) {
+          return [...state];
+        } else {
+          return [...state, action.payload.item]
+        }
       } else {
-        action.payload.item.quantity = action.payload.quantity;
         return [...state];
       }
 
@@ -22,23 +27,17 @@ export const CartReducer = (state = initialState, action) => {
       return state.filter(record => {
         console.log("Record.quantity: ", record.id);
         console.log("action.payload.data.quantity: ", action.payload.data.id);
-        action.payload.data.quantity = 0;
-        // ("",action.payload.isAdded)
+        action.payload.data.quantity = 1;
         return record.id !== action.payload.data.id;
       })
-    // console.log("State returned: ", state);
-    // return [...state]
 
     case SET_ITEM_QUANTITY:
       action.payload.item.quantity = action.payload.quantity;
       return [...state];
-    // return [action.payload.item];
 
     case EMPTY_CART:
       state.map(item => {
-        // item.quantity = 0;
-        console.log('item:', item);
-        item.quantity = 0;
+        item.quantity = 1;
       });
       state = [];
       return [...state];

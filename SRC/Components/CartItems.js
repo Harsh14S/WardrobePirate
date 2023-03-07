@@ -7,28 +7,25 @@ import {
   Text,
   View,
 } from 'react-native';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { RFValue } from 'react-native-responsive-fontsize';
 import { useDispatch, useSelector } from 'react-redux';
 import { removeFromCart, setItemQuantity } from '../Redux/Actions/CartActions';
 
-
-// let itemIndex;
-let initQuantity = 1;
-
 const CartItems = () => {
-  const [quant, setQuant] = useState(initQuantity);
   const cartState = useSelector(state => state.cart);
   const dispatch = useDispatch();
   const removeItemFromCart = (item) => {
     dispatch(removeFromCart(item));
+  };
+  const setQuantity = (item, quantity) => {
+    dispatch(setItemQuantity(item, quantity));
   };
 
   return (
     <View style={styles.container}>
       <ScrollView style={styles.itemContainer}>
         {cartState.map((item, index) => {
-          
           return (
             <View key={index} style={{ flexDirection: 'row' }}>
               <View style={styles.imgContainer}>
@@ -48,9 +45,6 @@ const CartItems = () => {
                       style={styles.plusminuscontainer}
                       onPress={() => {
                         removeItemFromCart(item);
-                        // setQuant(1);
-                        console.log("Item: ", item);
-                        // console.log('Item Quantity: ', item.quantity);
                       }}>
                       <Image
                         source={require('../ProjectData/Logo/Bin.png')}
@@ -60,7 +54,10 @@ const CartItems = () => {
                     <Pressable
                       style={styles.plusminuscontainer}
                       onPress={() => {
-                        quant >= 2 ? setQuant(quant - 1) : null;
+                        item.quantity >= 2
+                          ? setQuantity(item, item.quantity - 1)
+                          : removeItemFromCart(item);
+
                       }}>
                       <Image
                         source={require('../ProjectData/Logo/Minus.png')}
@@ -68,13 +65,14 @@ const CartItems = () => {
                       />
                     </Pressable>
                     <View style={styles.plusminuscontainer}>
-                      <Text style={styles.itemQuantity}>{quant}</Text>
-                      {/* <Text style={styles.navTxt}>{amount}</Text> */}
+                      <Text style={styles.itemQuantity}>{item.quantity}</Text>
                     </View>
                     <Pressable
                       style={styles.plusminuscontainer}
                       onPress={() => {
-                        quant <= 9 ? setQuant(quant + 1) : null;
+                        item.quantity <= 9
+                          ? setQuantity(item, item.quantity + 1)
+                          : null;
                       }}>
                       <Image
                         source={require('../ProjectData/Logo/Plus.png')}
@@ -85,7 +83,6 @@ const CartItems = () => {
                 </View>
               </View>
             </View>
-            // (itemIndex = index)
           );
         })}
       </ScrollView>

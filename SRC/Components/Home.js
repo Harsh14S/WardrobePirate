@@ -57,11 +57,7 @@ const Home = ({ navigation }) => {
                   <Pressable
                     style={ProductStyle.favBtn}
                     onPress={() => {
-                      // Alert.alert(index + ' Added to your wishlist');
-                      // !item.inWishlist;
-                      // console.log(' item.inWishlist before add: ', item.inWishlist);
                       addItemToWishlist(item);
-                      // console.log(' item.inWishlist after add: ', item.inWishlist);
                     }}>
                     <Image
                       source={

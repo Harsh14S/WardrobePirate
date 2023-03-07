@@ -1,16 +1,14 @@
 import {
   ADD_INTO_CART,
-  ADD_ITEM_INTO_CART,
   EMPTY_CART,
-  MIN_ITEM_INTO_CART,
   REMOVE_FROM_CART,
   SET_ITEM_QUANTITY,
 } from './Constant';
 
-export const addIntoCart = (item, quantity, isAdded) => {
+export const addIntoCart = (item, isAdded) => {
   return {
     type: ADD_INTO_CART,
-    payload: { item, quantity, isAdded },
+    payload: { item, isAdded },
   };
 };
 

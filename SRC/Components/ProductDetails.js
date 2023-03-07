@@ -18,17 +18,15 @@ import { addIntoCart, setItemQuantity } from '../Redux/Actions/CartActions';
 
 let item = {};
 const Add2Cart = createBottomTabNavigator();
-let initQuantity = 1;
 
 const ProductDetailsNav = ({ navigation, route }) => {
   item = route.params.item;
-  const [quant, setQuant] = useState(1);
 
   const cartState = useSelector(state => state.cart);
   const dispatch = useDispatch();
 
-  const addItemIntoCart = (item, quantity, isAdded) => {
-    dispatch(addIntoCart(item, quantity, isAdded));
+  const addItemIntoCart = (item, isAdded) => {
+    dispatch(addIntoCart(item, isAdded));
   };
 
   const setQuantity = (item, quantity) => {
@@ -52,9 +50,8 @@ const ProductDetailsNav = ({ navigation, route }) => {
                   style={styles.plusminuscontainer}
                   onPress={() => {
                     item.quantity >= 2
-                    // ? setQuantity(item, item.quantity - 1)
-                    // : null;
-                    quant >= 2 ? (setQuant(quant - 1)) : null;
+                      ? setQuantity(item, item.quantity - 1)
+                      : null;
                   }}>
                   <Image
                     source={require('../ProjectData/Logo/Minus.png')}
@@ -62,17 +59,14 @@ const ProductDetailsNav = ({ navigation, route }) => {
                   />
                 </Pressable>
                 <View style={styles.plusminuscontainer}>
-                  {/* <Text style={styles.navTxt}>{item.quantity}</Text> */}
-                  {/* <Text style={styles.navTxt}>{item.quantity}</Text> */}
-                  <Text style={styles.navTxt}>{quant}</Text>
+                  <Text style={styles.navTxt}>{item.quantity}</Text>
                 </View>
                 <Pressable
                   style={styles.plusminuscontainer}
                   onPress={() => {
-                    // item.quantity <= 9
-                    //   ? setQuantity(item, item.quantity + 1)
-                    //   : null;
-                    quant <= 9 ? setQuant(quant + 1) : null;
+                    item.quantity <= 9
+                      ? setQuantity(item, item.quantity + 1)
+                      : null;
                   }}>
                   <Image
                     source={require('../ProjectData/Logo/Plus.png')}
@@ -84,14 +78,8 @@ const ProductDetailsNav = ({ navigation, route }) => {
                 style={styles.iconContainer}
                 onPress={() => {
                   navigation.navigate('CheckoutCart', {
-                    // quantity: quant,
                   });
-                  if (item.quantity === 0) {
-                    addItemIntoCart(item, item.quantity, true);
-                    setQuant(item.quantity);
-                  } else {
-                    addItemIntoCart(item, item.quantity, false);
-                  }
+                  addItemIntoCart(item, true);
                 }}>
                 <Text style={styles.navTxt}>Add To Cart</Text>
               </Pressable>
@@ -104,9 +92,7 @@ const ProductDetailsNav = ({ navigation, route }) => {
 };
 
 const ProductDetails = ({ navigation }) => {
-  // const cartState = useSelector(state => state.cart);
   const [selectedId, setSelectedId] = useState(0);
-  // console.log("item: ", item);
   return (
     <View style={styles.Container}>
       <HeaderProductDetails navigation={navigation} item={item} />
