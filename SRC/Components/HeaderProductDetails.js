@@ -6,15 +6,19 @@ import { useDispatch, useSelector } from 'react-redux';
 import { addToWishlist, removeFromWishlist } from '../Redux/Actions/WishlistActions';
 
 const HeaderProductDetails = ({ navigation, item }) => {
+
   const wishState = useSelector(state => state.wish);
   const cartState = useSelector(state => state.cart);
+
   const dispatch = useDispatch();
   const addItemToWishlist = data => {
     dispatch(addToWishlist(data));
   };
+
   const removeItemFromWishlist = data => {
     dispatch(removeFromWishlist(data));
   };
+
   return (
     <View style={styles.container}>
       <Pressable
@@ -32,13 +36,13 @@ const HeaderProductDetails = ({ navigation, item }) => {
       <Pressable
         style={[styles.circle, { marginRight: RFValue(10) }]}
         onPress={() => {
-          item.inWishlist ? removeItemFromWishlist(item) : addItemToWishlist(item);
+          wishState.includes(item) ? removeItemFromWishlist(item) : addItemToWishlist(item);
           // removeItemFromWishlist(item);
           // console.log(item);
         }}
       >
         <Image
-          source={item.inWishlist ? require('../ProjectData/Logo/FavoriteFill.png') : require('../ProjectData/Logo/FavoriteEmpty.png')}
+          source={wishState.includes(item) ? require('../ProjectData/Logo/FavoriteFill.png') : require('../ProjectData/Logo/FavoriteEmpty.png')}
           style={styles.img}
         // source={require('../ProjectData/Logo/FavoriteEmpty.png')}
         />

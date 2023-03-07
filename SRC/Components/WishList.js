@@ -13,6 +13,7 @@ import { removeFromWishlist } from '../Redux/Actions/WishlistActions';
 
 const Wishlist = () => {
   const wishState = useSelector(state => state.wish);
+  // console.log("wishState: ", wishState);
   // console.log('Items in Wishlist: ', wishState.length);
   const dispatch = useDispatch();
   const removeItemFromWishlist = data => {
@@ -27,46 +28,42 @@ const Wishlist = () => {
         </Text>
       </View>
     ) : (
-      <ScrollView showsVerticalScrollIndicator={false} style={{ backgroundColor: 'white' }}>
-        {wishState.map((item, index) => (
-          <View style={styles.container} key={index}>
-            <View style={styles.imgContainer}>
-              <Image source={item.img} style={styles.img} />
-            </View>
-            <View style={styles.itemDetails}>
-              <View style={styles.itemTitle}>
-                <Text style={styles.itemTitleTxt}>{item.title}</Text>
+      <ScrollView style={styles.itemContainer} showsVerticalScrollIndicator={false}>
+        {wishState.map((item, index) => {
+          return (
+            <View key={index} style={{ flexDirection: 'row' }}>
+              <View style={styles.imgContainer}>
+                <Image source={item.img} style={styles.img} />
               </View>
-              <View style={styles.itemCateg}>
-                <Text style={styles.itemCategTxt}>{item.categ}</Text>
-              </View>
-              <View style={styles.priceQuantity}>
-                <Text style={styles.itemPrice}>${item.price}</Text>
-                <View style={styles.intractionContainer}>
-                  <Pressable
-                    style={[
-                      styles.plusminuscontainer,
-                      {
-                        width: RFValue(80),
-                        backgroundColor: 'black',
-                        padding: RFValue(5),
-                      },
-                    ]}
-                    onPress={() => {
-                      // console.log("Item: ", item);
-                      console.log(' item.inWishlist before remove: ', item.inWishlist);
-                      removeItemFromWishlist(item);
-                      // addItemToWishlist(item);
-                      console.log(' item.inWishlist after remove: ', item.inWishlist);
-                    }}>
-                    <Text style={{ color: 'white' }}>Remove</Text>
-                  </Pressable>
+              <View style={styles.itemDetails}>
+                <View style={styles.itemTitle}>
+                  <Text style={styles.itemTitleTxt}>{item.title}</Text>
+                </View>
+                <View style={styles.itemCateg}>
+                  <Text style={styles.itemCategTxt}>{item.categ}</Text>
+                </View>
+                <View style={styles.priceQuantity}>
+                  <Text style={styles.itemPrice}>${item.price}</Text>
+                  <View style={styles.intractionContainer}>
+                    <Pressable
+                      style={[styles.plusminuscontainer, { padding: RFValue(2) }]}
+                      onPress={() => {
+                        console.log(' item.inWishlist before remove: ', item.inWishlist);
+                        removeItemFromWishlist(item);
+                        console.log(' item.inWishlist after remove: ', item.inWishlist);
+                      }}>
+                      <Image
+                        source={require('../ProjectData/Logo/Bin.png')}
+                        style={styles.bin}
+                      />
+                    </Pressable>
+                  </View>
                 </View>
               </View>
             </View>
-          </View>
-        ))}
-      </ScrollView>
+          );
+        })}
+      </ScrollView >
     )
   );
 };
@@ -74,13 +71,10 @@ const Wishlist = () => {
 export default Wishlist;
 
 const styles = StyleSheet.create({
-  container: {
-    // flex: 1,
-    // backgroundColor: 'yellow',
-    flexDirection: 'row',
-    justifyContent: 'center',
-    marginVertical: RFValue(5),
-    height: RFValue(100),
+  itemContainer: {
+    backgroundColor: 'white',
+    paddingVertical: RFValue(5),
+    paddingHorizontal: RFValue(10),
   },
   imgContainer: {
     // backgroundColor: 'red',
@@ -99,7 +93,7 @@ const styles = StyleSheet.create({
     padding: RFValue(5),
   },
   itemTitle: {
-    flex: 1,
+    // flex: 1,
   },
   itemTitleTxt: {
     // flex: 1,
@@ -137,11 +131,14 @@ const styles = StyleSheet.create({
     height: RFValue(26),
     width: RFValue(26),
   },
+  bin: {
+    height: RFValue(22),
+    width: RFValue(22),
+  },
   plusminuscontainer: {
-    alignItems: 'center',
-    justifyContent: 'center',
+    // backgroundColor: 'yellow',
     marginHorizontal: RFValue(4),
-    // width: RFValue(28),
+    width: RFValue(28),
   },
   itemQuantity: {
     color: 'black',

@@ -1,5 +1,6 @@
 import {
   ADD_INTO_CART,
+  BILL_COUNTER,
   EMPTY_CART,
   REMOVE_FROM_CART,
   SET_ITEM_QUANTITY,
@@ -13,7 +14,6 @@ export const addIntoCart = (item, isAdded) => {
 };
 
 export const removeFromCart = (data) => {
-  console.log('data :', data);
   return {
     type: REMOVE_FROM_CART,
     payload: { data },
@@ -26,6 +26,13 @@ export const setItemQuantity = (item, quantity) => {
     payload: { item, quantity },
   };
 };
+
+// export const billCounter = (item, quantity, total) => {
+//   return {
+//     type: BILL_COUNTER,
+//     payload: { item, quantity, total }
+//   }
+// }
 
 export const emptyCartItems = () => {
   return {

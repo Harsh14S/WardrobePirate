@@ -61,7 +61,7 @@ const Home = ({ navigation }) => {
                     }}>
                     <Image
                       source={
-                        (item.inWishlist)
+                        (wishState.includes(item))
                           ? require('../ProjectData/Logo/FavoriteFill.png')
                           : require('../ProjectData/Logo/FavoriteEmpty.png')
                       }

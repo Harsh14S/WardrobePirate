@@ -63,10 +63,13 @@ const styles = StyleSheet.create({
     borderRadius: RFValue(25),
     // borderWidth: 0.2,
     shadowColor: 'black',
-    // elevation: 20,
-    shadowOffset: (0, 10),
-    shadowRadius: 2,
-    shadowOpacity: 0.1,
+    elevation: 1,
+    shadowOffset: {
+      height: RFValue(0.1),
+      width: RFValue(0.1),
+    },
+    shadowRadius: RFValue(0.5),
+    shadowOpacity: 0.5,
   },
   title: {
     // color: 'black',
