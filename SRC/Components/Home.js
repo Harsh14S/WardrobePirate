@@ -11,12 +11,13 @@ import React from 'react';
 import Categories from './Categories';
 import NewSeasonsEss from './NewSeasonsEss';
 import TopSearchBar from './HeaderHome';
-import {RFPercentage, RFValue} from 'react-native-responsive-fontsize';
+import { RFPercentage, RFValue } from 'react-native-responsive-fontsize';
 import ProductData from '../ProjectData/ProductsImage/ProductData';
-import {useDispatch, useSelector} from 'react-redux';
-import {addToWishlist} from '../Redux/Actions/WishlistActions';
+import { useDispatch, useSelector } from 'react-redux';
+import { addToWishlist } from '../Redux/Actions/WishlistActions';
+import { FlatList } from 'react-native-gesture-handler';
 
-const Home = ({navigation}) => {
+const Home = ({ navigation }) => {
   const dispatch = useDispatch();
   const wishState = useSelector(state => state.wish);
   // console.log("Home Items: ", items.length);
@@ -71,7 +72,7 @@ const Home = ({navigation}) => {
                   <View style={ProductStyle.tilesContainer}>
                     {item.colors.map((clr, index) => (
                       <View
-                        style={[ProductStyle.clrTiles, {backgroundColor: clr}]}
+                        style={[ProductStyle.clrTiles, { backgroundColor: clr, right: RFPercentage(index / 1.4) }]}
                         key={index}
                       />
                     ))}
@@ -197,10 +198,12 @@ const ProductStyle = StyleSheet.create({
   tilesContainer: {
     flexDirection: 'row',
     marginHorizontal: RFValue(5),
+    bottom: RFValue(4)
   },
   clrTiles: {
     width: RFValue(10),
     height: RFValue(10),
     borderRadius: RFValue(2.5),
+    position: 'absolute',
   },
 });

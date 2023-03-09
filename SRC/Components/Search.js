@@ -8,11 +8,12 @@ import {
   Pressable,
   ScrollView,
 } from 'react-native';
-import React, {useState} from 'react';
-import {RFPercentage, RFValue} from 'react-native-responsive-fontsize';
-import {useDispatch, useSelector} from 'react-redux';
-import {searchItem} from '../Redux/Actions/HomeSearchAction';
+import React, { useState } from 'react';
+import { RFPercentage, RFValue } from 'react-native-responsive-fontsize';
+import { useDispatch, useSelector } from 'react-redux';
+import { searchItem } from '../Redux/Actions/HomeSearchAction';
 import ProductData from '../ProjectData/ProductsImage/ProductData';
+import { FlatList } from 'react-native-gesture-handler';
 
 const Triangle = () => {
   return <View style={[styles.triangle]} />;
@@ -26,10 +27,12 @@ const Search = () => {
   const searchState = useSelector(state => state.homeSearch);
   const dispatch = useDispatch();
   const searchProduct = title => {
-    searchItem(title);
+    dispatch(searchItem(title));
   };
+  console.log("SearchState Length: ", searchState.length);
+
   return (
-    <ScrollView style={styles.container}>
+    <View style={styles.container}>
       {/* Search Bar */}
       <View style={styles.TopSearchBar}>
         <View
@@ -39,8 +42,6 @@ const Search = () => {
             flexDirection: 'row',
             justifyContent: 'space-between',
             alignItems: 'center',
-            // backgroundColor: 'blue',
-            // padding: RFValue(1),
           }}>
           <View
             style={{
@@ -51,17 +52,15 @@ const Search = () => {
               alignItems: 'center',
               borderTopLeftRadius: RFValue(50),
               borderBottomLeftRadius: RFValue(50),
-              //   paddingLeft: RFValue(7),
-              // marginRight: RFValue(5),
             }}>
             <TextInput
               placeholder="Search"
               style={{
-                // backgroundColor: 'orange',
                 flex: 1,
                 fontSize: RFValue(15),
                 color: 'black',
-                paddingHorizontal: RFValue(10),
+                paddingHorizontal: RFPercentage(2),
+                paddingVertical: RFPercentage(2),
               }}
               onChangeText={newText => {
                 setText(newText);
@@ -70,17 +69,16 @@ const Search = () => {
           </View>
           <Pressable
             style={{
+              flex: 0.1,
               backgroundColor: 'lightgrey',
               alignItems: 'center',
-              padding: RFValue(10),
-              // marginRight: RFValue(5),
-              //   borderRadius: RFValue(40),
+              paddingHorizontal: RFPercentage(1),
+              paddingVertical: RFPercentage(1.5),
               borderTopRightRadius: RFValue(50),
               borderBottomRightRadius: RFValue(50),
             }}
             onPress={() => {
-              //   searchProduct(text);
-              console.log('Search Text: ', text);
+              searchProduct(text);
             }}>
             <Image
               source={require('../ProjectData/Logo/Search.png')}
@@ -95,67 +93,55 @@ const Search = () => {
       </View>
       {/* Other VIew */}
       {
-        <View
-          style={{
-            backgroundColor: 'gold',
-            flex: 1,
-            //   height: 100,
-            width: '100%',
-          }}>
-          <View
-            style={{
-              flex: 1,
-              justifyContent: 'center',
-              alignItems: 'center',
-              marginVertical: RFPercentage(0.5),
-            }}>
-            <Image
-              source={ProductData[0].img}
-              resizeMode="contain"
-              style={{
-                height: RFPercentage(68),
-                width: RFPercentage(100),
-                //   height: RFValue(300),
-                //   width: RFValue(300),
-                //   justifyContent: 'center',
-                //   alignItems: 'center',
-              }}
-            />
-          </View>
-          <View
-            style={{
-              flex: 1,
-              // justifyContent: 'center',
-              // alignItems: 'center',
-              marginVertical: RFPercentage(0.5),
-              flexDirection: 'row',
-              width: '100%',
-              // paddingHorizontal: RFPercentage(3.89),
-            }}>
-            <Text
-              style={{
-                color: 'black',
-                fontSize: RFPercentage(3.3),
-                fontWeight: '600',
-                textAlign: 'justify',
-                marginHorizontal: RFPercentage(1),
-              }}>
-              Title:
-            </Text>
-            <Text
-              style={{
-                color: 'grey',
-                fontSize: RFPercentage(3),
-                fontWeight: '400',
-                textAlign: 'justify',
-                //   marginRight: RFPercentage(1),
-              }}>
-              {ProductData[0].title}
-            </Text>
-          </View>
+        <View style={{ flex: 1 }}>
+          <FlatList data={searchState}
+            showsVerticalScrollIndicator={false}
+            renderItem={({ item, index }) => (
+              <View style={productDetailsStyle.productViewCenter} key={index}>
+                <View style={productDetailsStyle.productView}>
+                  <Image source={item.img} style={productDetailsStyle.img} />
+                  <View style={productDetailsStyle.priceTagContainer}>
+                    <Text style={productDetailsStyle.priceTag}>${item.price}</Text>
+                  </View>
+                </View>
+                <View style={productDetailsStyle.nameContainer}>
+                  <Text style={productDetailsStyle.productName}>{item.title}</Text>
+                </View>
+                <View style={productDetailsStyle.productSize}>
+                  <ScrollView
+                    horizontal={true}
+                    showsHorizontalScrollIndicator={false}>
+                    {item.size.map((item, index) => (
+                      <Pressable
+                        style={[
+                          productDetailsStyle.btn,
+                          { backgroundColor: 'white' },
+                        ]}
+                        onPress={() => {
+                          setSelectedId(index);
+                        }}
+                        key={index}>
+                        <Text
+                          style={[
+                            productDetailsStyle.sizeTitle,
+                            { color: 'black' },
+                          ]}>
+                          {item}
+                        </Text>
+                      </Pressable>
+                    ))}
+                  </ScrollView>
+                </View>
+                <View style={productDetailsStyle.productDescContainer}>
+                  <Text style={productDetailsStyle.productDescTitle}>Description</Text>
+                  <Text style={productDetailsStyle.productDesc}>{item.details}</Text>
+                </View>
+                <View style={productDetailsStyle.empty} />
+              </View>
+            )} />
         </View>
       }
-    </ScrollView>
+    </View>
   );
 };
 
@@ -163,7 +149,7 @@ export default Search;
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: 'blue',
+    backgroundColor: 'lightblue',
     flex: 1,
     // alignItems: 'center',
     // justifyContent: 'center',
@@ -208,6 +194,104 @@ const styles = StyleSheet.create({
     // borderBottomLeftRadius: RFValue(100),
     // borderBottomRightRadius: RFValue(100),
     borderTopColor: 'red',
-    transform: [{rotate: '180deg'}],
+    transform: [{ rotate: '180deg' }],
+  },
+});
+
+const productDetailsStyle = StyleSheet.create({
+  productViewCenter: {
+    alignItems: 'center',
+    paddingBottom: RFValue(60),
+  },
+  productView: {
+    borderRadius: RFValue(40),
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  img: {
+    height: RFValue(350),
+    width: Dimensions.get('window').width - 30,
+    borderRadius: RFValue(36),
+  },
+  priceTag: {
+    color: 'white',
+    fontSize: RFValue(23),
+    paddingHorizontal: RFValue(5),
+    paddingVertical: RFValue(5),
+  },
+  priceTagContainer: {
+    backgroundColor: 'black',
+    borderRadius: RFValue(100),
+    // paddingHorizontal: RFValue(12),
+    width: Dimensions.get('window').width - 290,
+    paddingVertical: RFValue(4),
+    alignItems: 'center',
+    justifyContent: 'center',
+    position: 'absolute',
+    bottom: RFValue(0),
+    right: RFValue(0),
+  },
+  nameContainer: {
+    marginTop: RFValue(8),
+    marginBottom: RFValue(5),
+    width: Dimensions.get('window').width - 35,
+  },
+  productName: {
+    fontSize: RFValue(25),
+    fontWeight: '500',
+    color: 'black',
+  },
+  productRating: {
+    // backgroundColor: 'yellow',
+    marginVertical: RFValue(5),
+  },
+  ratingText: {
+    marginHorizontal: RFValue(8),
+  },
+  productSize: {
+    flexDirection: 'row',
+    marginVertical: RFValue(10),
+  },
+  sizeTitle: {
+    fontSize: RFValue(14),
+    fontWeight: '600',
+  },
+  btn: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: RFValue(4),
+    marginHorizontal: RFValue(3.5),
+    paddingHorizontal: RFValue(17),
+    paddingVertical: RFValue(12),
+    marginVertical: RFValue(2),
+    borderRadius: RFValue(12),
+    elevation: RFValue(1),
+    shadowColor: 'black',
+    shadowOffset: {
+      height: RFValue(1),
+      width: RFValue(0),
+    },
+    shadowRadius: RFValue(2),
+    shadowOpacity: 0.2,
+  },
+  title: {
+    fontSize: RFValue(15),
+    color: 'black',
+  },
+  productDescContainer: {
+    color: 'black',
+    width: '90%',
+    justifyContent: 'center',
+  },
+  productDescTitle: {
+    fontWeight: '600',
+    fontSize: RFValue(13),
+    marginTop: RFValue(7),
+  },
+  productDesc: {
+    marginTop: RFValue(12),
+    fontSize: RFValue(13),
+    textAlign: 'justify',
+    marginBottom: RFValue(25),
   },
 });
