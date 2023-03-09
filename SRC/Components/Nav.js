@@ -1,13 +1,13 @@
-import { StyleSheet, View, Image, Platform, Alert, Text } from 'react-native';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import {StyleSheet, View, Image, Platform, Alert, Text} from 'react-native';
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import Home from './Home';
-import { CheckoutCart } from './CheckoutCart';
-import { RFValue } from 'react-native-responsive-fontsize';
+import {CheckoutCart} from './CheckoutCart';
+import {RFValue} from 'react-native-responsive-fontsize';
 import Search from './Search';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { TouchableOpacity } from 'react-native-gesture-handler';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import {TouchableOpacity} from 'react-native-gesture-handler';
 import ProductDetailsNav from './ProductDetails';
-import { useSelector } from 'react-redux';
+import {useSelector} from 'react-redux';
 import MyCart from './MyCart';
 import Wishlist from './Wishlist';
 
@@ -28,11 +28,11 @@ const App = () => {
       <Stack.Screen
         name="Nav"
         component={Nav}
-      // options={{
-      //   headerShown: false,
-      //   headerBackTitleVisible: false,
-      //   headerShadowVisible: false,
-      // }}
+        // options={{
+        //   headerShown: false,
+        //   headerBackTitleVisible: false,
+        //   headerShadowVisible: false,
+        // }}
       />
       <Stack.Screen
         name="ProductDetails"
@@ -106,11 +106,11 @@ const Nav = () => {
         component={Home}
         options={{
           headerShown: false,
-          tabBarIcon: ({ focused }) => (
+          tabBarIcon: ({focused}) => (
             <View
               style={[
                 styles.iconContainer,
-                { backgroundColor: focused ? 'darkorange' : null },
+                {backgroundColor: focused ? 'darkorange' : null},
               ]}>
               <Image
                 source={require('../ProjectData/Logo/Home.png')}
@@ -125,11 +125,12 @@ const Nav = () => {
         name="Search"
         component={Search}
         options={{
-          tabBarIcon: ({ focused }) => (
+          headerShown: false,
+          tabBarIcon: ({focused}) => (
             <View
               style={[
                 styles.iconContainer,
-                { backgroundColor: focused ? 'darkorange' : null },
+                {backgroundColor: focused ? 'darkorange' : null},
               ]}>
               <Image
                 source={require('../ProjectData/Logo/Search.png')}
@@ -146,11 +147,11 @@ const Nav = () => {
         options={{
           // "tabBarShowLabel": true,
           // tabBarBadge: items.length,
-          tabBarIcon: ({ focused }) => (
+          tabBarIcon: ({focused}) => (
             <View
               style={[
                 styles.iconContainer,
-                { backgroundColor: focused ? 'darkorange' : null },
+                {backgroundColor: focused ? 'darkorange' : null},
               ]}>
               <Image
                 source={require('../ProjectData/Logo/Cart.png')}
@@ -166,14 +167,18 @@ const Nav = () => {
         component={Wishlist}
         options={{
           // tabBarBadge: items.length,
-          tabBarIcon: ({ focused }) => (
+          tabBarIcon: ({focused}) => (
             <View
               style={[
                 styles.iconContainer,
-                { backgroundColor: focused ? 'darkorange' : null },
+                {backgroundColor: focused ? 'darkorange' : null},
               ]}>
               <Image
-                source={items.length === 0 ? require('../ProjectData/Logo/FavoriteEmpty.png') : require('../ProjectData/Logo/FavoriteFill.png')}
+                source={
+                  items.length === 0
+                    ? require('../ProjectData/Logo/FavoriteEmpty.png')
+                    : require('../ProjectData/Logo/FavoriteFill.png')
+                }
                 resizeMode="contain"
                 style={styles.iconImg}
               />
@@ -183,7 +188,7 @@ const Nav = () => {
                   <Text
                     style={[
                       styles.badgeTxt,
-                      { color: focused ? 'darkorange' : 'black' },
+                      {color: focused ? 'darkorange' : 'black'},
                     ]}>
                     {items.length}
                   </Text>

@@ -11,13 +11,12 @@ import React from 'react';
 import Categories from './Categories';
 import NewSeasonsEss from './NewSeasonsEss';
 import TopSearchBar from './HeaderHome';
-import { RFValue } from 'react-native-responsive-fontsize';
+import {RFPercentage, RFValue} from 'react-native-responsive-fontsize';
 import ProductData from '../ProjectData/ProductsImage/ProductData';
-import { useDispatch, useSelector } from 'react-redux';
-import { addToWishlist } from '../Redux/Actions/WishlistActions';
-// import Toast from 'react-native-toast-message';
+import {useDispatch, useSelector} from 'react-redux';
+import {addToWishlist} from '../Redux/Actions/WishlistActions';
 
-const Home = ({ navigation }) => {
+const Home = ({navigation}) => {
   const dispatch = useDispatch();
   const wishState = useSelector(state => state.wish);
   // console.log("Home Items: ", items.length);
@@ -49,10 +48,7 @@ const Home = ({ navigation }) => {
                         item: item,
                       });
                     }}>
-                    <Image
-                      source={item.img}
-                      style={ProductStyle.img}
-                    />
+                    <Image source={item.img} style={ProductStyle.img} />
                   </Pressable>
                   <Pressable
                     style={ProductStyle.favBtn}
@@ -61,7 +57,7 @@ const Home = ({ navigation }) => {
                     }}>
                     <Image
                       source={
-                        (wishState.includes(item))
+                        wishState.includes(item)
                           ? require('../ProjectData/Logo/FavoriteFill.png')
                           : require('../ProjectData/Logo/FavoriteEmpty.png')
                       }
@@ -75,7 +71,7 @@ const Home = ({ navigation }) => {
                   <View style={ProductStyle.tilesContainer}>
                     {item.colors.map((clr, index) => (
                       <View
-                        style={[ProductStyle.clrTiles, { backgroundColor: clr }]}
+                        style={[ProductStyle.clrTiles, {backgroundColor: clr}]}
                         key={index}
                       />
                     ))}
@@ -103,12 +99,15 @@ const styles = StyleSheet.create({
     // paddingHorizontal: RFValue(10),
   },
   TopSearchBar: {
-    // backgroundColor: 'grey',
+    // backgroundColor: 'lightgrey',
     width: '100%',
-    marginTop: RFValue(0),
-    height: RFValue(40),
     justifyContent: 'center',
+    alignItems: 'center',
+    height: RFValue(50),
     width: Dimensions.get('window').width - 30,
+    paddingHorizontal: RFPercentage(1),
+    paddingVertical: RFPercentage(1.2),
+    borderRadius: RFPercentage(4),
   },
   inContainer: {
     // flex: 1,

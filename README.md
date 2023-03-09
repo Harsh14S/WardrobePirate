@@ -26,14 +26,20 @@ protected void onCreate(Bundle savedInstanceState) {
 super.onCreate(null);
 }
 
-
 # Installing redux
 
 # npm install redux
+
 # npm install @reduxjs/toolkit
+
 # npm install react-redux
 
 # install after cloning repo in local
 
 # Install after cloning project for android
+
 # npm i @react-native-community/cli-platform-android
+
+# for dropdown list
+
+# npm install react-native-element-dropdown --save

@@ -9,3 +9,6 @@ export const SET_ITEM_QUANTITY = 'SET_ITEM_QUANTITY';
 export const BILL_COUNTER = 'BILL_COUNTER';
 
 export const EMPTY_CART = 'EMPTY_CART';
+
+// For HomeSearch
+export const SEARCH_ITEM = 'SEARCH_ITEM';
