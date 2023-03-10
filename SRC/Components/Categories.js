@@ -1,6 +1,6 @@
 import { FlatList, StyleSheet, Text, Pressable, View } from 'react-native'
 import React, { useState } from 'react'
-import { RFValue } from 'react-native-responsive-fontsize';
+import { RFPercentage, RFValue } from 'react-native-responsive-fontsize';
 
 const CategoryData = [
   { id: 1, title: 'Top' },
@@ -11,7 +11,7 @@ const CategoryData = [
 
 const Item = ({ title, bgClr, clr, onPress, stat }) => (
   <Pressable
-    style={[styles.btn, { backgroundColor: bgClr }]}
+    style={[styles.btn, { backgroundColor: bgClr}]}
     onPress={onPress}>
     <Text style={[styles.title, { color: clr }]}>{stat} {title}</Text>
   </Pressable>
@@ -27,6 +27,7 @@ const Categories = () => {
         onPress={() => setSelectedId(item.id)}
         bgClr={(item.id === selectedId) ? 'black' : 'white'}
         clr={(item.id === selectedId) ? 'white' : 'black'}
+        // mrg={(item.id === 0 && item.id === )}
       />
     );
   };
@@ -51,16 +52,16 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     flexDirection: 'row',
+    marginBottom: RFPercentage(1.4),
+    // marginHorizontal: RFPercentage(1.7),
   },
   btn: {
     justifyContent: 'center',
     alignItems: 'center',
-    padding: RFValue(4),
-    marginVertical: RFValue(2),
-    marginHorizontal: RFValue(3),
-    paddingHorizontal: RFValue(29),
-    borderRadius: RFValue(25),
-    // borderWidth: 0.2,
+    margin: RFPercentage(0.4),
+    paddingHorizontal: RFPercentage(4),
+    paddingVertical: RFPercentage(1.6),
+    borderRadius: RFPercentage(100),
     elevation: RFValue(1),
     shadowColor: 'black',
     shadowOffset: {
@@ -71,10 +72,6 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.2,
   },
   title: {
-    // color: 'black',
-    fontSize: RFValue(13),
+    fontSize: RFPercentage(2.1),
   },
-  list: {
-
-  }
 })

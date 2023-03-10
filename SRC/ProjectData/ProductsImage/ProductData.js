@@ -47,7 +47,7 @@ const ProductData = [
     title: 'Stretchable Cotton Pants Side pockets',
     img: require('../ProductsImage/Pants1.jpg'),
     price: 18,
-    colors: ['black', 'skyblue', 'darkorange'],
+    colors: ['black', 'skyblue', 'rgb(253, 120, 45)'],
     categ: ['Men'],
     rating: 4,
     size: ['XS', 'S', 'M', 'L', 'XL', 'XXL', 'XXL'],

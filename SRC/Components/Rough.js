@@ -1,99 +1,57 @@
-import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
+import { SafeAreaView, View, Text, Image, StyleSheet } from 'react-native'
+import { RFPercentage } from 'react-native-responsive-fontsize';
+import ProductData from '../ProjectData/ProductsImage/ProductData';
 
 
-// Action Creators
-const newBooking = (userName, netAmount) => {
-  return {
-    type: "NEW_BOOKING",
-    payload: {
-      name: userName,
-      amount: netAmount,
-    }
-  };
-};
-const cancelBooking = (userName, refAmount) => {
-  return {
-    type: "CANCEL_BOOKING",
-    payload: {
-      name: userName,
-      refundAmount: refAmount,
-    }
-  };
-};
-
-//Reducers
-
-const reservationHistory = (oldReservationList = [], action) => {
-  if (action.type === "NEW_BOOKING") {
-    return [...oldReservationList, action.payload]
-  } else if (action.type === "CANCEL_BOOKING") {
-    return oldReservationList.filter(record => {
-      return record.name !== action.payload.name;
-    });
-  }
-  return oldReservationList;
-}
-
-const cancellationHistory = (oldCancellationList = [], action) => {
-  if (action.type === "CANCEL_BOOKING") {
-    return [...oldCancellationList, action.payload]
-  }
-  return oldCancellationList;
-};
-
-const accounting = (totalMoney = 100, action) => {
-  if (action.type === "NEW_BOOKING") {
-    // console.log("amount", action.payload.amount);
-    return totalMoney + action.payload.amount;
-  } else if (action.type === "CANCEL_BOOKING") {
-    // console.log("refundAmount ", action.payload.refundAmount);
-    return totalMoney - action.payload.refundAmount;
-  }
-  return totalMoney;
-};
-
-
-// Redux Store
-import { createStore, combineReducers } from "redux";
-import { Provider, useDispatch } from 'react-redux';
-
-const railwayCentralStore = combineReducers({
-  accounting: accounting,
-  reservationHistory: reservationHistory,
-  cancellationHistory: cancellationHistory,
-});
-
-const store = createStore(railwayCentralStore);
-
-
-
-const Rough = () => {
+export default Rough = () => {
   return (
-    <Provider store={store}>
-      <Viewer />
-    </Provider>
+    // <View style={{ backgroundColor: COLORS.white, flex: 1 }}>
+    //     <Header title={'Chat'} />
+    <SafeAreaView style={{ justifyContent: 'flex-end', alignItems: 'flex-end', margin: RFPercentage(2), backgroundColor: 'white' }}>
+      <Image source={ProductData[0].img} style={{ width: RFPercentage(30), height: RFPercentage(30), }}></Image>
+      {/* <View style={{}}></View> */}
+      <View style={{}}>
+
+      </View>
+      <View style={styles.triangleCorner} />
+      <View style={{ position: 'absolute', justifyContent: 'flex-end', alignItems: 'flex-end', }}>
+        <View style={styles.shape1}></View>
+        <View style={styles.oval}></View>
+      </View>
+    </SafeAreaView>
+    // </View>
   )
 }
-
-const Viewer = () => {
-  const dispatch = useDispatch();
-  const action = newBooking("Om", 30);
-  store.dispatch(action);
-  store.dispatch(newBooking("Luffy", 70));
-  store.dispatch(cancelBooking("Om", 20));
-  console.log(store.getState());
-  return (
-    <View>
-      <Text>Rough</Text>
-    </View>
-  )
-}
-
-export default Rough
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  }
+  oval: {
+    width: 55,
+    height: 30,
+    borderRadius: 20,
+    backgroundColor: "black",
+    // transform: [{ scaleX: 1.5 }],
+    // position: 'absolute'
+    // justifyContent:'flex-end',
+    // alignSelf:'flex-end'
+  },
+  shape1: {
+    backgroundColor: "white",
+    position: 'absolute',
+    width: 60,
+    height: 35,
+    borderTopLeftRadius: 20,
+  },
+  triangleCorner: {
+    backgroundColor: "transparent",
+    borderStyle: "solid",
+    borderRightWidth: 100,
+    borderTopWidth: 100,
+    borderRightColor: "transparent",
+    borderTopColor: "red",
+    transform: [{ rotate: "180deg" }],
+    position: 'absolute',
+  },
 })
+
+

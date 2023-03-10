@@ -25,6 +25,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: 'white',
-    paddingTop: Platform.OS === 'ios' ? RFPercentage(5) : RFPercentage(1),
+    paddingTop: Platform.OS === 'ios' ? RFPercentage(6) : RFPercentage(1),
   },
 });

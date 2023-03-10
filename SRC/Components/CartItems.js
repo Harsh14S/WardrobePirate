@@ -41,6 +41,7 @@ const CartItems = () => {
   }
   subtotal(cartState);
   return (
+
     cartState.length === 0 ? (
       <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: 'white' }}>
         <Text style={{ fontSize: RFValue(20), fontWeight: '600', color: 'lightgrey' }}>
@@ -148,6 +149,7 @@ const styles = StyleSheet.create({
     // justifyContent: 'center',
     width: Dimensions.get('window').width - 20,
     marginVertical: RFValue(5),
+    // paddingBottom: RFValue(90),
   },
   itemContainer: {
     // backgroundColor: 'grey',

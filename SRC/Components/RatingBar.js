@@ -46,7 +46,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   starImgStyle: {
-    tintColor: 'darkorange',
+    tintColor: 'rgb(253, 110, 0)',
     width: RFValue(14),
     height: RFValue(14),
     resizeMode: 'cover',

@@ -35,7 +35,7 @@ const BottomBar = () => {
 
           <Pressable
             key={index}
-            style={[styles.btn, { backgroundColor: (index === selectedId) ? 'darkorange' : null }]}
+            style={[styles.btn, { backgroundColor: (index === selectedId) ? 'rgb(253, 110, 0)' : null }]}
             onPress={() => setSelectedId(index)}>
             <Image source={item.src}
               style={styles.menuIcon}
@@ -66,7 +66,7 @@ const styles = StyleSheet.create({
     tintColor: 'white',
   },
   btn: {
-    // backgroundColor: 'darkorange',
+    // backgroundColor: 'rgb(253, 110, 0)',
     paddingHorizontal: RFValue(20),
     paddingVertical: RFValue(17),
     borderRadius: RFValue(50),

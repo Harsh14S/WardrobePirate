@@ -1,124 +1,120 @@
-import { Alert, Image, Pressable, StyleSheet, Text, Pressable, View } from 'react-native'
+import { Alert, Image, Pressable, StyleSheet, Text, View, FlatList, Dimensions } from 'react-native'
 import React from 'react'
-import ProductData from './ProjectData/ProductsImage/ProductData'
-import { RFValue } from 'react-native-responsive-fontsize'
+import ProductData from '../ProjectData/ProductsImage/ProductData'
+import { RFPercentage, RFValue } from 'react-native-responsive-fontsize'
+import { useDispatch, useSelector } from 'react-redux'
+import { addToWishlist } from '../Redux/Actions/WishlistActions'
 
-const Product = ({ navigation }) => {
+export default Product = ({ navigation }) => {
+  const dispatch = useDispatch();
+  const wishState = useSelector(state => state.wish);
+  const addItemToWishlist = item => {
+    dispatch(addToWishlist(item));
+  };
   return (
-    <View style={styles.container}>
-      {
-        ProductData.map((item, index) => (
-          <View style={styles.proContainer}>
-            <View style={styles.productView}>
-              <View style={styles.imgContainer}>
-                <Pressable
-                  // onPress={() => func('ProductDetails', index)}
-                  onPress={() => {
-                    navigation.navigate("ProductDetails", {
-                      index: index,
-                    });
-                  }}
-                >
-                  <Image
-                    key={index}
-                    source={item.img}
-                    style={styles.img}
-                  />
-                </Pressable>
-              </View>
+    <View style={ProductStyle.container}>
+      <FlatList
+        contentContainerStyle={{ alignItems: 'center' }}
+        scrollEnabled={false}
+        numColumns={2}
+        data={ProductData}
+        renderItem={({ item, index }) => (
+          <View style={ProductStyle.proContainer} key={index}>
+            <View style={ProductStyle.productView}>
               <Pressable
-                style={styles.favBtn}
-                onPress={() => Alert.alert(' Added to your wishlist')}
-                activeOpacity={0.7}
-              >
+                style={ProductStyle.img}
+                onPress={() => {
+                  navigation.navigate('ProductDetails', {
+                    item: item,
+                  });
+                }}>
+                <Image source={item.img} style={ProductStyle.img} />
+              </Pressable>
+              <Pressable
+                style={ProductStyle.favBtn}
+                onPress={() => {
+                  addItemToWishlist(item);
+                }}>
                 <Image
-                  source={require('./ProjectData/Logo/Favorite.png')}
-                  style={styles.favImg}
+                  source={
+                    wishState.includes(item)
+                      ? require('../ProjectData/Logo/FavoriteFill.png')
+                      : require('../ProjectData/Logo/FavoriteEmpty.png')
+                  }
+                  style={ProductStyle.favImg}
                 />
               </Pressable>
             </View>
-            <Text style={styles.txt}>{item.title}</Text>
-            <View style={styles.btmContainer}>
-              <Text style={styles.priceTag}> ${item.price}</Text>
-              <View style={styles.tilesContainer}>
-                {
-                  item.colors.map((clr) => (
-                    <View style={[styles.clrTiles, { backgroundColor: clr }]}></View>
-                  ))
-                }
+            <Text style={ProductStyle.txt}>{item.title}</Text>
+            <View style={ProductStyle.btnContainer}>
+              <Text style={ProductStyle.priceTag}>${item.price}</Text>
+              <View style={ProductStyle.tilesContainer}>
+                {item.colors.map((clr, index) => (
+                  <View
+                    style={[ProductStyle.clrTiles, { backgroundColor: clr, right: RFPercentage(index / 1.4) }]}
+                    key={index}
+                  />
+                ))}
               </View>
             </View>
           </View>
-        ))
-      }
+        )}
+      />
     </View>
   )
 }
 
-export default Navi
 
-const Pro = StyleSheet.create({
+const ProductStyle = StyleSheet.create({
   container: {
-    borderRadius: RFValue(40),
-    flexDirection: 'row',
-    justifyContent: 'space-evenly',
-    flexWrap: 'wrap',
-    // marginHorizontal: RFValue(5),
+    backgroundColor: 'grey',
+    paddingBottom: RFPercentage(12),
+    marginBottom: RFPercentage(1.4),
+    // marginHorizontal: RFPercentage(1.7),
   },
   proContainer: {
-    width: RFValue(155),
-    marginBottom: RFValue(6),
+    marginHorizontal: RFPercentage(1),
+    width: RFPercentage(22),
   },
   productView: {
-    margin: RFValue(2),
     justifyContent: 'flex-end',
     alignItems: 'flex-end',
   },
-  imgContainer: {
-    overflow: 'hidden',
-    width: RFValue(190),
-    borderRadius: RFValue(40),
-  },
   img: {
-    height: RFValue(180),
-    borderRadius: RFValue(36),
-    width: RFValue(190),
-    marginLeft: RFValue(35),
+    height: RFPercentage(25),
+    width: RFPercentage(22),
+    borderRadius: RFPercentage(5),
   },
   favImg: {
-    width: RFValue(20),
-    height: RFValue(20),
+    tintColor: 'white',
+    width: RFPercentage(3),
+    height: RFPercentage(3),
   },
   favBtn: {
-    backgroundColor: 'darkorange',
-    height: RFValue(30),
+    backgroundColor: 'rgb(253, 110, 0)',
     borderRadius: RFValue(20),
-    paddingHorizontal: RFValue(12),
+    paddingHorizontal: RFPercentage(2.4),
+    paddingVertical: RFPercentage(1),
     position: 'absolute',
-    alignItems: 'center',
-    justifyContent: 'center',
   },
   txt: {
-    marginTop: RFValue(3),
     fontSize: RFValue(13),
   },
-  btmContainer: {
-    marginTop: RFValue(6),
+  btnContainer: {
     flexDirection: 'row',
-    alignItems: 'center',
     justifyContent: 'space-between',
-    marginRight: RFValue(5),
   },
   priceTag: {
     fontSize: RFValue(14),
+    alignSelf: 'center'
   },
   tilesContainer: {
     flexDirection: 'row',
-    marginHorizontal: RFValue(5),
+    alignSelf: 'center',
   },
   clrTiles: {
-    width: RFValue(10),
-    height: RFValue(10),
+    width: RFPercentage(1.5),
+    height: RFPercentage(1.5),
     borderRadius: RFValue(2.5),
-  }
-})
+  },
+});

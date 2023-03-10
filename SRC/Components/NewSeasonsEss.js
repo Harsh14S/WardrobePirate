@@ -10,7 +10,7 @@ const NewSeasonsEss = () => {
         style={styles.imgBack}
       >
         <View style={styles.inContainer}>
-          <Text style={styles.txt}>New Seasson Essentials.</Text>
+          <Text style={styles.headingTxt}>New Seasson Essentials.</Text>
           <Pressable
             onPress={() => Alert.alert("Pressed")}
             underlayColor='orange'
@@ -29,32 +29,38 @@ export default NewSeasonsEss
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    borderRadius: RFValue(30),
+    borderRadius: RFPercentage(4),
     overflow: 'hidden',
-    backgroundColor: 'black',
+    marginBottom: RFPercentage(1.4),
+    marginHorizontal: RFPercentage(1.7),
   },
   imgBack: {
     flex: 1,
-    // opacity: 0.5,
+    height: RFPercentage(24),
   },
   inContainer: {
-    padding: RFValue(16),
+    flex: 1,
+    paddingHorizontal: RFPercentage(3),
+    paddingVertical: RFPercentage(3),
+    backgroundColor: '#00000090',
   },
-  txt: {
+  headingTxt: {
     color: 'white',
-    fontSize: RFValue(28),
+    fontSize: RFPercentage(4.6),
+    fontWeight: '500'
   },
   btn: {
-    backgroundColor: 'darkorange',
-    width: RFPercentage(14),
-    height: RFValue(30),
+    backgroundColor: 'rgb(253, 110, 0)',
+    paddingHorizontal: RFPercentage(1),
+    paddingVertical: RFPercentage(1.7),
+    width: RFPercentage(13),
     alignItems: 'center',
     justifyContent: 'center',
-    borderRadius: RFValue(15),
-    marginTop: RFValue(7)
+    borderRadius: RFPercentage(4),
+    marginTop: RFPercentage(1.7)
   },
   btntxt: {
     color: 'white',
-    fontSize: RFValue(12),
+    fontSize: RFPercentage(1.6),
   },
 })

@@ -123,11 +123,15 @@ const ProductDetails = ({ navigation }) => {
             <ScrollView
               horizontal={true}
               showsHorizontalScrollIndicator={false}>
-              {item.size.map((item, index) => (
+              {item.size.map((itemSize, index) => (
                 <Pressable
                   style={[
                     styles.btn,
-                    { backgroundColor: selectedId === index ? 'black' : 'white' },
+                    {
+                      backgroundColor: selectedId === index ? 'black' : 'white',
+                      marginLeft: (index === 0) ? RFValue(15) : null,
+                      marginRight: (index === (item.size.length - 1)) ? RFValue(15) : null,
+                    },
                   ]}
                   onPress={() => {
                     setSelectedId(index);
@@ -138,7 +142,7 @@ const ProductDetails = ({ navigation }) => {
                       styles.sizeTitle,
                       { color: selectedId === index ? 'white' : 'black' },
                     ]}>
-                    {item}
+                    {itemSize}
                   </Text>
                 </Pressable>
               ))}
@@ -240,6 +244,7 @@ const styles = StyleSheet.create({
   productSize: {
     flexDirection: 'row',
     marginVertical: RFValue(10),
+    // marginHorizontal: RFValue(10),
   },
   sizeTitle: {
     fontSize: RFValue(14),
@@ -253,6 +258,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: RFValue(17),
     paddingVertical: RFValue(12),
     marginVertical: RFValue(2),
+    // marginHorizontal: RFValue(2),
     borderRadius: RFValue(12),
     elevation: RFValue(1),
     shadowColor: 'black',
@@ -293,7 +299,7 @@ const styles = StyleSheet.create({
   iconContainer: {
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: 'darkorange',
+    backgroundColor: 'rgb(253, 110, 0)',
     borderRadius: RFValue(50),
     height: RFValue(62),
     paddingHorizontal: RFValue(45),

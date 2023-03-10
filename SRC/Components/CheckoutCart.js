@@ -8,10 +8,10 @@ import {
   View,
 } from 'react-native';
 import React from 'react';
-import {RFValue} from 'react-native-responsive-fontsize';
-import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import { RFValue } from 'react-native-responsive-fontsize';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import CartItems from './CartItems';
-import {useSelector} from 'react-redux';
+import { useSelector } from 'react-redux';
 import HeaderCart from './HeaderCart';
 const Add2Cart = createBottomTabNavigator();
 
@@ -42,7 +42,7 @@ export const CheckoutCart = () => {
   );
 };
 
-const Cart = ({navigation}) => {
+const Cart = ({ navigation }) => {
   const cartState = useSelector(state => state.cart);
   // console.log("Cart State: ", cartState);
   // console.log("Item through nav: ", item);
@@ -101,7 +101,7 @@ const styles = StyleSheet.create({
   checkout: {
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: 'darkorange',
+    backgroundColor: 'rgb(253, 110, 0)',
     borderRadius: RFValue(50),
     width: Dimensions.get('window').width - 20,
     top: Platform.OS === 'ios' ? RFValue(13) : null,

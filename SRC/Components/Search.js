@@ -12,7 +12,6 @@ import React, { useState } from 'react';
 import { RFPercentage, RFValue } from 'react-native-responsive-fontsize';
 import { useDispatch, useSelector } from 'react-redux';
 import { searchItem } from '../Redux/Actions/HomeSearchAction';
-import ProductData from '../ProjectData/ProductsImage/ProductData';
 import { FlatList } from 'react-native-gesture-handler';
 
 const Triangle = () => {
@@ -36,112 +35,86 @@ const Search = () => {
       {/* Search Bar */}
       <View style={styles.TopSearchBar}>
         <View
-          style={{
-            // flex: 1,
-            width: '100%',
-            flexDirection: 'row',
-            justifyContent: 'space-between',
-            alignItems: 'center',
-          }}>
-          <View
-            style={{
-              flex: 1,
-              marginRight: RFValue(5),
-              backgroundColor: 'lightgrey',
-              flexDirection: 'row',
-              alignItems: 'center',
-              borderTopLeftRadius: RFValue(50),
-              borderBottomLeftRadius: RFValue(50),
-            }}>
-            <TextInput
-              placeholder="Search"
-              style={{
-                flex: 1,
-                fontSize: RFValue(15),
-                color: 'black',
-                paddingHorizontal: RFPercentage(2),
-                paddingVertical: RFPercentage(2),
-              }}
-              onChangeText={newText => {
-                setText(newText);
-              }}
-            />
-          </View>
-          <Pressable
-            style={{
-              flex: 0.1,
-              backgroundColor: 'lightgrey',
-              alignItems: 'center',
-              paddingHorizontal: RFPercentage(1),
-              paddingVertical: RFPercentage(1.5),
-              borderTopRightRadius: RFValue(50),
-              borderBottomRightRadius: RFValue(50),
+          style={styles.searchBarContainer}>
+          <TextInput
+            placeholder="Search"
+            autoCorrect={false}
+            autoCapitalize='none'
+            style={styles.searchTextInput}
+            onChangeText={newText => {
+              setText(newText);
             }}
-            onPress={() => {
-              searchProduct(text);
-            }}>
-            <Image
-              source={require('../ProjectData/Logo/Search.png')}
-              resizeMode="contain"
-              style={{
-                height: RFValue(22),
-                width: RFValue(22),
-              }}
-            />
-          </Pressable>
+          />
         </View>
+        <Pressable
+          style={styles.searchBtnContainer}
+          onPress={() => {
+            searchProduct(text);
+          }}>
+          <Image
+            source={require('../ProjectData/Logo/Search.png')}
+            resizeMode="contain"
+            style={styles.searchBtnImg}
+          />
+        </Pressable>
       </View>
       {/* Other VIew */}
-      {
-        <View style={{ flex: 1 }}>
-          <FlatList data={searchState}
-            showsVerticalScrollIndicator={false}
-            renderItem={({ item, index }) => (
-              <View style={productDetailsStyle.productViewCenter} key={index}>
-                <View style={productDetailsStyle.productView}>
-                  <Image source={item.img} style={productDetailsStyle.img} />
-                  <View style={productDetailsStyle.priceTagContainer}>
-                    <Text style={productDetailsStyle.priceTag}>${item.price}</Text>
-                  </View>
-                </View>
-                <View style={productDetailsStyle.nameContainer}>
-                  <Text style={productDetailsStyle.productName}>{item.title}</Text>
-                </View>
-                <View style={productDetailsStyle.productSize}>
-                  <ScrollView
-                    horizontal={true}
-                    showsHorizontalScrollIndicator={false}>
-                    {item.size.map((item, index) => (
-                      <Pressable
-                        style={[
-                          productDetailsStyle.btn,
-                          { backgroundColor: 'white' },
-                        ]}
-                        onPress={() => {
-                          setSelectedId(index);
-                        }}
-                        key={index}>
-                        <Text
-                          style={[
-                            productDetailsStyle.sizeTitle,
-                            { color: 'black' },
-                          ]}>
-                          {item}
-                        </Text>
-                      </Pressable>
-                    ))}
-                  </ScrollView>
-                </View>
-                <View style={productDetailsStyle.productDescContainer}>
-                  <Text style={productDetailsStyle.productDescTitle}>Description</Text>
-                  <Text style={productDetailsStyle.productDesc}>{item.details}</Text>
-                </View>
-                <View style={productDetailsStyle.empty} />
-              </View>
-            )} />
+      {searchState.length === 0 ? (
+        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+          <Text style={{ fontSize: RFValue(20), fontWeight: '600', color: 'lightgrey' }}>Search Here</Text>
         </View>
+      ) :
+        (
+          <View style={{ flex: 1 }}>
+            <FlatList data={searchState}
+              showsVerticalScrollIndicator={false}
+              renderItem={({ item, index }) => (
+                <View style={productDetailsStyle.productViewCenter} key={index}>
+                  <View style={productDetailsStyle.productView}>
+                    <Image source={item.img} style={productDetailsStyle.img} />
+                    <View style={productDetailsStyle.priceTagContainer}>
+                      <Text style={productDetailsStyle.priceTag}>${item.price}</Text>
+                    </View>
+                  </View>
+                  <View style={productDetailsStyle.nameContainer}>
+                    <Text style={productDetailsStyle.productName}>{item.title}</Text>
+                  </View>
+                  <View style={productDetailsStyle.productSize}>
+                    <ScrollView
+                      horizontal={true}
+                      showsHorizontalScrollIndicator={false}>
+                      {item.size.map((item, index) => (
+                        <Pressable
+                          style={[
+                            productDetailsStyle.btn,
+                            { backgroundColor: 'white' },
+                          ]}
+                          onPress={() => {
+                            setSelectedId(index);
+                          }}
+                          key={index}>
+                          <Text
+                            style={[
+                              productDetailsStyle.sizeTitle,
+                              { color: 'black' },
+                            ]}>
+                            {item}
+                          </Text>
+                        </Pressable>
+                      ))}
+                    </ScrollView>
+                  </View>
+                  <View style={productDetailsStyle.productDescContainer}>
+                    <Text style={productDetailsStyle.productDescTitle}>Description</Text>
+                    <Text style={productDetailsStyle.productDesc}>{item.details}</Text>
+                  </View>
+                  <View style={productDetailsStyle.empty} />
+                </View>
+              )} />
+          </View>
+        )
       }
-    </View>
+    </View >
   );
 };
 
@@ -149,28 +122,46 @@ export default Search;
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: 'lightblue',
+    backgroundColor: 'white',
     flex: 1,
-    // alignItems: 'center',
-    // justifyContent: 'center',
     paddingVertical: RFValue(10),
     paddingHorizontal: RFPercentage(1.3),
-    // marginBottom: RFPercentage(2),
   },
   TopSearchBar: {
-    //   flex: 1,
-    // backgroundColor: 'lightgrey',
     width: '100%',
-    justifyContent: 'center',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
     alignItems: 'center',
-    height: RFValue(50),
-    // width: Dimensions.get('window').width - 100,
-    paddingHorizontal: RFPercentage(1),
-    paddingVertical: RFPercentage(1.2),
-    borderRadius: RFPercentage(4),
-    marginBottom: RFPercentage(0.5),
+    paddingHorizontal: RFPercentage(0.5),
   },
-
+  searchBarContainer: {
+    flex: 0.92,
+    marginRight: RFValue(5),
+    backgroundColor: 'rgb(240, 240, 240)',
+    flexDirection: 'row',
+    alignItems: 'center',
+    borderRadius: RFValue(50),
+    paddingVertical: RFPercentage(1.5),
+  },
+  searchTextInput: {
+    flex: 1,
+    fontSize: RFValue(15),
+    color: 'black',
+    paddingLeft: RFPercentage(3),
+    paddingRight: RFPercentage(1),
+    paddingVertical: RFPercentage(0.2),
+  },
+  searchBtnContainer: {
+    flex: 0.08,
+    backgroundColor: 'rgb(240, 240, 240)',
+    alignItems: 'center',
+    padding: RFPercentage(1.5),
+    borderRadius: RFPercentage(5),
+  },
+  searchBtnImg: {
+    height: RFValue(22),
+    width: RFValue(22),
+  },
   triangle: {
     width: RFValue(50),
     height: RFValue(50),
