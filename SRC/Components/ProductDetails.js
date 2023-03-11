@@ -1,5 +1,6 @@
 import {
   Dimensions,
+  FlatList,
   Image,
   Platform,
   Pressable,
@@ -8,7 +9,7 @@ import {
   View,
 } from 'react-native';
 import React, { useState } from 'react';
-import { RFValue } from 'react-native-responsive-fontsize';
+import { RFPercentage, RFValue } from 'react-native-responsive-fontsize';
 import { ScrollView } from 'react-native-gesture-handler';
 import RatingBar from './RatingBar';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
@@ -120,6 +121,30 @@ const ProductDetails = ({ navigation }) => {
             </View>
           </View>
           <View style={styles.productSize}>
+            {/* <FlatList
+              data={item.size}
+              horizontal={true}
+              showsHorizontalScrollIndicator={false}
+              renderItem={(itemSize, index) => (
+                <View >
+                  <Pressable
+                    style={[styles.btn,
+                    {
+                      backgroundColor: selectedId === index ? 'black' : 'white',
+                      marginLeft: (index === 0) ? RFPercentage(2) : null,
+                      marginRight: (index === (item.size.length - 1)) ? RFPercentage(2) : null,
+                    }]}
+                    onPress={() => { setSelectedId(index) }}>
+                    <Text
+                      style={[styles.sizeTitle,
+                      { color: selectedId === index ? 'white' : 'black' }]}
+                    >
+                      {itemSize}
+                    </Text>
+                  </Pressable>
+                </View>
+              )}
+            /> */}
             <ScrollView
               horizontal={true}
               showsHorizontalScrollIndicator={false}>
@@ -129,8 +154,8 @@ const ProductDetails = ({ navigation }) => {
                     styles.btn,
                     {
                       backgroundColor: selectedId === index ? 'black' : 'white',
-                      marginLeft: (index === 0) ? RFValue(15) : null,
-                      marginRight: (index === (item.size.length - 1)) ? RFValue(15) : null,
+                      marginLeft: (index === 0) ? RFPercentage(2) : null,
+                      marginRight: (index === (item.size.length - 1)) ? RFPercentage(2) : null,
                     },
                   ]}
                   onPress={() => {

@@ -7,4 +7,4 @@ import App from './App';
 import { name as appName } from './app.json';
 import Rough from './SRC/Components/Rough';
 
-AppRegistry.registerComponent(appName, () => Rough);
+AppRegistry.registerComponent(appName, () => App);

@@ -9,12 +9,12 @@ const CategoryData = [
   { id: 4, title: 'Kids', },
 ];
 
-const Item = ({ title, bgClr, clr, onPress, stat }) => (
+const Item = ({ title, bgClr, clr, onPress, stat, mrgRight, mrgLeft }) => (
   <Pressable
-    style={[styles.btn, { backgroundColor: bgClr}]}
-    onPress={onPress}>
+    style={[styles.btn, { backgroundColor: bgClr, marginRight: mrgRight, marginLeft: mrgLeft }]}
+    onPress={onPress} >
     <Text style={[styles.title, { color: clr }]}>{stat} {title}</Text>
-  </Pressable>
+  </Pressable >
 );
 
 const Categories = () => {
@@ -27,7 +27,8 @@ const Categories = () => {
         onPress={() => setSelectedId(item.id)}
         bgClr={(item.id === selectedId) ? 'black' : 'white'}
         clr={(item.id === selectedId) ? 'white' : 'black'}
-        // mrg={(item.id === 0 && item.id === )}
+        mrgRight={(item.id === CategoryData.length ? RFPercentage(2) : null)}
+        mrgLeft={(item.id === 1 ? RFPercentage(2) : null)}
       />
     );
   };

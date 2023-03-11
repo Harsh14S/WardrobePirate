@@ -44,5 +44,6 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingTop: RFPercentage(1),
     // marginHorizontal: RFPercentage(1.7),
+
   },
 });

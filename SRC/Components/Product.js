@@ -8,6 +8,8 @@ import { addToWishlist } from '../Redux/Actions/WishlistActions'
 export default Product = ({ navigation }) => {
   const dispatch = useDispatch();
   const wishState = useSelector(state => state.wish);
+  const searchState = useSelector(state => state.search);
+  // console.log("Length: ", searchState.length);
   const addItemToWishlist = item => {
     dispatch(addToWishlist(item));
   };
@@ -18,6 +20,7 @@ export default Product = ({ navigation }) => {
         scrollEnabled={false}
         numColumns={2}
         data={ProductData}
+        // data={searchState.length === 0 ? ProductData : searchState}
         renderItem={({ item, index }) => (
           <View style={ProductStyle.proContainer} key={index}>
             <View style={ProductStyle.productView}>
@@ -46,7 +49,7 @@ export default Product = ({ navigation }) => {
               </Pressable>
             </View>
             <Text style={ProductStyle.txt}>{item.title}</Text>
-            <View style={ProductStyle.btnContainer}>
+            <View style={ProductStyle.priceAndColorTiles}>
               <Text style={ProductStyle.priceTag}>${item.price}</Text>
               <View style={ProductStyle.tilesContainer}>
                 {item.colors.map((clr, index) => (
@@ -67,14 +70,15 @@ export default Product = ({ navigation }) => {
 
 const ProductStyle = StyleSheet.create({
   container: {
-    backgroundColor: 'grey',
-    paddingBottom: RFPercentage(12),
-    marginBottom: RFPercentage(1.4),
+    // backgroundColor: 'grey',
+    paddingBottom: RFPercentage(13),
+    // marginBottom: RFPercentage(1.4),
     // marginHorizontal: RFPercentage(1.7),
   },
   proContainer: {
     marginHorizontal: RFPercentage(1),
     width: RFPercentage(22),
+    marginBottom: RFPercentage(1.2)
   },
   productView: {
     justifyContent: 'flex-end',
@@ -92,20 +96,24 @@ const ProductStyle = StyleSheet.create({
   },
   favBtn: {
     backgroundColor: 'rgb(253, 110, 0)',
-    borderRadius: RFValue(20),
+    borderRadius: RFPercentage(20),
     paddingHorizontal: RFPercentage(2.4),
     paddingVertical: RFPercentage(1),
     position: 'absolute',
   },
   txt: {
-    fontSize: RFValue(13),
+    marginTop: RFPercentage(0.9),
+    fontSize: RFPercentage(1.87),
+    fontWeight: '600',
   },
-  btnContainer: {
+  priceAndColorTiles: {
+    marginTop: RFPercentage(0.8),
     flexDirection: 'row',
     justifyContent: 'space-between',
   },
   priceTag: {
-    fontSize: RFValue(14),
+    fontSize: RFPercentage(1.8),
+    fontWeight: '600',
     alignSelf: 'center'
   },
   tilesContainer: {

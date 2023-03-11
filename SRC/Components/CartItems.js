@@ -1,5 +1,6 @@
 import {
   Dimensions,
+  FlatList,
   Image,
   Pressable,
   ScrollView,
@@ -8,16 +9,13 @@ import {
   View,
 } from 'react-native';
 import React from 'react';
-import { RFValue } from 'react-native-responsive-fontsize';
+import { RFPercentage, RFValue } from 'react-native-responsive-fontsize';
 import { useDispatch, useSelector } from 'react-redux';
-import { billCounter, removeFromCart, setItemQuantity } from '../Redux/Actions/CartActions';
+import { removeFromCart, setItemQuantity } from '../Redux/Actions/CartActions';
 import Users from '../ProjectData/UsersData/UserProfile';
-
-// const bill = Users[0].cart.bill;
 
 const CartItems = () => {
   const cartState = useSelector(state => state.cart);
-  // console.log("Cart State: ", cartState);
   const dispatch = useDispatch();
   const removeItemFromCart = (item) => {
     dispatch(removeFromCart(item));
@@ -25,11 +23,9 @@ const CartItems = () => {
   const setQuantity = (item, quantity) => {
     dispatch(setItemQuantity(item, quantity));
   };
-  // console.log("CartState: ", cartState);
 
   const subtotal = (data) => {
     let subTotal = 0;
-    // console.log("Bill: ", bill);
     data.map((item) => {
       subTotal = subTotal + (item.quantity * item.price);
     })
@@ -50,10 +46,11 @@ const CartItems = () => {
       </View>
     ) : (
       <View style={styles.container}>
-        <ScrollView style={styles.itemContainer} showsVerticalScrollIndicator={false}>
-          {cartState.map((item, index) => {
+        <FlatList
+          data={cartState}
+          renderItem={({ item, index }) => {
             return (
-              <View key={index} style={{ flexDirection: 'row' }}>
+              <View View key={index} style={styles.itemContainer} >
                 <View style={styles.imgContainer}>
                   <Image source={item.img} style={styles.img} />
                 </View>
@@ -68,33 +65,18 @@ const CartItems = () => {
                     <Text style={styles.itemPrice}>${item.price}</Text>
                     <View style={styles.intractionContainer}>
                       <Pressable
-                        style={styles.plusminuscontainer}
-                        onPress={() => {
-                          removeItemFromCart(item);
-                        }}>
-                        <Image
-                          source={require('../ProjectData/Logo/Bin.png')}
-                          style={styles.bin}
-                        />
-                      </Pressable>
-                      <Pressable
-                        style={styles.plusminuscontainer}
                         onPress={() => {
                           item.quantity >= 2
                             ? setQuantity(item, item.quantity - 1)
                             : removeItemFromCart(item);
-
                         }}>
                         <Image
                           source={require('../ProjectData/Logo/Minus.png')}
                           style={styles.plusminus}
                         />
                       </Pressable>
-                      <View style={styles.plusminuscontainer}>
-                        <Text style={styles.itemQuantity}>{item.quantity}</Text>
-                      </View>
+                      <Text style={styles.itemQuantity}>{item.quantity}</Text>
                       <Pressable
-                        style={styles.plusminuscontainer}
                         onPress={() => {
                           item.quantity <= 9
                             ? setQuantity(item, item.quantity + 1)
@@ -110,31 +92,31 @@ const CartItems = () => {
                   </View>
                 </View>
               </View>
-            );
-          })}
-        </ScrollView>
+            )
+          }}
+        />
+
         <View style={styles.billContainer}>
           <View style={styles.billHeadings}>
-            <Text style={styles.titleTxt}>Subtotal:</Text>
-            <Text style={styles.priceTxt}>${parseFloat(Users[0].cart.bill.subTotal).toFixed(2)}</Text>
-            {/* <Text style={styles.priceTxt}>${subtotal(cartState)}</Text> */}
-            {/* <Text style={styles.priceTxt}>${parseFloat(subtotal(cartState)).toFixed(2)}</Text> */}
+            <Text style={styles.billtitleTxt}>Subtotal:</Text>
+            <Text style={styles.billpriceTxt}>${parseFloat(Users[0].cart.bill.subTotal).toFixed(2)}</Text>
           </View>
           <View style={styles.billHeadings}>
-            <Text style={styles.titleTxt}>Fee Delivery:</Text>
-            <Text style={styles.priceTxt}>${parseFloat(Users[0].cart.bill.FeeDelivery).toFixed(2)}</Text>
+            <Text style={styles.billtitleTxt}>Fee Delivery:</Text>
+            <Text style={styles.billpriceTxt}>${parseFloat(Users[0].cart.bill.FeeDelivery).toFixed(2)}</Text>
           </View>
           <View style={[styles.billHeadings, { paddingBottom: RFValue(70) }]}>
-            <Text style={styles.titleTxt}>Discount:</Text>
-            <Text style={styles.priceTxt}>${parseFloat(Users[0].cart.bill.discount).toFixed(2)}</Text>
+            <Text style={styles.billtitleTxt}>Discount:</Text>
+            <Text style={styles.billpriceTxt}>${parseFloat(Users[0].cart.bill.discount).toFixed(2)}</Text>
           </View>
           <View style={styles.separator} />
           <View style={[styles.billHeadings, { paddingTop: RFValue(8) }]}>
-            <Text style={styles.titleTxt}>Total: </Text>
-            <Text style={styles.priceTxt}>${parseFloat(Users[0].cart.bill.total).toFixed(2)}</Text>
+            <Text style={styles.billtitleTxt}>Total: </Text>
+            <Text style={styles.billpriceTxt}>${parseFloat(Users[0].cart.bill.total).toFixed(2)}</Text>
           </View>
         </View>
-      </View>)
+      </View >
+    )
   );
 };
 
@@ -143,41 +125,40 @@ export default CartItems;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    // backgroundColor: 'orange',
-    padding: RFValue(5),
-    // flexDirection: 'row',
-    // justifyContent: 'center',
-    width: Dimensions.get('window').width - 20,
-    marginVertical: RFValue(5),
-    // paddingBottom: RFValue(90),
+    padding: RFPercentage(0.8),
+    width: RFPercentage(49),
+    marginVertical: RFPercentage(0.8),
   },
   itemContainer: {
-    // backgroundColor: 'grey',
-    marginBottom: RFValue(5),
+    flexDirection: 'row',
+    backgroundColor: 'rgb(240, 240, 240)',
+    marginBottom: RFPercentage(1.5),
+    padding: RFPercentage(0.5),
+    borderRadius: RFPercentage(4)
   },
   imgContainer: {
-    // backgroundColor: 'red',
     justifyContent: 'center',
     alignItems: 'center',
     overflow: 'hidden',
     padding: RFValue(5),
   },
   img: {
-    height: RFValue(85),
-    width: RFValue(85),
-    borderRadius: RFValue(20),
+    height: RFPercentage(11.5),
+    width: RFPercentage(12),
+    borderRadius: RFPercentage(3),
   },
   itemDetails: {
     flex: 1,
-    padding: RFValue(5),
+    padding: RFPercentage(1),
   },
   itemTitle: {
     flex: 1,
+    marginTop: RFPercentage(0.5),
+    marginRight: RFPercentage(0.5)
   },
   itemTitleTxt: {
-    // flex: 1,
     color: 'black',
-    fontSize: RFValue(14),
+    fontSize: RFPercentage(2),
     fontWeight: '600',
   },
   itemCateg: {
@@ -185,10 +166,9 @@ const styles = StyleSheet.create({
   },
   itemCategTxt: {
     color: 'grey',
-    fontSize: RFValue(11),
+    fontSize: RFPercentage(1.6),
   },
   priceQuantity: {
-    // backgroundColor: 'white',
     flex: 1,
     flexDirection: 'row',
     justifyContent: 'space-between',
@@ -196,28 +176,18 @@ const styles = StyleSheet.create({
   },
   itemPrice: {
     color: 'black',
-    fontSize: RFValue(15),
+    fontSize: RFPercentage(2.1),
     fontWeight: '600',
   },
   intractionContainer: {
-    // backgroundColor: 'grey',
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'center',
-    marginLeft: RFValue(10),
+    justifyContent: 'space-evenly',
+    width: RFPercentage(13),
   },
   plusminus: {
-    height: RFValue(26),
-    width: RFValue(26),
-  },
-  bin: {
-    height: RFValue(22),
-    width: RFValue(22),
-  },
-  plusminuscontainer: {
-    // backgroundColor: 'yellow',
-    marginHorizontal: RFValue(4),
-    width: RFValue(28),
+    height: RFPercentage(3),
+    width: RFPercentage(3),
   },
   itemQuantity: {
     color: 'black',
@@ -227,27 +197,21 @@ const styles = StyleSheet.create({
     fontSize: RFValue(16),
   },
   billContainer: {
-    // backgroundColor: 'yellow',
     width: '100%',
     marginTop: RFValue(5),
-    // marginBottom: RFValue(100),
   },
   billHeadings: {
-    // flex: 1,
     justifyContent: 'space-between',
     flexDirection: 'row',
     margin: RFValue(4),
   },
-  titleTxt: {
+  billtitleTxt: {
     color: 'grey',
     fontWeight: '700',
   },
-  priceTxt: {
+  billpriceTxt: {
     color: 'black',
     fontWeight: '600',
-  },
-  total: {
-    marginTop: RFValue(50),
   },
   separator: {
     borderColor: 'lightgrey',

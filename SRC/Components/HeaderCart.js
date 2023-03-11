@@ -1,6 +1,6 @@
 import { Image, Pressable, StyleSheet, Text, View } from 'react-native'
 import React from 'react'
-import { RFValue } from 'react-native-responsive-fontsize';
+import { RFPercentage, RFValue } from 'react-native-responsive-fontsize';
 import { useDispatch, useSelector } from 'react-redux';
 import { emptyCartItems } from '../Redux/Actions/CartActions';
 
@@ -52,11 +52,11 @@ const styles = StyleSheet.create({
     width: '100%',
     // paddingVertical: RFValue(5),
     paddingHorizontal: RFValue(5),
-    marginBottom: RFValue(5),
+    // marginBottom: RFValue(5),
   },
   circle: {
-    // backgroundColor: 'skyblue',
-    width: '10%',
+    backgroundColor: 'rgb(240, 240, 240)',
+    // width: '10%',
     justifyContent: 'center',
     alignItems: 'center',
     // margin: RFValue(5),
@@ -64,7 +64,7 @@ const styles = StyleSheet.create({
     // height: RFValue(40),
     borderRadius: RFValue(25),
     // overflow: 'hidden',
-    padding: RFValue(5),
+    padding: RFPercentage(1.8),
   },
   img: {
     // justifyContent: 'center',
