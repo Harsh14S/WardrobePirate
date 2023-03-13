@@ -13,7 +13,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import Categories from './Categories';
 import NewSeasonsEss from './NewSeasonsEss';
 import HeaderHome from './HeaderHome';
-import { RFPercentage, RFValue } from 'react-native-responsive-fontsize';
+import { RFPercentage } from 'react-native-responsive-fontsize';
 import { addToWishlist } from '../Redux/Actions/WishlistActions';
 import Product from './Product';
 
@@ -42,7 +42,7 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: 'white',
     flex: 1,
-    paddingTop: RFPercentage(1),
+    paddingTop: RFPercentage(2),
     // marginHorizontal: RFPercentage(1.7),
 
   },

@@ -4,7 +4,7 @@ import { RFPercentage, RFValue } from 'react-native-responsive-fontsize';
 import { useDispatch, useSelector } from 'react-redux';
 import { emptyCartItems } from '../Redux/Actions/CartActions';
 
-const HeaderCart = ({ navigation, item }) => {
+export default HeaderCart = ({ navigation }) => {
   const wishState = useSelector(state => state.wish);
   const cartState = useSelector(state => state.cart);
   const dispatch = useDispatch();
@@ -41,7 +41,6 @@ const HeaderCart = ({ navigation, item }) => {
   )
 }
 
-export default HeaderCart;
 
 
 const styles = StyleSheet.create({
@@ -52,6 +51,7 @@ const styles = StyleSheet.create({
     width: '100%',
     // paddingVertical: RFValue(5),
     paddingHorizontal: RFValue(5),
+    marginBottom: RFPercentage(1.4),
     // marginBottom: RFValue(5),
   },
   circle: {

@@ -1,4 +1,4 @@
-import { Alert, Image, Pressable, StyleSheet, Text, View, FlatList, Dimensions } from 'react-native'
+import { Image, Pressable, StyleSheet, Text, View, FlatList } from 'react-native'
 import React from 'react'
 import ProductData from '../ProjectData/ProductsImage/ProductData'
 import { RFPercentage, RFValue } from 'react-native-responsive-fontsize'
@@ -9,7 +9,6 @@ export default Product = ({ navigation }) => {
   const dispatch = useDispatch();
   const wishState = useSelector(state => state.wish);
   const searchState = useSelector(state => state.search);
-  // console.log("Length: ", searchState.length);
   const addItemToWishlist = item => {
     dispatch(addToWishlist(item));
   };
@@ -19,8 +18,7 @@ export default Product = ({ navigation }) => {
         contentContainerStyle={{ alignItems: 'center' }}
         scrollEnabled={false}
         numColumns={2}
-        data={ProductData}
-        // data={searchState.length === 0 ? ProductData : searchState}
+        data={searchState.length === 0 ? ProductData : searchState}
         renderItem={({ item, index }) => (
           <View style={ProductStyle.proContainer} key={index}>
             <View style={ProductStyle.productView}>
@@ -54,7 +52,7 @@ export default Product = ({ navigation }) => {
               <View style={ProductStyle.tilesContainer}>
                 {item.colors.map((clr, index) => (
                   <View
-                    style={[ProductStyle.clrTiles, { backgroundColor: clr, right: RFPercentage(index / 1.4) }]}
+                    style={[ProductStyle.clrTiles, { backgroundColor: clr, right: RFPercentage(index / 1.8) }]}
                     key={index}
                   />
                 ))}
@@ -70,10 +68,7 @@ export default Product = ({ navigation }) => {
 
 const ProductStyle = StyleSheet.create({
   container: {
-    // backgroundColor: 'grey',
     paddingBottom: RFPercentage(13),
-    // marginBottom: RFPercentage(1.4),
-    // marginHorizontal: RFPercentage(1.7),
   },
   proContainer: {
     marginHorizontal: RFPercentage(1),
@@ -107,6 +102,7 @@ const ProductStyle = StyleSheet.create({
     fontWeight: '600',
   },
   priceAndColorTiles: {
+    flex: 1,
     marginTop: RFPercentage(0.8),
     flexDirection: 'row',
     justifyContent: 'space-between',
@@ -114,15 +110,15 @@ const ProductStyle = StyleSheet.create({
   priceTag: {
     fontSize: RFPercentage(1.8),
     fontWeight: '600',
-    alignSelf: 'center'
+    alignSelf: 'center',
   },
   tilesContainer: {
-    flexDirection: 'row',
+    flexDirection: 'row-reverse',
     alignSelf: 'center',
   },
   clrTiles: {
     width: RFPercentage(1.5),
     height: RFPercentage(1.5),
-    borderRadius: RFValue(2.5),
+    borderRadius: RFPercentage(0.35),
   },
 });

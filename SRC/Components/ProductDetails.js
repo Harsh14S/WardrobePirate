@@ -98,7 +98,7 @@ const ProductDetails = ({ navigation }) => {
     <View style={styles.Container}>
       <HeaderProductDetails navigation={navigation} item={item} />
       <ScrollView
-        style={{ flex: 1, marginTop: RFValue(10) }}
+        style={{ flex: 1, marginTop: RFPercentage(2) }}
         showsVerticalScrollIndicator={false}>
         <View style={styles.productViewCenter}>
           <View style={styles.productView}>
@@ -121,30 +121,6 @@ const ProductDetails = ({ navigation }) => {
             </View>
           </View>
           <View style={styles.productSize}>
-            {/* <FlatList
-              data={item.size}
-              horizontal={true}
-              showsHorizontalScrollIndicator={false}
-              renderItem={(itemSize, index) => (
-                <View >
-                  <Pressable
-                    style={[styles.btn,
-                    {
-                      backgroundColor: selectedId === index ? 'black' : 'white',
-                      marginLeft: (index === 0) ? RFPercentage(2) : null,
-                      marginRight: (index === (item.size.length - 1)) ? RFPercentage(2) : null,
-                    }]}
-                    onPress={() => { setSelectedId(index) }}>
-                    <Text
-                      style={[styles.sizeTitle,
-                      { color: selectedId === index ? 'white' : 'black' }]}
-                    >
-                      {itemSize}
-                    </Text>
-                  </Pressable>
-                </View>
-              )}
-            /> */}
             <ScrollView
               horizontal={true}
               showsHorizontalScrollIndicator={false}>
@@ -191,10 +167,7 @@ const styles = StyleSheet.create({
   Container: {
     backgroundColor: 'white',
     flex: 1,
-    // justifyContent: 'center',
-    // alignItems: 'center',
-    paddingTop: RFValue(5),
-    // marginTop: RFValue(5),
+    paddingTop: RFPercentage(1.3),
   },
   tabNav: {
     display: 'flex',

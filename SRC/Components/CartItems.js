@@ -127,7 +127,7 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: RFPercentage(0.8),
     width: RFPercentage(49),
-    marginVertical: RFPercentage(0.8),
+    marginBottom: RFPercentage(0.8),
   },
   itemContainer: {
     flexDirection: 'row',

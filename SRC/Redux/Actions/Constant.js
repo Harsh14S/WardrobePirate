@@ -12,3 +12,4 @@ export const EMPTY_CART = 'EMPTY_CART';
 
 // For HomeSearch
 export const SEARCH_ITEM = 'SEARCH_ITEM';
+export const EMPTY_SEARCH = 'EMPTY_SEARCH';

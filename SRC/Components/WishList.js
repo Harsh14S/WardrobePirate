@@ -7,72 +7,93 @@ import {
   View,
 } from 'react-native';
 import React from 'react';
-import { RFValue } from 'react-native-responsive-fontsize';
+import { RFPercentage, RFValue } from 'react-native-responsive-fontsize';
 import { useDispatch, useSelector } from 'react-redux';
 import { removeFromWishlist } from '../Redux/Actions/WishlistActions';
+import HeaderWishlist from './HeaderWishlist';
 
 const Wishlist = () => {
   const wishState = useSelector(state => state.wish);
-  // console.log("wishState: ", wishState);
-  // console.log('Items in Wishlist: ', wishState.length);
   const dispatch = useDispatch();
   const removeItemFromWishlist = data => {
     dispatch(removeFromWishlist(data));
   };
   return (
-
-    wishState.length === 0 ? (
-      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: 'white' }}>
-        <Text style={{ fontSize: RFValue(20), fontWeight: '600', color: 'lightgrey' }}>
-          Wishlist Empty
-        </Text>
-      </View>
-    ) : (
-      <ScrollView style={styles.itemContainer} showsVerticalScrollIndicator={false}>
-        {wishState.map((item, index) => {
-          return (
-            <View key={index} style={{ flexDirection: 'row' }}>
-              <View style={styles.imgContainer}>
-                <Image source={item.img} style={styles.img} />
-              </View>
-              <View style={styles.itemDetails}>
-                <View style={styles.itemTitle}>
-                  <Text style={styles.itemTitleTxt}>{item.title}</Text>
-                </View>
-                <View style={styles.itemCateg}>
-                  <Text style={styles.itemCategTxt}>{item.categ}</Text>
-                </View>
-                <View style={styles.priceQuantity}>
-                  <Text style={styles.itemPrice}>${item.price}</Text>
-                  <View style={styles.intractionContainer}>
-                    <Pressable
-                      style={[styles.plusminuscontainer, { padding: RFValue(2) }]}
-                      onPress={() => {
-                        console.log(' item.inWishlist before remove: ', item.inWishlist);
-                        removeItemFromWishlist(item);
-                        console.log(' item.inWishlist after remove: ', item.inWishlist);
-                      }}>
-                      <Image
-                        source={require('../ProjectData/Logo/Bin.png')}
-                        style={styles.bin}
-                      />
-                    </Pressable>
+    <View style={styles.container}>
+      <HeaderWishlist />
+      {
+        wishState.length === 0 ? (
+          <View style={styles.emptyPage}>
+            <Text style={styles.emptyPageTxt}>
+              Wishlist Empty
+            </Text>
+          </View>
+        ) : (
+          <ScrollView style={styles.itemContainer} showsVerticalScrollIndicator={false}>
+            {wishState.map((item, index) => {
+              return (
+                <View key={index} style={{ flexDirection: 'row' }}>
+                  <View style={styles.imgContainer}>
+                    <Image source={item.img} style={styles.img} />
+                  </View>
+                  <View style={styles.itemDetails}>
+                    <View style={styles.itemTitle}>
+                      <Text style={styles.itemTitleTxt}>{item.title}</Text>
+                    </View>
+                    <View style={styles.itemCateg}>
+                      <Text style={styles.itemCategTxt}>{item.categ}</Text>
+                    </View>
+                    <View style={styles.priceQuantity}>
+                      <Text style={styles.itemPrice}>${item.price}</Text>
+                      <View style={styles.intractionContainer}>
+                        <Pressable
+                          style={[styles.plusminuscontainer, { padding: RFValue(2) }]}
+                          onPress={() => {
+                            console.log(' item.inWishlist before remove: ', item.inWishlist);
+                            removeItemFromWishlist(item);
+                            console.log(' item.inWishlist after remove: ', item.inWishlist);
+                          }}>
+                          <Image
+                            source={require('../ProjectData/Logo/Bin.png')}
+                            style={styles.bin}
+                          />
+                        </Pressable>
+                      </View>
+                    </View>
                   </View>
                 </View>
-              </View>
-            </View>
-          );
-        })}
-      </ScrollView >
-    )
-  );
+              );
+            })}
+          </ScrollView >
+        )
+      }
+    </View>
+  )
 };
 
 export default Wishlist;
 
 const styles = StyleSheet.create({
-  itemContainer: {
+  container: {
+    flex: 1,
     backgroundColor: 'white',
+    // justifyContent: 'center',
+    alignItems: 'center',
+    width: '100%',
+    paddingBottom: RFPercentage(12),
+    paddingTop: RFPercentage(2),
+  },
+  emptyPage: {
+    flex: 1,
+    alignItems: 'center',
+    marginTop: RFPercentage(42),
+  },
+  emptyPageTxt: {
+    fontSize: RFPercentage(3.5),
+    fontWeight: '600',
+    color: 'lightgrey',
+  },
+  itemContainer: {
     paddingVertical: RFValue(5),
     paddingHorizontal: RFValue(10),
   },

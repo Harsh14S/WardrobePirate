@@ -9,12 +9,22 @@ import {
 import React, { useState } from 'react';
 import Users from '../ProjectData/UsersData/UserProfile';
 import { RFPercentage, RFValue } from 'react-native-responsive-fontsize';
+import { useDispatch, useSelector } from 'react-redux';
+import { emptySearchItem, searchItem } from '../Redux/Actions/HomeSearchAction';
 
 // DC Tshirt with Round Neck
 
 export default HeaderHome = () => {
+  const dispatch = useDispatch();
   const [bool, setBool] = useState(true);
   const [text, setText] = useState('');
+  const searchState = useSelector(state => state.search);
+  const searchProduct = title => {
+    dispatch(searchItem(title));
+  };
+  const emptySearchArea = () => {
+    dispatch(emptySearchItem());
+  }
   return (
     <View style={styles.container}>
       {bool ? (
@@ -33,26 +43,22 @@ export default HeaderHome = () => {
         </View>
       ) : (
         <View
-          style={{
-            flex: 0.92,
-            marginRight: RFValue(5),
-            backgroundColor: 'rgb(240, 240, 240)',
-            flexDirection: 'row',
-            alignItems: 'center',
-            borderRadius: RFValue(50),
-            paddingVertical: RFPercentage(1.5),
-
-          }}>
+          style={styles.inpTxtBackContainer}>
+          <Pressable
+            style={styles.backBtn}
+            onPress={() => {
+              emptySearchArea();
+              setBool(!bool);
+            }}>
+            <Image
+              source={require('../ProjectData/Logo/BackArrow.png')}
+              resizeMode="contain"
+              style={styles.searchBtnImg}
+            />
+          </Pressable>
           <TextInput
             placeholder="Search"
-            style={{
-              flex: 1,
-              fontSize: RFValue(15),
-              color: 'black',
-              paddingLeft: RFPercentage(3),
-              paddingRight: RFPercentage(1),
-              paddingVertical: RFPercentage(0.2),
-            }}
+            style={styles.searchTxtInput}
             onChangeText={newText => {
               setText(newText);
             }}
@@ -61,7 +67,9 @@ export default HeaderHome = () => {
       )}
       <Pressable
         style={styles.searchBtnContainer}
-        onPress={() => setBool(!bool)}>
+        onPress={() => {
+          bool ? setBool(!bool) : searchProduct(text);
+        }}>
         <Image
           source={require('../ProjectData/Logo/Search.png')}
           resizeMode="contain"
@@ -108,7 +116,31 @@ const styles = StyleSheet.create({
     borderRadius: RFPercentage(5),
   },
   searchBtnImg: {
-    height: RFValue(22),
-    width: RFValue(22),
+    height: RFPercentage(3.3),
+    width: RFPercentage(3.3),
+  },
+  inpTxtBackContainer: {
+    flex: 0.92,
+    marginRight: RFPercentage(1),
+    flexDirection: 'row',
+    alignItems: 'center',
+    borderRadius: RFPercentage(4),
+  },
+  backBtn: {
+    borderRadius: RFPercentage(50),
+    marginLeft: RFPercentage(1),
+    padding: RFPercentage(1.5),
+    backgroundColor: 'rgb(240, 240, 240)',
+    marginRight: RFPercentage(1),
+  },
+  searchTxtInput: {
+    flex: 1,
+    fontSize: RFValue(15),
+    color: 'black',
+    backgroundColor: 'rgb(240, 240, 240)',
+    paddingLeft: RFPercentage(2),
+    paddingRight: RFPercentage(1),
+    paddingVertical: RFPercentage(1.5),
+    borderRadius: RFPercentage(4),
   },
 });

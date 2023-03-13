@@ -1,8 +1,8 @@
-import { StyleSheet, View, Image, Platform, Alert, Text } from 'react-native';
+import { StyleSheet, View, Image, Platform, Alert, Text, Pressable } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Home from './Home';
 import { CheckoutCart } from './CheckoutCart';
-import { RFValue } from 'react-native-responsive-fontsize';
+import { RFPercentage, RFValue } from 'react-native-responsive-fontsize';
 import Search from './Search';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { TouchableOpacity } from 'react-native-gesture-handler';
@@ -145,8 +145,7 @@ const Nav = () => {
         name="My Cart"
         component={MyCart}
         options={{
-          // "tabBarShowLabel": true,
-          // tabBarBadge: items.length,
+          headerShown: false,
           tabBarIcon: ({ focused }) => (
             <View
               style={[
@@ -166,6 +165,7 @@ const Nav = () => {
         name="Wishlist"
         component={Wishlist}
         options={{
+          headerShown: false,
           // tabBarBadge: items.length,
           tabBarIcon: ({ focused }) => (
             <View

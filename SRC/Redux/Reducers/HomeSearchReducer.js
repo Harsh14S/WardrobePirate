@@ -1,16 +1,25 @@
 import ProductData from '../../ProjectData/ProductsImage/ProductData';
-import { SEARCH_ITEM } from '../Actions/Constant';
+import { EMPTY_SEARCH, SEARCH_ITEM } from '../Actions/Constant';
 
 const initital = [];
-export default HomeSearchReducer = (state = initital, action) => {
+export const HomeSearchReducer = (state = initital, action) => {
   switch (action.type) {
     case SEARCH_ITEM:
+      // if(ProductData.includes()){}
       return ProductData.filter(record => {
-        if ((action.payload.text).toLowerCase() == (record.title).toLowerCase()) {
-          console.log("Matched.....");
-          return [...state, record];
-        }
-      });
+        // if ((action.payload.text).toLowerCase() == (record.title).toLowerCase()) {
+        //   console.log("Matched.....");
+        //   console.log("record: ", record);
+        //   console.log("state: ", state);
+        //   return [...state, record];
+        // }
+        // return [...state]
+        return (action.payload.text).toLowerCase() == (record.title).toLowerCase();
+      })
+
+    case EMPTY_SEARCH:
+      state = [];
+      return [...state]
     default:
       return [...state];
   }

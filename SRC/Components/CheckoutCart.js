@@ -8,7 +8,7 @@ import {
   View,
 } from 'react-native';
 import React from 'react';
-import { RFValue } from 'react-native-responsive-fontsize';
+import { RFPercentage, RFValue } from 'react-native-responsive-fontsize';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import CartItems from './CartItems';
 import { useSelector } from 'react-redux';
@@ -44,17 +44,13 @@ export const CheckoutCart = () => {
 
 const Cart = ({ navigation }) => {
   const cartState = useSelector(state => state.cart);
-  // console.log("Cart State: ", cartState);
-  // console.log("Item through nav: ", item);
   return (
     <View style={styles.container}>
-      {/* <ScrollView> */}
       <HeaderCart navigation={navigation} />
       <View style={styles.cartContainer}>
         <CartItems />
       </View>
       <View style={styles.empty} />
-      {/* </ScrollView> */}
     </View>
   );
 };
@@ -63,9 +59,8 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: 'white',
-    // justifyContent: 'center',
     alignItems: 'center',
-    paddingBottom: RFValue(75),
+    paddingBottom: RFPercentage(11),
   },
   tabContainer: {
     display: 'flex',
@@ -82,21 +77,13 @@ const styles = StyleSheet.create({
   },
   cartContainer: {
     flex: 2,
-    marginTop: RFValue(10),
-    // backgroundColor: 'lightgrey',
     paddingVertical: RFValue(2),
-    width: Dimensions.get('window').width - 20,
-    // height: Dimensions.get('window').height / 2 - 55,
   },
 
   billContainer: {
     backgroundColor: 'grey',
-    // flex: 1,
     marginTop: RFValue(5),
-    // paddingVertical: RFValue(50),
-    // backgroundColor: 'white',
     width: Dimensions.get('window').width - 20,
-    // height: Dimensions.get('window').height / 2 - 150,
   },
   checkout: {
     alignItems: 'center',
@@ -113,6 +100,5 @@ const styles = StyleSheet.create({
     textAlignVertical: 'center',
     fontWeight: 'bold',
     fontSize: RFValue(16),
-    // paddingVertical: RFValue(5),
   },
 });

@@ -62,7 +62,7 @@ const styles = StyleSheet.create({
     width: '100%',
     // paddingVertical: RFValue(5),
     paddingHorizontal: RFValue(5),
-    marginBottom: RFValue(5),
+    // marginBottom: RFPercentage(1.4),
   },
   circle: {
     backgroundColor: 'rgb(240, 240, 240)',
