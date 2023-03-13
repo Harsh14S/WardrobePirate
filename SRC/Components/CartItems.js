@@ -37,7 +37,6 @@ const CartItems = () => {
   }
   subtotal(cartState);
   return (
-
     cartState.length === 0 ? (
       <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: 'white' }}>
         <Text style={{ fontSize: RFValue(20), fontWeight: '600', color: 'lightgrey' }}>

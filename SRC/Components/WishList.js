@@ -1,4 +1,5 @@
 import {
+  FlatList,
   Image,
   Pressable,
   ScrollView,
@@ -29,25 +30,33 @@ const Wishlist = () => {
             </Text>
           </View>
         ) : (
-          <ScrollView style={styles.itemContainer} showsVerticalScrollIndicator={false}>
-            {wishState.map((item, index) => {
-              return (
-                <View key={index} style={{ flexDirection: 'row' }}>
-                  <View style={styles.imgContainer}>
-                    <Image source={item.img} style={styles.img} />
-                  </View>
-                  <View style={styles.itemDetails}>
-                    <View style={styles.itemTitle}>
-                      <Text style={styles.itemTitleTxt}>{item.title}</Text>
+          <View style={{
+            flex: 1,
+            padding: RFPercentage(0.8),
+            width: RFPercentage(49),
+            marginBottom: RFPercentage(0.8),
+          }} >
+            <FlatList
+              showsVerticalScrollIndicator={false}
+              data={wishState}
+              renderItem={({ item, index }) => {
+                return (
+                  <View View key={index} style={styles.itemContainer} >
+                    <View style={styles.imgContainer}>
+                      <Image source={item.img} style={styles.img} />
                     </View>
-                    <View style={styles.itemCateg}>
-                      <Text style={styles.itemCategTxt}>{item.categ}</Text>
-                    </View>
-                    <View style={styles.priceQuantity}>
-                      <Text style={styles.itemPrice}>${item.price}</Text>
-                      <View style={styles.intractionContainer}>
+                    <View style={styles.itemDetails}>
+                      <View style={styles.itemTitle}>
+                        <Text style={styles.itemTitleTxt}>{item.title}</Text>
+                      </View>
+                      <View style={styles.itemCateg}>
+                        <Text style={styles.itemCategTxt}>{item.categ}</Text>
+                      </View>
+                      <View style={styles.priceQuantity}>
+                        <Text style={styles.itemPrice}>${item.price}</Text>
+
                         <Pressable
-                          style={[styles.plusminuscontainer, { padding: RFValue(2) }]}
+                          style={styles.deleteBtnContainer}
                           onPress={() => {
                             console.log(' item.inWishlist before remove: ', item.inWishlist);
                             removeItemFromWishlist(item);
@@ -61,10 +70,10 @@ const Wishlist = () => {
                       </View>
                     </View>
                   </View>
-                </View>
-              );
-            })}
-          </ScrollView >
+                )
+              }}
+            />
+          </View >
         )
       }
     </View>
@@ -77,9 +86,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: 'white',
-    // justifyContent: 'center',
     alignItems: 'center',
-    width: '100%',
     paddingBottom: RFPercentage(12),
     paddingTop: RFPercentage(2),
   },
@@ -94,8 +101,11 @@ const styles = StyleSheet.create({
     color: 'lightgrey',
   },
   itemContainer: {
-    paddingVertical: RFValue(5),
-    paddingHorizontal: RFValue(10),
+    flexDirection: 'row',
+    backgroundColor: 'rgb(240, 240, 240)',
+    marginVertical: RFPercentage(1.5),
+    padding: RFPercentage(0.5),
+    borderRadius: RFPercentage(4)
   },
   imgContainer: {
     // backgroundColor: 'red',
@@ -105,21 +115,22 @@ const styles = StyleSheet.create({
     padding: RFValue(5),
   },
   img: {
-    height: RFValue(85),
-    width: RFValue(85),
-    borderRadius: RFValue(20),
+    height: RFPercentage(11.5),
+    width: RFPercentage(12),
+    borderRadius: RFPercentage(3),
   },
   itemDetails: {
     flex: 1,
-    padding: RFValue(5),
+    padding: RFPercentage(1),
   },
   itemTitle: {
-    // flex: 1,
+    flex: 1,
+    marginTop: RFPercentage(0.5),
+    marginRight: RFPercentage(0.5)
   },
   itemTitleTxt: {
-    // flex: 1,
     color: 'black',
-    fontSize: RFValue(14),
+    fontSize: RFPercentage(2),
     fontWeight: '600',
   },
   itemCateg: {
@@ -127,10 +138,9 @@ const styles = StyleSheet.create({
   },
   itemCategTxt: {
     color: 'grey',
-    fontSize: RFValue(11),
+    fontSize: RFPercentage(1.6),
   },
   priceQuantity: {
-    // backgroundColor: 'white',
     flex: 1,
     flexDirection: 'row',
     justifyContent: 'space-between',
@@ -138,34 +148,17 @@ const styles = StyleSheet.create({
   },
   itemPrice: {
     color: 'black',
-    fontSize: RFValue(15),
+    fontSize: RFPercentage(2.1),
     fontWeight: '600',
   },
-  intractionContainer: {
-    // backgroundColor: 'grey',
+  deleteBtnContainer: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    marginLeft: RFValue(10),
-  },
-  plusminus: {
-    height: RFValue(26),
-    width: RFValue(26),
+    marginRight: RFPercentage(2),
   },
   bin: {
-    height: RFValue(22),
-    width: RFValue(22),
-  },
-  plusminuscontainer: {
-    // backgroundColor: 'yellow',
-    marginHorizontal: RFValue(4),
-    width: RFValue(28),
-  },
-  itemQuantity: {
-    color: 'black',
-    textAlign: 'center',
-    textAlignVertical: 'center',
-    fontWeight: 'bold',
-    fontSize: RFValue(16),
+    height: RFPercentage(3),
+    width: RFPercentage(3),
   },
 });
