@@ -58,9 +58,7 @@ const Wishlist = () => {
                         <Pressable
                           style={styles.deleteBtnContainer}
                           onPress={() => {
-                            console.log(' item.inWishlist before remove: ', item.inWishlist);
                             removeItemFromWishlist(item);
-                            console.log(' item.inWishlist after remove: ', item.inWishlist);
                           }}>
                           <Image
                             source={require('../ProjectData/Logo/Bin.png')}

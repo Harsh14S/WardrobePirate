@@ -49,6 +49,7 @@ export default HeaderHome = () => {
             onPress={() => {
               emptySearchArea();
               setBool(!bool);
+              setText('')
             }}>
             <Image
               source={require('../ProjectData/Logo/BackArrow.png')}
@@ -61,6 +62,7 @@ export default HeaderHome = () => {
             style={styles.searchTxtInput}
             onChangeText={newText => {
               setText(newText);
+              searchProduct(newText)
             }}
           />
         </View>

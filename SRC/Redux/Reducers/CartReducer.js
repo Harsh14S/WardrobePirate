@@ -13,7 +13,6 @@ export const CartReducer = (state = initialState, action) => {
   switch (action.type) {
 
     case ADD_INTO_CART:
-      console.log("isAdded: ", action.payload.isAdded);
       if (action.payload.isAdded) {
         if (state.includes(action.payload.item)) {
           return [...state];

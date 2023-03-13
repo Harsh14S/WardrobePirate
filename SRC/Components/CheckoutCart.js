@@ -16,8 +16,6 @@ import HeaderCart from './HeaderCart';
 const Add2Cart = createBottomTabNavigator();
 
 export const CheckoutCart = () => {
-  // console.log('quantity: ', route.params.quantity);
-  // console.log("Item through nav: ", item);
   return (
     <Add2Cart.Navigator
       screenOptions={{

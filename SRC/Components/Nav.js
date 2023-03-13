@@ -20,57 +20,18 @@ const App = () => {
     <Stack.Navigator
       screenOptions={{
         headerShown: false,
-        // headerShadowVisible: false,
-        headerTitleStyle: {
-          fontSize: RFValue(18),
-        },
       }}>
       <Stack.Screen
         name="Nav"
         component={Nav}
-      // options={{
-      //   headerShown: false,
-      //   headerBackTitleVisible: false,
-      //   headerShadowVisible: false,
-      // }}
       />
       <Stack.Screen
         name="ProductDetails"
         component={ProductDetailsNav}
-        options={{
-          title: 'Product Details',
-          headerBackTitleVisible: false,
-          headerRight: () => (
-            <TouchableOpacity
-              style={styles.favBtn}
-              onPress={() => {
-                // Alert.alert('Added To Your WishList');
-                console.log('WishState in ProductDetatils: ', wishState);
-              }}>
-              <Image
-                source={require('../ProjectData/Logo/Favorite.png')}
-                style={styles.favImg}
-              />
-            </TouchableOpacity>
-          ),
-        }}
       />
       <Stack.Screen
         name="CheckoutCart"
         component={CheckoutCart}
-        options={{
-          // headerShown: true,
-          headerRight: () => (
-            <TouchableOpacity
-              style={styles.favBtn}
-              onPress={() => Alert.alert('Settings')}>
-              <Image
-                source={require('../ProjectData/Logo/Dots.png')}
-                style={styles.favImg}
-              />
-            </TouchableOpacity>
-          ),
-        }}
       />
     </Stack.Navigator>
   );
@@ -78,16 +39,15 @@ const App = () => {
 
 const Nav = () => {
   const items = useSelector(state => state.wish);
-  // console.log("State Items in Nav: ", items.length);
   return (
     <Tab.Navigator
       screenOptions={{
         tabBarShowLabel: false,
         headerShadowVisible: false,
+        headerShown: false,
         headerTitleStyle: {
           fontSize: RFValue(18),
         },
-        // headerShown: false,
         tabBarStyle: {
           display: 'flex',
           backgroundColor: 'black',
@@ -105,7 +65,6 @@ const Nav = () => {
         name="Home"
         component={Home}
         options={{
-          headerShown: false,
           tabBarIcon: ({ focused }) => (
             <View
               style={[
@@ -125,7 +84,6 @@ const Nav = () => {
         name="Search"
         component={Search}
         options={{
-          headerShown: false,
           tabBarIcon: ({ focused }) => (
             <View
               style={[
@@ -145,7 +103,6 @@ const Nav = () => {
         name="My Cart"
         component={MyCart}
         options={{
-          headerShown: false,
           tabBarIcon: ({ focused }) => (
             <View
               style={[
@@ -165,8 +122,6 @@ const Nav = () => {
         name="Wishlist"
         component={Wishlist}
         options={{
-          headerShown: false,
-          // tabBarBadge: items.length,
           tabBarIcon: ({ focused }) => (
             <View
               style={[

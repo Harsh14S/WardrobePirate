@@ -38,7 +38,6 @@ const HeaderProductDetails = ({ navigation, item }) => {
         onPress={() => {
           wishState.includes(item) ? removeItemFromWishlist(item) : addItemToWishlist(item);
           // removeItemFromWishlist(item);
-          // console.log(item);
         }}
       >
         <Image

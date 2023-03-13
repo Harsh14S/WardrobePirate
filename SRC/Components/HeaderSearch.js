@@ -1,15 +1,21 @@
 import { Alert, Image, Pressable, StyleSheet, Text, TextInput, View } from 'react-native'
-import React from 'react'
+import React, { useState } from 'react'
 import { RFPercentage, RFValue } from 'react-native-responsive-fontsize'
 import { useDispatch, useSelector } from 'react-redux'
 import { emptyCartItems } from '../Redux/Actions/CartActions'
+import { searchItem } from '../Redux/Actions/HomeSearchAction'
 
 export default HeaderSearch = () => {
+  const [text, setText] = useState('');
   const searchState = useSelector(state => state.search);
   const dispatch = useDispatch();
   const emptyCart = () => {
     dispatch(emptyCartItems());
   };
+  const searchProduct = title => {
+    dispatch(searchItem(title));
+  };
+
   return (
     <View style={styles.TopSearchBar}>
       <View
@@ -21,6 +27,7 @@ export default HeaderSearch = () => {
           style={styles.searchTextInput}
           onChangeText={newText => {
             setText(newText);
+            searchProduct(newText);
           }}
         />
       </View>
@@ -38,9 +45,6 @@ export default HeaderSearch = () => {
     </View>
   )
 }
-
-
-
 
 const styles = StyleSheet.create({
   TopSearchBar: {

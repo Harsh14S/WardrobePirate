@@ -21,14 +21,12 @@ const Search = ({ navigation }) => {
   const dispatch = useDispatch();
   const wishState = useSelector(state => state.wish);
   const searchState = useSelector(state => state.search);
-  // console.log("Length: ", searchState.length);
   const addItemToWishlist = item => {
     dispatch(addToWishlist(item));
   };
   const searchProduct = title => {
     dispatch(searchItem(title));
   };
-  // console.log("SearchState Length: ", searchState.length);
 
   return (
     <View style={styles.container}>
